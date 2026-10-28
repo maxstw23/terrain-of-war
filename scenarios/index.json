@@ -1,5 +1,14 @@
 [
   {
+    "file": "scenarios/jingxing-204bc.json",
+    "title": "Han Xin at Jingxing",
+    "period": "204 BC",
+    "zh": {
+      "title": "韩信：井陉之战",
+      "period": "前204年"
+    }
+  },
+  {
     "file": "scenarios/hannibal-alps-218bc.json",
     "title": "Hannibal's pass over the Alps",
     "period": "218 BC",
