@@ -115,8 +115,9 @@ class Camera(BaseModel):
 
 
 class Analysis(BaseModel):
-    type: Literal["profile", "viewshed", "los"]
+    type: Literal["profile", "viewshed", "los", "compare"]
     route: Optional[str] = Field(None, description="route id, for profile")
+    routes: Optional[list[str]] = Field(None, description="2-4 route ids, for compare (alternative routes side by side)")
     coords: Optional[list[LonLat]] = Field(None, description="ad-hoc profile line, e.g. a cross-section of a gorge")
     at: Optional[LonLat] = Field(None, description="observer [lon, lat], for viewshed")
     from_: Optional[LonLat] = Field(None, alias="from", description="observer [lon, lat], for los")
@@ -152,6 +153,26 @@ class Scenario(BaseModel):
 SYSTEM = (Path(__file__).with_name("scenario_prompt.md")).read_text(encoding="utf-8")
 
 
+def known_places() -> str:
+    """The gazetteer as compact lines, so recurring places get the agreed coordinates."""
+    path = Path(__file__).resolve().parent.parent / "gazetteer.json"
+    if not path.exists():
+        return ""
+    lines = []
+    for g in json.loads(path.read_text(encoding="utf-8"))["places"]:
+        alts = "; ".join(f"{a['label']} {a['lon']},{a['lat']}" for a in g.get("alternatives", []))
+        lines.append(f"{g.get('zh', '')} | {g['name']} | {g['kind']} | {g['lon']},{g['lat']}"
+                     + (" | approximate" if g.get("approximate") else "") + (f" | alternatives: {alts}" if alts else ""))
+    return "\n".join(lines)
+
+
+def user_message(article: str) -> str:
+    gaz = known_places()
+    known = (f"\n\nKnown places (use these coordinates when the text refers to one of them):\n<gazetteer>\n{gaz}\n</gazetteer>"
+             if gaz else "")
+    return f"Build a scenario from this text:\n\n<article>\n{article}\n</article>{known}"
+
+
 def generate(article: str, client: anthropic.Anthropic) -> Scenario:
     with client.beta.messages.stream(
         model=MODEL,
@@ -162,7 +183,7 @@ def generate(article: str, client: anthropic.Anthropic) -> Scenario:
         output_format=Scenario,
         betas=["server-side-fallback-2026-07-01"],
         fallbacks="default",
-        messages=[{"role": "user", "content": f"Build a scenario from this text:\n\n<article>\n{article}\n</article>"}],
+        messages=[{"role": "user", "content": user_message(article)}],
     ) as stream:
         message = stream.get_final_message()
 
@@ -198,6 +219,9 @@ def check_references(sc: Scenario) -> list[str]:
         a = step.analysis
         if a and a.route and a.route not in ids:
             problems.append(f"step '{step.title}': unknown route '{a.route}'")
+        for r in (a.routes or []) if a else []:
+            if r not in ids:
+                problems.append(f"step '{step.title}': unknown route '{r}'")
     for x in [*sc.places, *[p for r in sc.routes for p in r.waypoints]]:
         lon, lat = (x.lon, x.lat) if isinstance(x, Place) else (x[0], x[1])
         if not (-180 <= lon <= 180 and -90 <= lat <= 90):

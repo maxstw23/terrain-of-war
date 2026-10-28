@@ -6,7 +6,8 @@
      "enum": [
       "profile",
       "viewshed",
-      "los"
+      "los",
+      "compare"
      ],
      "type": "string"
     },
@@ -20,6 +21,20 @@
       }
      ],
      "description": "route id, for profile"
+    },
+    "routes": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "description": "2-4 route ids, for compare (alternative routes side by side)"
     },
     "coords": {
      "anyOf": [

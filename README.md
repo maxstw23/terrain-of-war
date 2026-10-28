@@ -17,6 +17,11 @@ analysis makes the geographic argument visible:
 - **Viewshed:** what a sentry on a pass or fort can see (amber), and the dead ground where
   troops can move unseen or wait in ambush (dark).
 - **Line of sight** between two points, with Earth curvature and refraction.
+- **Compare routes:** the "should he have gone the other way?" view. Several routes' profiles on
+  one chart, with length, total climb, highest point, steepest grade and marching days side by
+  side, all measured the same way.
+- **Place search** in Chinese or English (街亭, Sedan…). Disputed sites show their alternative
+  identifications as extra pins.
 - **March route:** the least-effort path through the terrain between waypoints. Mountain
   roads in scenarios can be traced this way (`"follow": "terrain"`).
 - **Historical map overlays:** add any georeferenced old map as XYZ tiles (Allmaps, Map
@@ -69,8 +74,12 @@ the historical road line.
 
 ## From a text to a scenario
 
+It works for discussions too: paste a Reddit / 小红书 / 知乎 thread arguing about what a commander
+could have done, and the scenario maps the options each side raises, including the routes not
+taken, with a comparison wherever the text weighs one route against another.
+
 **With a Claude subscription (no API key):** open this repository in Claude Code, paste the
-text and ask for a scenario. `CLAUDE.md` tells Claude to write it with the same prompt and
+text and run `/new-scenario` (or just ask for a scenario). `CLAUDE.md` tells Claude to write it with the same prompt and
 schema, add it to `scenarios/`, and push; it appears on the site a minute or two later.
 
 **With an API key, in the page:**
@@ -99,6 +108,22 @@ Load the JSON with **Open JSON…** or by dropping it on the map. The page and t
 the prompt (`tools/scenario_prompt.md`) and schema. After changing the `Scenario` model in the
 script, regenerate the page's copy with
 `python tools/article_to_scenario.py --write-schema scenario.schema.json`.
+
+## Tools
+
+```bash
+node tools/tow.mjs prep  scenarios/x.json   # snap peaks, pre-compute routes, check (rewrites the file)
+node tools/tow.mjs check scenarios/*.json   # validate only
+node tools/tow.mjs place 街亭                # look a place up in the gazetteer
+```
+
+`tow.mjs` runs the app's own terrain code in Node (no npm install; needs `curl`), so what it
+computes is exactly what the page shows. `check` catches missing translations, broken
+references, places in the sea, peaks that sit below their summit, and places that drifted from
+their `gazetteer.json` entry. Pre-computed routes make scenarios open without tracing; each
+carries a fingerprint of its waypoints, so an edited route is traced again instead of drawn
+stale. `gazetteer.json` holds agreed coordinates for recurring places; both generators pass it
+to Claude so the same place lands in the same spot every time.
 
 ## Scenario format
 
@@ -133,6 +158,7 @@ script, regenerate the page's copy with
               "analysis": { "type": "viewshed", "at": "dasan", "radiusKm": 10, "observerH": 15 },
               // or { "type": "profile", "route": "gudao" } / { "type": "profile", "coords": [...] }
               // or { "type": "los", "from": "a", "to": "b" }
+              // or { "type": "compare", "routes": ["gudao", "baoxie"] }
               "zh": { "title": "…", "text": "…" } }]
 }
 ```
@@ -145,5 +171,8 @@ script, regenerate the page's copy with
 - `js/scenario.js`: scenario validation and GeoJSON
 - `js/i18n.js`: English and Chinese interface strings
 - `js/generate.js`: Create from text (Claude API from the browser)
-- `js/app.js`: map, story player, tools
+- `js/app.js`: map, story player, tools, place search
+- `tools/tow.mjs`, `tools/lib/`: check / snap / bake / gazetteer lookup in Node
+- `gazetteer.json`: agreed coordinates for recurring places
+- `.claude/commands/new-scenario.md`: the fixed text-to-scenario steps for Claude Code
 - `tools/article_to_scenario.py`, `tools/scenario_prompt.md`, `scenario.schema.json`: the generator

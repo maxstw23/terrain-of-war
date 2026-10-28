@@ -1,0 +1,329 @@
+{
+ "about": "Agreed coordinates for places used in scenarios, so the same place sits in the same spot everywhere. tools/tow.mjs check compares scenario places with these; `node tools/tow.mjs place <name>` looks one up. Add new places here when a scenario introduces them.",
+ "places": [
+  {
+   "id": "belgian-plain",
+   "zh": "比利时中部平原",
+   "name": "Central Belgian plain", "kind": "region", "lon": 4.3, "lat": 50.8
+  },
+  {
+   "id": "lorraine",
+   "zh": "洛林",
+   "name": "Lorraine", "kind": "region", "lon": 6.4, "lat": 49.05
+  },
+  {
+   "id": "sedan",
+   "zh": "色当",
+   "name": "Sedan", "kind": "battle", "lon": 4.94, "lat": 49.7
+  },
+  {
+   "id": "marfee",
+   "zh": "马尔菲高地",
+   "name": "Marfée heights", "kind": "mountain", "lon": 4.9, "lat": 49.67, "approximate": true
+  },
+  {
+   "id": "montherme",
+   "zh": "蒙泰尔梅",
+   "name": "Monthermé", "kind": "battle", "lon": 4.73, "lat": 49.88
+  },
+  {
+   "id": "dinant",
+   "zh": "迪南 / 乌克斯",
+   "name": "Dinant / Houx", "kind": "battle", "lon": 4.9, "lat": 50.28
+  },
+  {
+   "id": "luxembourg",
+   "zh": "卢森堡",
+   "name": "Luxembourg", "kind": "city", "lon": 6.13, "lat": 49.61
+  },
+  {
+   "id": "bastogne",
+   "zh": "巴斯托涅",
+   "name": "Bastogne", "kind": "city", "lon": 5.72, "lat": 50
+  },
+  {
+   "id": "bouillon",
+   "zh": "布永",
+   "name": "Bouillon", "kind": "city", "lon": 5.07, "lat": 49.79
+  },
+  {
+   "id": "longuyon",
+   "zh": "隆吉永",
+   "name": "Longuyon", "kind": "fort", "lon": 5.6, "lat": 49.44
+  },
+  {
+   "id": "laferte",
+   "zh": "拉费尔泰",
+   "name": "La Ferté", "kind": "fort", "lon": 5.24, "lat": 49.59, "approximate": true
+  },
+  {
+   "id": "gembloux",
+   "zh": "让布卢",
+   "name": "Gembloux", "kind": "battle", "lon": 4.69, "lat": 50.56
+  },
+  {
+   "id": "wavre",
+   "zh": "瓦夫尔",
+   "name": "Wavre", "kind": "fort", "lon": 4.61, "lat": 50.72,
+   "aliases": [
+    "Wavre (Dyle line)",
+    "瓦夫尔（代尔防线）"
+   ]
+  },
+  {
+   "id": "eben-emael",
+   "zh": "埃本-埃马尔",
+   "name": "Eben-Emael", "kind": "fort", "lon": 5.68, "lat": 50.8
+  },
+  {
+   "id": "montcornet",
+   "zh": "蒙科尔内",
+   "name": "Montcornet", "kind": "battle", "lon": 3.98, "lat": 49.69
+  },
+  {
+   "id": "arras",
+   "zh": "阿拉斯",
+   "name": "Arras", "kind": "battle", "lon": 2.78, "lat": 50.29
+  },
+  {
+   "id": "abbeville",
+   "zh": "阿布维尔",
+   "name": "Abbeville", "kind": "city", "lon": 1.83, "lat": 50.11
+  },
+  {
+   "id": "dunkirk",
+   "zh": "敦刻尔克",
+   "name": "Dunkirk", "kind": "port", "lon": 2.38, "lat": 51.03
+  },
+  {
+   "id": "hanzhong",
+   "zh": "汉中盆地",
+   "name": "Hanzhong basin", "kind": "region", "lon": 107.35, "lat": 33
+  },
+  {
+   "id": "guanzhong",
+   "zh": "关中平原",
+   "name": "Guanzhong plain", "kind": "region", "lon": 108.35, "lat": 34.47
+  },
+  {
+   "id": "daba",
+   "zh": "大巴山",
+   "name": "Daba Mountains", "kind": "region", "lon": 107.6, "lat": 32.6
+  },
+  {
+   "id": "nanzheng",
+   "zh": "南郑",
+   "name": "Nanzheng", "kind": "city", "lon": 107.03, "lat": 33.07
+  },
+  {
+   "id": "baogu",
+   "zh": "褒谷口",
+   "name": "Bao valley mouth", "kind": "pass", "lon": 106.98, "lat": 33.21, "approximate": true
+  },
+  {
+   "id": "xiegu",
+   "zh": "斜谷口",
+   "name": "Xie valley mouth", "kind": "pass", "lon": 107.65, "lat": 34.23, "approximate": true
+  },
+  {
+   "id": "taibai",
+   "zh": "太白山",
+   "name": "Mt Taibai", "kind": "mountain", "lon": 107.7637, "lat": 33.9552
+  },
+  {
+   "id": "dasan",
+   "zh": "大散关",
+   "name": "Dasan Pass", "kind": "pass", "lon": 106.99, "lat": 34.23, "approximate": true
+  },
+  {
+   "id": "fengxian",
+   "zh": "故道",
+   "name": "Gudao", "kind": "camp", "lon": 106.52, "lat": 33.92, "approximate": true,
+   "aliases": [
+    "Gudao (Feng county)",
+    "故道（凤县）"
+   ]
+  },
+  {
+   "id": "lueyang",
+   "zh": "略阳",
+   "name": "Lueyang", "kind": "landmark", "lon": 106.15, "lat": 33.33
+  },
+  {
+   "id": "chencang",
+   "zh": "陈仓",
+   "name": "Chencang", "kind": "battle", "lon": 107.33, "lat": 34.36, "approximate": true
+  },
+  {
+   "id": "haozhi",
+   "zh": "好畤",
+   "name": "Haozhi", "kind": "battle", "lon": 108.22, "lat": 34.56, "approximate": true
+  },
+  {
+   "id": "feiqiu",
+   "zh": "废丘",
+   "name": "Feiqiu", "kind": "fort", "lon": 108.49, "lat": 34.3, "approximate": true
+  },
+  {
+   "id": "xianyang",
+   "zh": "咸阳",
+   "name": "Xianyang", "kind": "city", "lon": 108.71, "lat": 34.33
+  },
+  {
+   "id": "plain",
+   "zh": "华北平原",
+   "name": "North China Plain", "kind": "region", "lon": 116.2, "lat": 35.1
+  },
+  {
+   "id": "taihang",
+   "zh": "太行山",
+   "name": "Taihang Mountains", "kind": "region", "lon": 113.4, "lat": 36.4
+  },
+  {
+   "id": "lu",
+   "zh": "鲁中山地",
+   "name": "Shandong hills", "kind": "region", "lon": 117.7, "lat": 36.1
+  },
+  {
+   "id": "daliang",
+   "zh": "大梁",
+   "name": "Daliang", "kind": "city", "lon": 114.33, "lat": 34.8
+  },
+  {
+   "id": "handan",
+   "zh": "邯郸",
+   "name": "Handan", "kind": "city", "lon": 114.47, "lat": 36.6
+  },
+  {
+   "id": "linzi",
+   "zh": "临淄",
+   "name": "Linzi", "kind": "city", "lon": 118.33, "lat": 36.87
+  },
+  {
+   "id": "xinzheng",
+   "zh": "新郑",
+   "name": "Xinzheng", "kind": "city", "lon": 113.74, "lat": 34.4
+  },
+  {
+   "id": "guiling",
+   "zh": "桂陵",
+   "name": "Guiling", "kind": "battle", "lon": 114.62, "lat": 35.24, "approximate": true,
+   "alternatives": [
+    {
+     "label": "菏泽说 near Heze", "lon": 115.48, "lat": 35.32
+    }
+   ],
+   "note": "Usually placed north-west of Changyuan.",
+  "note_zh": "一般认为在今长垣西北。"
+  },
+  {
+   "id": "maling",
+   "zh": "马陵",
+   "name": "Maling", "kind": "battle", "lon": 115.45, "lat": 35.8, "approximate": true,
+   "alternatives": [
+    {
+     "label": "莘县说 Shen county", "lon": 115.67, "lat": 36.23
+    },
+    {
+     "label": "郯城马陵山说 Maling hills, Tancheng", "lon": 118.555, "lat": 34.695
+    }
+   ],
+   "note": "Disputed. Main position: the Fan county identification on the Henan–Shandong border.",
+  "note_zh": "有争议。主要说法：豫鲁交界的范县一带。"
+  },
+  {
+   "id": "maling-tancheng",
+   "zh": "马陵山",
+   "name": "Maling hills", "kind": "mountain", "lon": 118.5554, "lat": 34.6946, "approximate": true,
+   "aliases": [
+    "Maling hills (Tancheng)",
+    "马陵山（郯城）"
+   ]
+  },
+  {
+   "id": "qinling",
+   "zh": "秦岭",
+   "name": "Qinling", "kind": "region", "lon": 107.4, "lat": 33.75
+  },
+  {
+   "id": "longyou",
+   "zh": "陇右",
+   "name": "Longyou", "kind": "region", "lon": 104.9, "lat": 35.35
+  },
+  {
+   "id": "mianyang",
+   "zh": "沔阳",
+   "name": "Mianyang", "kind": "camp", "lon": 106.67, "lat": 33.15, "approximate": true,
+   "aliases": [
+    "Mianyang (Hanzhong base)",
+    "沔阳（汉中基地）"
+   ]
+  },
+  {
+   "id": "qishan",
+   "zh": "祁山",
+   "name": "Qishan", "kind": "fort", "lon": 105.33, "lat": 34.1, "approximate": true
+  },
+  {
+   "id": "shanggui",
+   "zh": "上邽",
+   "name": "Shanggui", "kind": "city", "lon": 105.72, "lat": 34.58,
+   "aliases": [
+    "Shanggui (Tianshui)",
+    "上邽（天水）"
+   ]
+  },
+  {
+   "id": "ji",
+   "zh": "冀县",
+   "name": "Ji", "kind": "city", "lon": 105.27, "lat": 34.74, "approximate": true
+  },
+  {
+   "id": "nanan",
+   "zh": "南安",
+   "name": "Nan'an", "kind": "city", "lon": 104.63, "lat": 34.98, "approximate": true
+  },
+  {
+   "id": "anding",
+   "zh": "安定",
+   "name": "Anding", "kind": "city", "lon": 106.95, "lat": 35.55, "approximate": true
+  },
+  {
+   "id": "jieting",
+   "zh": "街亭",
+   "name": "Jieting", "kind": "battle", "lon": 105.98, "lat": 35.08, "approximate": true,
+   "alternatives": [
+    {
+     "label": "秦安陇城说 Longcheng, Qin'an", "lon": 105.83, "lat": 34.98
+    }
+   ],
+   "note": "Main position: Longshan, Zhuanglang county.",
+  "note_zh": "主要说法：庄浪县龙山镇。"
+  },
+  {
+   "id": "longguan",
+   "zh": "陇关",
+   "name": "Long Pass", "kind": "pass", "lon": 106.55, "lat": 34.9, "approximate": true
+  },
+  {
+   "id": "jigu",
+   "zh": "箕谷",
+   "name": "Ji valley", "kind": "pass", "lon": 107, "lat": 33.45, "approximate": true
+  },
+  {
+   "id": "mei",
+   "zh": "郿",
+   "name": "Mei", "kind": "camp", "lon": 107.75, "lat": 34.27, "approximate": true
+  },
+  {
+   "id": "changan",
+   "zh": "长安",
+   "name": "Chang'an", "kind": "city", "lon": 108.94, "lat": 34.27
+  },
+  {
+   "id": "wuzhangyuan",
+   "zh": "五丈原",
+   "name": "Wuzhangyuan", "kind": "camp", "lon": 107.63, "lat": 34.28, "approximate": true
+  }
+ ]
+}

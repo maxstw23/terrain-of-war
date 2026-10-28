@@ -7,32 +7,31 @@ English and Chinese. There is no build step; see README.md for the code layout.
 
 ## Main task: turn a pasted text into a scenario
 
-When the user pastes a passage about a battle or campaign (in any language) and asks for a
-scenario, or just pastes such a passage with no other request:
-
-1. Follow `tools/scenario_prompt.md` exactly. It is the same instruction the web page and
-   `tools/article_to_scenario.py` give the API: illustrate the text as written, never
-   fact-check or dispute it, and flag only uncertain locations (`"approximate": true`).
-2. Write the scenario JSON so it matches `scenario.schema.json` (generated from the
-   `Scenario` model in `tools/article_to_scenario.py`), including every `zh` translation.
-   Use real coordinates in `[lon, lat]` order; place ids may also be used as waypoints.
-   Look at `scenarios/*.json` for finished examples.
-3. Save it as `scenarios/<short-kebab-name>.json` and add an entry to
-   `scenarios/index.json`: `{"file": "scenarios/<name>.json", "title": …, "period": …,
-   "zh": {"title": …, "period": …}}`.
-4. Check it: the JSON parses, every id in a step's `focus` / `analysis.route` exists, and
-   every coordinate is in range. If a local check is possible, serve the folder
-   (`python3 -m http.server`) and load `?scenario=scenarios/<name>.json`.
-5. Commit and push to `main`. The page updates within a minute or two; tell the user the
-   link `https://maxstw23.github.io/terrain-of-war/?scenario=scenarios/<name>.json` (add
-   `&lang=zh` for Chinese).
+When the user pastes a text about a battle, campaign or historical debate (a book passage, an
+article, a Reddit / 小红书 / 知乎 thread, in any language) and asks for a scenario, or just pastes
+such a text, follow `.claude/commands/new-scenario.md` (also available as `/new-scenario`).
+In short: rules from `tools/scenario_prompt.md` → coordinates from `gazetteer.json`
+(`node tools/tow.mjs place <name>`) → write `scenarios/<name>.json` and `sources/<name>.md`
+→ `node tools/tow.mjs prep scenarios/<name>.json` until OK → add new places to the gazetteer
+→ push and send the link.
 
 Ask the user before guessing when the text does not make clear which battle, place or period
 it describes.
+
+## Tools
+
+- `node tools/tow.mjs check|snap|bake|prep <scenario.json>`: runs the app's own terrain code in
+  Node (needs `curl`; tiles are cached in `~/.cache/terrain-of-war`). `prep` = snap + bake +
+  check, and rewrites the file. Re-run `prep` after editing a scenario's places or routes: baked
+  routes carry a fingerprint, and the page re-traces stale ones on load (slow).
+- `node tools/tow.mjs place <name>`: gazetteer lookup.
+- `python tools/article_to_scenario.py`: the same generation through the API (needs a key).
 
 ## Other conventions
 
 - Keep the English and Chinese interface strings in `js/i18n.js` in step.
 - After changing the `Scenario` model, regenerate the page's schema:
   `python tools/article_to_scenario.py --write-schema scenario.schema.json`.
+- Edit scenario JSON with care for the compact formatting `tow.mjs` writes; re-running `prep`
+  (or `bake`) restores it.
 - Library versions are pinned (MapLibre GL 4.7.1, Anthropic SDK 0.133.0 in the browser).

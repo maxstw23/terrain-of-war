@@ -15,15 +15,28 @@ export class GenerateError extends Error {
   }
 }
 
+/** Same message as tools/article_to_scenario.py: the text, then the known places. */
+function userMessage(text, gazetteer) {
+  const lines = gazetteer.map((g) => {
+    const alts = (g.alternatives || []).map((a) => `${a.label} ${a.lon},${a.lat}`).join('; ');
+    return `${g.zh || ''} | ${g.name} | ${g.kind} | ${g.lon},${g.lat}${g.approximate ? ' | approximate' : ''}${alts ? ` | alternatives: ${alts}` : ''}`;
+  });
+  const known = lines.length
+    ? `\n\nKnown places (use these coordinates when the text refers to one of them):\n<gazetteer>\n${lines.join('\n')}\n</gazetteer>`
+    : '';
+  return `Build a scenario from this text:\n\n<article>\n${text}\n</article>${known}`;
+}
+
 /**
  * Generate a scenario. onProgress({ phase: 'thinking' | 'writing', chars }) is called
  * as the response streams in. Abort with `signal`.
  */
 export async function generateScenario({ apiKey, text, signal, onProgress }) {
-  const [Anthropic, system, schema] = await Promise.all([
+  const [Anthropic, system, schema, gazetteer] = await Promise.all([
     loadSdk().catch(() => { throw new GenerateError('sdk'); }),
     fetch('tools/scenario_prompt.md').then((r) => r.text()),
     fetch('scenario.schema.json').then((r) => r.json()),
+    fetch('gazetteer.json').then((r) => r.json()).then((g) => g.places).catch(() => []),
   ]);
   const client = new Anthropic({ apiKey, dangerouslyAllowBrowser: true });
 
@@ -40,7 +53,7 @@ export async function generateScenario({ apiKey, text, signal, onProgress }) {
         // recommended fallback model inside the same call.
         betas: ['server-side-fallback-2026-07-01'],
         fallbacks: 'default',
-        messages: [{ role: 'user', content: `Build a scenario from this text:\n\n<article>\n${text}\n</article>` }],
+        messages: [{ role: 'user', content: userMessage(text, gazetteer) }],
       },
       { signal },
     );

@@ -1040,6 +1040,91 @@ function bindUI() {
   });
   $('#export-btn').onclick = exportScenario;
   bindGenerator();
+  bindSearch();
+}
+
+// ---------------------------------------------------------------------------
+// Place search (gazetteer + the open scenario)
+// ---------------------------------------------------------------------------
+
+let gazetteer = [];
+fetch('gazetteer.json').then((r) => r.json()).then((g) => (gazetteer = g.places || [])).catch(() => {});
+let foundMarkers = [];
+
+function searchPlaces(q) {
+  q = q.trim().toLowerCase();
+  if (!q) return [];
+  const fromScenario = (state.scenario?.places || []).map((p) => ({
+    id: p.id, zh: p.zh?.name || p.nameLocal || '', name: p.name, kind: p.kind, lon: p.lon, lat: p.lat,
+    approximate: p.approximate, aliases: [p.nameLocal].filter(Boolean), note: tr(p, 'note'),
+  }));
+  const seen = new Set(), out = [];
+  for (const g of [...fromScenario, ...gazetteer]) {
+    const keys = [g.zh, g.name, ...(g.aliases || [])].filter(Boolean).map((k) => k.toLowerCase());
+    if (!keys.some((k) => k.includes(q))) continue;
+    const dedupe = `${g.zh || g.name}|${g.lon.toFixed(2)}`;
+    if (seen.has(dedupe)) continue;
+    seen.add(dedupe);
+    // Prefer gazetteer alternatives for a scenario place of the same name.
+    const gz = gazetteer.find((x) => x.zh && x.zh === g.zh);
+    const gzNote = gz && (getLang() === 'zh' ? gz.note_zh || gz.note : gz.note);
+    const note = g.note_zh && getLang() === 'zh' ? g.note_zh : g.note;
+    out.push({ ...g, alternatives: g.alternatives || gz?.alternatives, note: note || gzNote });
+    if (out.length >= 8) break;
+  }
+  return out;
+}
+
+function showFound(g) {
+  foundMarkers.forEach((m) => m.remove());
+  foundMarkers = [];
+  const label = getLang() === 'zh' ? (g.zh || g.name) : g.name;
+  const pin = (lngLat, alt, text) => {
+    const el = Object.assign(document.createElement('div'), { className: `found-marker${alt ? ' alt' : ''}` });
+    const div = document.createElement('div');
+    div.className = 'popup';
+    div.innerHTML = `<h4>${esc(text)}</h4><div class="meta">${lngLat[1].toFixed(3)}°, ${lngLat[0].toFixed(3)}°${g.approximate || alt ? ` <span class="approx">≈</span>` : ''}</div>` +
+      (!alt && g.note ? paragraphs(g.note) : '') +
+      (!alt && g.alternatives?.length ? `<div class="meta">${t('search.alts')} ${g.alternatives.map((a) => esc(a.label)).join('；')}</div>` : '') +
+      `<div class="row"><button class="btn small">${t('popup.vs')}</button></div>`;
+    div.querySelector('button').onclick = () => runViewshed(lngLat, text);
+    const m = new maplibregl.Marker({ element: el, anchor: 'bottom' }).setLngLat(lngLat)
+      .setPopup(new maplibregl.Popup({ offset: 18, maxWidth: '300px' }).setDOMContent(div)).addTo(map);
+    foundMarkers.push(m);
+    return m;
+  };
+  const main = pin([g.lon, g.lat], false, `${label}${g.zh && g.name && label !== g.name ? ` · ${getLang() === 'zh' ? g.name : g.zh}` : ''}`);
+  for (const a of g.alternatives || []) pin([a.lon, a.lat], true, `${t('search.alt')}: ${a.label}`);
+  const pts = [[g.lon, g.lat], ...(g.alternatives || []).map((a) => [a.lon, a.lat])];
+  if (pts.length > 1) moveCamera(cameraFor(pts), false);
+  else moveCamera({ center: pts[0], zoom: 10 }, false);
+  main.togglePopup();
+}
+
+function bindSearch() {
+  const input = $('#place-search'), list = $('#search-results');
+  let hits = [], active = 0;
+  const render = () => {
+    list.replaceChildren(...(hits.length ? hits : [null]).map((g, i) => {
+      const li = document.createElement('li');
+      if (!g) { li.innerHTML = `<small>${t('search.none')}</small>`; return li; }
+      const [a, b] = getLang() === 'zh' ? [g.zh || g.name, g.name] : [g.name, g.zh];
+      li.innerHTML = `<span>${esc(a)}${b && b !== a ? ` <small>${esc(b)}</small>` : ''}${g.approximate ? ' <span class="approx">≈</span>' : ''}</span><small>${esc(t(`kind.${g.kind}`) || '')}</small>`;
+      li.classList.toggle('active', i === active);
+      li.onmousedown = (e) => { e.preventDefault(); pick(g); };
+      return li;
+    }));
+    list.hidden = !input.value.trim();
+  };
+  const pick = (g) => { list.hidden = true; input.blur(); showFound(g); };
+  input.oninput = () => { hits = searchPlaces(input.value); active = 0; render(); };
+  input.onkeydown = (e) => {
+    if (e.key === 'ArrowDown') { active = Math.min(active + 1, hits.length - 1); render(); e.preventDefault(); }
+    else if (e.key === 'ArrowUp') { active = Math.max(active - 1, 0); render(); e.preventDefault(); }
+    else if (e.key === 'Enter' && hits[active]) pick(hits[active]);
+    else if (e.key === 'Escape') { input.value = ''; list.hidden = true; }
+  };
+  input.onblur = () => setTimeout(() => (list.hidden = true), 150);
 }
 
 // ---------------------------------------------------------------------------
