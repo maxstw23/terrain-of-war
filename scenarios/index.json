@@ -1,5 +1,14 @@
 [
   {
+    "file": "scenarios/trasimene-217bc.json",
+    "title": "Lake Trasimene",
+    "period": "217 BC",
+    "zh": {
+      "title": "特拉西梅诺湖之战",
+      "period": "前217年"
+    }
+  },
+  {
     "file": "scenarios/thermopylae-480bc.json",
     "title": "Thermopylae",
     "period": "480 BC",
