@@ -3,7 +3,7 @@
 
 import { DemSource, TERRARIUM } from './dem.js';
 import { elevationProfile, profileStats, lineOfSight, viewshed, leastCostRoute, lineLength, haversine, bboxOf, walkingHours } from './analysis.js';
-import { normalizeScenario, routesGeoJSON, zonesGeoJSON, PLACE_ICONS, ZONE_STYLE, cameraFor, allCoords } from './scenario.js';
+import { normalizeScenario, routesGeoJSON, zonesGeoJSON, PLACE_ICONS, ZONE_STYLE, cameraFor, allCoords, circleRing } from './scenario.js';
 import { renderProfile, renderCompare } from './chart.js';
 import { registerReliefProtocols, elevationRange, rampCss } from './relief.js';
 import { t, tr, names, getLang, setLang, translateDom } from './i18n.js';
@@ -223,6 +223,9 @@ function addOsmLayers() {
     },
   ]) map.addLayer(layer, 'cursor');
 }
+
+map.on('zoom', declutter);
+map.on('moveend', declutter);
 
 map.on('load', async () => {
   map.addImage('chevron', chevronImage(), { sdf: true });
@@ -462,7 +465,7 @@ async function annotatePeaks(sc) {
     }
     if (state.scenario !== sc) return;
     const el = state.markers.find((m) => m.getElement().dataset.id === p.id)?.getElement().querySelector('.peak');
-    if (el) el.textContent = fmtPeak(p.peakElev);
+    if (el) { el.textContent = fmtPeak(p.peakElev); declutter(); }
   }
 }
 
@@ -607,10 +610,12 @@ function goToStep(i, { instant = false, keepCamera = false } = {}) {
   $('#prev-step').disabled = i === 0;
   $('#next-step').disabled = i === sc.steps.length - 1;
 
-  // A comparison frames every route it compares; otherwise use the step's camera.
-  const compared = s.analysis?.type === 'compare' ? sc.routes.filter((r) => s.analysis.routes.includes(r.id)) : [];
-  const cam = compared.length ? cameraFor(compared.flatMap((r) => r.geometry))
-    : s.camera || (i === 0 ? sc.camera : null) || cameraFor(focusCoords(s));
+  // Frame what the step is about (its focus plus its analysis), or the whole scenario
+  // for an overview step. Hand-set cameras are only a last resort: a fixed zoom suits
+  // one screen size and not another.
+  const frame = stepFrame(s);
+  const all = frame.length ? frame : sceneCoords(sc);
+  const cam = all.length ? cameraFor(all) : s.camera || sc.camera || cameraFor([]);
   if (!keepCamera) moveCamera(cam, instant, !!s.analysis);
   applyStepVisibility();
   if (s.analysis) runStepAnalysis(s.analysis);
@@ -623,11 +628,43 @@ function goToStep(i, { instant = false, keepCamera = false } = {}) {
   history.replaceState(null, '', `?${params}`);
 }
 
-function focusCoords(s) {
+/**
+ * Coordinates a step should keep in view: its focus features (or shown ones) and the
+ * extent of its analysis. Rivers only count when nothing else does, so a long river
+ * doesn't pull the view out to its whole course.
+ */
+function stepFrame(s) {
   const sc = state.scenario;
-  const ids = new Set(s.focus || s.show || []);
-  const pick = { ...sc, places: sc.places.filter((p) => ids.has(p.id)), routes: sc.routes.filter((r) => ids.has(r.id)), zones: sc.zones.filter((z) => ids.has(z.id)) };
-  const c = allCoords(pick);
+  const a = s.analysis;
+  const extent = [];
+  if (a?.type === 'compare') sc.routes.filter((r) => a.routes?.includes(r.id)).forEach((r) => extent.push(...r.geometry));
+  else if (a?.type === 'viewshed' && a.at) extent.push(...circleRing(a.at, 2.5 * (a.radiusKm ?? +$('#vs-r').value), 16)); // with its surroundings
+  else if (a?.type === 'los' && a.from && a.to) extent.push(a.from, a.to);
+  else if (a?.type === 'profile' && a.coords) extent.push(...a.coords);
+  else if (a?.type === 'profile' && a.route) extent.push(...(sc.routes.find((r) => r.id === a.route)?.geometry || []));
+  const ids = new Set(s.focus?.length ? s.focus : s.show || []);
+  const coords = (minor) => [
+    ...sc.places.filter((p) => ids.has(p.id) && !minor).map((p) => [p.lon, p.lat]),
+    ...sc.routes.filter((r) => ids.has(r.id) && (r.kind === 'river') === minor).flatMap((r) => r.geometry),
+    ...sc.zones.filter((z) => ids.has(z.id) && !minor).flatMap((z) => z.ring),
+  ];
+  // A viewshed or sight line is about one spot: keep only the focus that is near it.
+  if (a?.type === 'viewshed' || a?.type === 'los') {
+    const c = a.at || a.from;
+    const reach = Math.max(25, 3 * (a.at ? a.radiusKm ?? +$('#vs-r').value : haversine(a.from, a.to) / 1000));
+    return [...extent, ...coords(false).filter((p) => haversine(c, p) / 1000 < reach)];
+  }
+  const main = [...extent, ...coords(false)];
+  return main.length ? main : coords(true);
+}
+
+/** Everything in the scenario except river courses, for overview steps. */
+function sceneCoords(sc) {
+  const c = [
+    ...sc.places.map((p) => [p.lon, p.lat]),
+    ...sc.routes.filter((r) => r.kind !== 'river').flatMap((r) => r.geometry),
+    ...sc.zones.flatMap((z) => z.ring),
+  ];
   return c.length ? c : allCoords(sc);
 }
 
@@ -638,10 +675,13 @@ function moveCamera(cam, instant, withDrawer = false) {
   // and of the analysis drawer when the step opens one.
   const panel = wide
     ? { top: 20, bottom: withDrawer ? 320 : 20, left: 380, right: 20 }
-    : { top: 20, bottom: window.innerHeight * 0.46 + (withDrawer ? 120 : 0), left: 0, right: 0 };
+    : { top: withDrawer ? 20 : 80, bottom: window.innerHeight * 0.46 + (withDrawer ? 8 + Math.min(window.innerHeight * 0.34, 240) : 0), left: 0, right: 0 };
   const opts = { duration: instant ? 0 : 2000, essential: true };
-  if (cam.bounds) map.fitBounds(cam.bounds, { ...opts, padding: { top: panel.top + 40, bottom: panel.bottom + 40, left: panel.left + 40, right: panel.right + 40 } });
-  else map.flyTo({ ...opts, center: cam.center, zoom: cam.zoom ?? 9, padding: panel });
+  // Names sit to the right of their symbols, so leave more room on that side. A single
+  // fort or a short pass shouldn't zoom in past what the relief can show.
+  const pad = { top: panel.top + 50, bottom: panel.bottom + 40, left: panel.left + 50, right: panel.right + (wide ? 130 : 70) };
+  if (cam.bounds) map.fitBounds(cam.bounds, { ...opts, padding: pad, maxZoom: 11.5 });
+  else map.flyTo({ ...opts, center: cam.center, zoom: Math.min(cam.zoom ?? 9, 11.5), padding: panel });
 }
 
 function applyStepVisibility() {
@@ -687,6 +727,62 @@ function applyStepVisibility() {
     const id = m.getElement().dataset.id;
     m.getElement().style.display = visible(id) ? '' : 'none';
     m.getElement().style.opacity = dimmed(id) ? 0.35 : 1;
+  }
+  declutter();
+}
+
+// ---------------------------------------------------------------------------
+// Label de-cluttering: markers are DOM elements, so MapLibre's own collision
+// detection doesn't apply. Place symbols always stay; names are placed in order of
+// importance and any that would overlap one already placed is hidden.
+// ---------------------------------------------------------------------------
+
+const MAJOR_KINDS = new Set(['battle', 'fort', 'city', 'pass', 'mountain']);
+let declutterQueued = false;
+function declutter() {
+  if (declutterQueued) return;
+  declutterQueued = true;
+  requestAnimationFrame(() => { declutterQueued = false; placeLabels(); });
+}
+
+function placeLabels() {
+  const sc = state.scenario;
+  if (!sc) return;
+  const focus = new Set(sc.steps[state.step]?.focus || []);
+  const items = [];
+  // Names under the panel, the legend or the map buttons couldn't be read anyway.
+  const taken = ['#panel', '#drawer', '#elev-legend', '.maplibregl-ctrl-top-right']
+    .map((q) => document.querySelector(q))
+    .filter((el) => el && !el.hidden && el.offsetParent)
+    .map((el) => el.getBoundingClientRect());
+  const shown = (el) => el.style.display !== 'none';
+  for (const m of state.markers) {
+    const el = m.getElement();
+    if (!shown(el)) continue;
+    const p = sc.places.find((x) => x.id === el.dataset.id);
+    const svg = el.querySelector('svg');
+    if (svg) taken.push(svg.getBoundingClientRect());
+    const label = el.classList.contains('region-label') ? el : el.querySelector('.lbl');
+    const rank = p?.kind === 'region' ? 4 : MAJOR_KINDS.has(p?.kind) ? 1 : 2;
+    items.push({ el: label, rank, id: el.dataset.id, dim: el.classList.contains('dim') });
+  }
+  for (const m of routeLabelMarkers) {
+    const el = m.getElement();
+    if (!shown(el)) continue;
+    items.push({ el, rank: el.classList.contains('region-label') ? 4 : 3, id: el.dataset.id, dim: el.style.opacity < 1 });
+  }
+  for (const it of items) {
+    it.el.classList.remove('clipped');
+    if (focus.has(it.id)) it.rank = 0;
+    if (it.dim) it.rank += 5;
+  }
+  items.sort((a, b) => a.rank - b.rank);
+  const overlaps = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom;
+  for (const it of items) {
+    const r = it.el.getBoundingClientRect();
+    const box = { left: r.left - 2, right: r.right + 2, top: r.top - 1, bottom: r.bottom + 1 };
+    if (taken.some((t) => overlaps(box, t))) it.el.classList.add('clipped');
+    else taken.push(box);
   }
 }
 
@@ -740,6 +836,7 @@ function clearAnalysis() {
   map.getSource('cursor').setData(EMPTY);
   removeViewshed();
   $('#drawer').hidden = true;
+  declutter();
 }
 
 function removeViewshed() {
@@ -749,6 +846,7 @@ function removeViewshed() {
 
 function openDrawer(title, statsHtml) {
   $('#drawer').hidden = false;
+  declutter();
   $('#chart').hidden = false;
   $('#drawer-title').textContent = title;
   $('#drawer-stats').innerHTML = statsHtml;
@@ -1011,7 +1109,7 @@ function bindUI() {
     const c = $('#panel').classList.contains('collapsed');
     $('#panel-toggle').textContent = phone.matches ? (c ? '▴' : '▾') : c ? '⟩' : '⟨';
   };
-  $('#panel-toggle').onclick = () => { $('#panel').classList.toggle('collapsed'); setToggle(); };
+  $('#panel-toggle').onclick = () => { $('#panel').classList.toggle('collapsed'); setToggle(); setTimeout(declutter, 400); };
   phone.addEventListener?.('change', setToggle);
   setToggle();
   document.addEventListener('keydown', (e) => {
