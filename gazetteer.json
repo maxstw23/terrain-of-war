@@ -387,6 +387,342 @@
     "奥斯塔河谷（萨拉西人）",
     "Aosta valley (Salassi)"
    ]
+  },
+  {
+   "id": "tongguan",
+   "zh": "潼关",
+   "name": "Tong Pass", "kind": "pass", "lon": 110.33, "lat": 34.6, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "hangu",
+   "zh": "函谷关",
+   "name": "Hangu Pass", "kind": "pass", "lon": 110.92, "lat": 34.63, "approximate": true,
+   "aliases": [
+    "Hanguguan"
+   ], "source": "estimated"
+  },
+  {
+   "id": "wuguan",
+   "zh": "武关",
+   "name": "Wu Pass", "kind": "pass", "lon": 110.96, "lat": 33.71, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "jianmen",
+   "zh": "剑门关",
+   "name": "Jianmen Pass", "kind": "pass", "lon": 105.57, "lat": 32.21, "approximate": true,
+   "aliases": [
+    "剑阁",
+    "Jiange"
+   ], "source": "estimated"
+  },
+  {
+   "id": "hulao",
+   "zh": "虎牢关",
+   "name": "Hulao Pass", "kind": "pass", "lon": 113.24, "lat": 34.85, "approximate": true,
+   "aliases": [
+    "成皋",
+    "Chenggao",
+    "汜水关"
+   ], "source": "estimated"
+  },
+  {
+   "id": "shanhai",
+   "zh": "山海关",
+   "name": "Shanhai Pass", "kind": "pass", "lon": 119.76, "lat": 40.01, "source": "estimated"
+  },
+  {
+   "id": "juyong",
+   "zh": "居庸关",
+   "name": "Juyong Pass", "kind": "pass", "lon": 116.07, "lat": 40.29, "source": "estimated"
+  },
+  {
+   "id": "yanmen",
+   "zh": "雁门关",
+   "name": "Yanmen Pass", "kind": "pass", "lon": 112.87, "lat": 39.18, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "pingxing",
+   "zh": "平型关",
+   "name": "Pingxing Pass", "kind": "pass", "lon": 113.95, "lat": 39.33, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "dingjun",
+   "zh": "定军山",
+   "name": "Mt Dingjun", "kind": "mountain", "lon": 106.62, "lat": 33.1, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "chengdu",
+   "zh": "成都",
+   "name": "Chengdu", "kind": "city", "lon": 104.07, "lat": 30.66, "source": "estimated"
+  },
+  {
+   "id": "luoyang",
+   "zh": "洛阳",
+   "name": "Luoyang", "kind": "city", "lon": 112.45, "lat": 34.62, "source": "estimated"
+  },
+  {
+   "id": "xuchang",
+   "zh": "许昌",
+   "name": "Xuchang", "kind": "city", "lon": 113.85, "lat": 34.03, "approximate": true,
+   "aliases": [
+    "许",
+    "许都",
+    "Xu"
+   ], "source": "estimated"
+  },
+  {
+   "id": "ye",
+   "zh": "邺城",
+   "name": "Ye", "kind": "city", "lon": 114.38, "lat": 36.32, "approximate": true,
+   "aliases": [
+    "邺"
+   ], "source": "estimated"
+  },
+  {
+   "id": "hefei",
+   "zh": "合肥",
+   "name": "Hefei", "kind": "city", "lon": 117.23, "lat": 31.82, "source": "estimated"
+  },
+  {
+   "id": "xiangyang",
+   "zh": "襄阳",
+   "name": "Xiangyang", "kind": "city", "lon": 112.14, "lat": 32.04, "source": "estimated"
+  },
+  {
+   "id": "fancheng",
+   "zh": "樊城",
+   "name": "Fancheng", "kind": "city", "lon": 112.15, "lat": 32.05, "source": "estimated"
+  },
+  {
+   "id": "jiangling",
+   "zh": "江陵",
+   "name": "Jiangling", "kind": "city", "lon": 112.19, "lat": 30.35,
+   "aliases": [
+    "荆州",
+    "Jingzhou"
+   ], "source": "estimated"
+  },
+  {
+   "id": "xuzhou",
+   "zh": "彭城",
+   "name": "Pengcheng", "kind": "city", "lon": 117.18, "lat": 34.26,
+   "aliases": [
+    "徐州",
+    "Xuzhou"
+   ], "source": "estimated"
+  },
+  {
+   "id": "xingyang",
+   "zh": "荥阳",
+   "name": "Xingyang", "kind": "city", "lon": 113.38, "lat": 34.79, "source": "estimated"
+  },
+  {
+   "id": "shouchun",
+   "zh": "寿春",
+   "name": "Shouchun", "kind": "city", "lon": 116.78, "lat": 32.58,
+   "aliases": [
+    "寿县",
+    "Shouxian"
+   ], "source": "estimated"
+  },
+  {
+   "id": "jiankang",
+   "zh": "建康",
+   "name": "Jiankang", "kind": "city", "lon": 118.78, "lat": 32.06,
+   "aliases": [
+    "南京",
+    "Nanjing",
+    "金陵",
+    "建业"
+   ], "source": "estimated"
+  },
+  {
+   "id": "beijing",
+   "zh": "北京",
+   "name": "Beijing", "kind": "city", "lon": 116.4, "lat": 39.9,
+   "aliases": [
+    "燕京",
+    "大都",
+    "Yanjing"
+   ], "source": "estimated"
+  },
+  {
+   "id": "linan",
+   "zh": "临安",
+   "name": "Lin'an", "kind": "city", "lon": 120.16, "lat": 30.27,
+   "aliases": [
+    "杭州",
+    "Hangzhou"
+   ], "source": "estimated"
+  },
+  {
+   "id": "ningyuan",
+   "zh": "宁远",
+   "name": "Ningyuan", "kind": "fort", "lon": 120.73, "lat": 40.62, "approximate": true,
+   "aliases": [
+    "兴城",
+    "Xingcheng"
+   ], "source": "estimated"
+  },
+  {
+   "id": "diaoyu",
+   "zh": "钓鱼城",
+   "name": "Diaoyu Fortress", "kind": "fort", "lon": 106.28, "lat": 30.01, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "guandu",
+   "zh": "官渡",
+   "name": "Guandu", "kind": "battle", "lon": 114.08, "lat": 34.8, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "chibi",
+   "zh": "赤壁",
+   "name": "Red Cliffs", "kind": "battle", "lon": 113.95, "lat": 29.89, "approximate": true,
+   "aliases": [
+    "Chibi"
+   ], "source": "estimated"
+  },
+  {
+   "id": "yiling",
+   "zh": "夷陵",
+   "name": "Yiling", "kind": "battle", "lon": 111.35, "lat": 30.7, "approximate": true,
+   "aliases": [
+    "猇亭",
+    "Xiaoting"
+   ], "source": "estimated"
+  },
+  {
+   "id": "changban",
+   "zh": "长坂坡",
+   "name": "Changban", "kind": "battle", "lon": 111.79, "lat": 30.82, "approximate": true,
+   "aliases": [
+    "当阳",
+    "Dangyang"
+   ], "source": "estimated"
+  },
+  {
+   "id": "changping",
+   "zh": "长平",
+   "name": "Changping", "kind": "battle", "lon": 112.92, "lat": 35.8, "approximate": true,
+   "aliases": [
+    "高平",
+    "Gaoping"
+   ], "source": "estimated"
+  },
+  {
+   "id": "julu",
+   "zh": "巨鹿",
+   "name": "Julu", "kind": "battle", "lon": 115.04, "lat": 37.22, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "gaixia",
+   "zh": "垓下",
+   "name": "Gaixia", "kind": "battle", "lon": 117.55, "lat": 33.35, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "feishui",
+   "zh": "淝水",
+   "name": "Fei River", "kind": "battle", "lon": 116.78, "lat": 32.62, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "sarhu",
+   "zh": "萨尔浒",
+   "name": "Sarhu", "kind": "battle", "lon": 124.13, "lat": 41.88, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "taierzhuang",
+   "zh": "台儿庄",
+   "name": "Taierzhuang", "kind": "battle", "lon": 117.73, "lat": 34.56, "source": "estimated"
+  },
+  {
+   "id": "waterloo",
+   "zh": "滑铁卢",
+   "name": "Waterloo", "kind": "battle", "lon": 4.41, "lat": 50.68, "source": "estimated"
+  },
+  {
+   "id": "cannae",
+   "zh": "坎尼",
+   "name": "Cannae", "kind": "battle", "lon": 16.13, "lat": 41.31, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "trasimene",
+   "zh": "特拉西梅诺湖",
+   "name": "Lake Trasimene", "kind": "battle", "lon": 12.1, "lat": 43.15, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "thermopylae",
+   "zh": "温泉关",
+   "name": "Thermopylae", "kind": "pass", "lon": 22.54, "lat": 38.8, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "marathon",
+   "zh": "马拉松",
+   "name": "Marathon", "kind": "battle", "lon": 23.98, "lat": 38.12, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "alesia",
+   "zh": "阿莱西亚",
+   "name": "Alesia", "kind": "fort", "lon": 4.5, "lat": 47.54, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "agincourt",
+   "zh": "阿金库尔",
+   "name": "Agincourt", "kind": "battle", "lon": 2.13, "lat": 50.46, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "hastings",
+   "zh": "黑斯廷斯",
+   "name": "Hastings", "kind": "battle", "lon": 0.49, "lat": 50.91, "approximate": true,
+   "aliases": [
+    "Battle"
+   ], "source": "estimated"
+  },
+  {
+   "id": "austerlitz",
+   "zh": "奥斯特里茨",
+   "name": "Austerlitz", "kind": "battle", "lon": 16.76, "lat": 49.13, "approximate": true,
+   "aliases": [
+    "Pratzen"
+   ], "source": "estimated"
+  },
+  {
+   "id": "gettysburg",
+   "zh": "葛底斯堡",
+   "name": "Gettysburg", "kind": "battle", "lon": -77.23, "lat": 39.82, "source": "estimated"
+  },
+  {
+   "id": "verdun",
+   "zh": "凡尔登",
+   "name": "Verdun", "kind": "city", "lon": 5.38, "lat": 49.16, "source": "estimated"
+  },
+  {
+   "id": "arnhem",
+   "zh": "阿纳姆",
+   "name": "Arnhem", "kind": "city", "lon": 5.91, "lat": 51.98, "source": "estimated"
+  },
+  {
+   "id": "cassino",
+   "zh": "卡西诺山",
+   "name": "Monte Cassino", "kind": "mountain", "lon": 13.81, "lat": 41.49, "source": "estimated"
+  },
+  {
+   "id": "stalingrad",
+   "zh": "斯大林格勒",
+   "name": "Stalingrad", "kind": "city", "lon": 44.52, "lat": 48.71,
+   "aliases": [
+    "Volgograd",
+    "伏尔加格勒"
+   ], "source": "estimated"
+  },
+  {
+   "id": "gallipoli",
+   "zh": "加里波利（澳新军团湾）",
+   "name": "Gallipoli (Anzac Cove)", "kind": "battle", "lon": 26.29, "lat": 40.24, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "omaha",
+   "zh": "奥马哈海滩",
+   "name": "Omaha Beach", "kind": "battle", "lon": -0.87, "lat": 49.37, "source": "estimated"
   }
  ]
 }

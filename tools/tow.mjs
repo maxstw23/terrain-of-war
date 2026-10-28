@@ -254,7 +254,8 @@ function place(query) {
   const hits = gazetteer().filter((g) => [g.id, g.name, g.zh, ...(g.aliases || [])].some((n) => n && n.toLowerCase().includes(q)));
   if (!hits.length) console.log(`no gazetteer entry for "${query}"`);
   for (const g of hits) {
-    console.log(`${g.id}: ${g.zh || ''} ${g.name} — ${fmt([g.lon, g.lat])}${g.approximate ? ' (approximate)' : ''}`);
+    const flags = [g.approximate && 'approximate', g.source === 'estimated' && 'estimated, not checked against a reference'].filter(Boolean);
+    console.log(`${g.id}: ${g.zh || ''} ${g.name} — ${fmt([g.lon, g.lat])}${flags.length ? ` (${flags.join('; ')})` : ''}`);
     for (const a of g.alternatives || []) console.log(`    alternative: ${a.label} — ${fmt([a.lon, a.lat])}`);
     if (g.note) console.log(`    ${g.note}`);
   }

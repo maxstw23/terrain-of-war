@@ -123,7 +123,14 @@ references, places in the sea, peaks that sit below their summit, and places tha
 their `gazetteer.json` entry. Pre-computed routes make scenarios open without tracing; each
 carries a fingerprint of its waypoints, so an edited route is traced again instead of drawn
 stale. `gazetteer.json` holds agreed coordinates for recurring places; both generators pass it
-to Claude so the same place lands in the same spot every time.
+to Claude so the same place lands in the same spot every time. Entries marked
+`"source": "estimated"` were seeded from general knowledge and not checked against a
+reference; replace them with checked coordinates when you have them. A GitHub Actions job runs
+`tow.mjs check` on every scenario at each push.
+
+Scenarios that were not pre-computed (for example one just generated in the page) are traced
+in a background worker: a quick preview first, then the same full-detail trace as `bake`;
+analyses shown in between are marked as previews and refresh themselves.
 
 ## Scenario format
 

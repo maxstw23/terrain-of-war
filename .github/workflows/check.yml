@@ -1,0 +1,23 @@
+name: Check scenarios
+
+on:
+  push:
+    paths: ['scenarios/**', 'gazetteer.json', 'js/**', 'tools/**', '.github/workflows/check.yml']
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Cache elevation tiles
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/terrain-of-war
+          key: tiles-${{ hashFiles('scenarios/*.json') }}
+          restore-keys: tiles-
+      - name: Check every scenario
+        run: node tools/tow.mjs check scenarios/*.json
