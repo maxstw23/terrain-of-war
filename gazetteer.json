@@ -861,15 +861,6 @@
    "name": "Cortona", "kind": "city", "lon": 11.985, "lat": 43.276
   },
   {
-   "id": "entrance",
-   "zh": "狭窄的入口",
-   "name": "The narrow entrance", "kind": "pass", "lon": 12.025, "lat": 43.186, "approximate": true,
-   "aliases": [
-    "狭窄的入口（博尔盖托）",
-    "The narrow entrance (Borghetto)"
-   ]
-  },
-  {
    "id": "tuoro",
    "zh": "图奥罗",
    "name": "Tuoro", "kind": "city", "lon": 12.074, "lat": 43.207
