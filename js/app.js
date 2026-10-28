@@ -357,26 +357,59 @@ async function loadScenario(raw, step = 0, source = null) {
   await traceTerrainRoutes(scenario);
 }
 
-/** Replace routes flagged follow: "terrain" with a least-cost path through the DEM. */
+// Live tracing for routes without a pre-computed path runs in a worker, on a coarser
+// grid than `tow.mjs bake` uses: a quick preview rather than the final line.
+const LIVE_TRACE_CELLS = 4e5, FULL_TRACE_CELLS = 1.5e6;
+let traceWorker = null, traceSeq = 0;
+const traceCalls = new Map();
+function traceInWorker(waypoints, mode, maxCells = LIVE_TRACE_CELLS) {
+  try {
+    if (!traceWorker) {
+      traceWorker = new Worker(new URL('./trace-worker.js', import.meta.url), { type: 'module' });
+      traceWorker.onmessage = ({ data }) => {
+        const call = traceCalls.get(data.id);
+        traceCalls.delete(data.id);
+        data.ok ? call.resolve(data.res) : call.reject(new Error(data.error));
+      };
+    }
+  } catch {
+    return leastCostRoute(dem, waypoints, { mode, maxCells }); // no module workers
+  }
+  const id = ++traceSeq;
+  return new Promise((resolve, reject) => {
+    traceCalls.set(id, { resolve, reject });
+    traceWorker.postMessage({ id, waypoints, mode, maxCells });
+  });
+}
+
+/**
+ * Trace routes flagged follow: "terrain" / "valley" that have no pre-computed path:
+ * a quick coarse preview of every route first, then the full-detail trace (the same as
+ * `tow.mjs bake`). Analyses shown meanwhile are marked as previews and refreshed.
+ */
 async function traceTerrainRoutes(sc) {
   const todo = sc.routes.filter((r) => ['terrain', 'valley'].includes(r.follow) && !r.traced);
-  for (const [i, r] of todo.entries()) {
-    status(t('status.tracing', { name: names(r)[0], i: i + 1, n: todo.length }));
-    try {
-      const valley = r.follow === 'valley';
-      const res = await leastCostRoute(dem, r.waypoints, { mode: valley ? 'valley' : 'march' });
-      if (state.scenario !== sc) return;
-      Object.assign(r, { geometry: res.coords, traced: true, hours: valley ? null : res.hours, profile: res.profile });
-      map.getSource('routes').setData(routesGeoJSON(sc));
-    } catch (e) {
-      console.warn(e);
+  if (!todo.length) return;
+  for (const pass of ['preview', 'full']) {
+    for (const [i, r] of todo.entries()) {
+      status(t(pass === 'preview' ? 'status.tracing' : 'status.refining', { name: names(r)[0], i: i + 1, n: todo.length }));
+      try {
+        const valley = r.follow === 'valley';
+        const res = await traceInWorker(r.waypoints, valley ? 'valley' : 'march', pass === 'preview' ? LIVE_TRACE_CELLS : FULL_TRACE_CELLS);
+        if (state.scenario !== sc) return;
+        Object.assign(r, { geometry: res.coords, hours: valley ? null : res.hours, profile: res.profile, preview: pass === 'preview' });
+        map.getSource('routes').setData(routesGeoJSON(sc));
+      } catch (e) {
+        console.warn(e);
+      }
     }
+    if (pass === 'preview') todo.forEach((r) => (r.traced = true));
+    renderRouteLabels();
+    // Analyses on screen were computed from the previous lines; recompute them.
+    const a = sc.steps[state.step]?.analysis;
+    if (a && ['profile', 'compare'].includes(a.type)) runStepAnalysis(a);
   }
-  status(todo.length ? t('status.traced') : '', 2500);
-  renderRouteLabels();
-  // A profile shown before tracing finished was drawn on the raw waypoints; redo it.
-  const a = sc.steps[state.step]?.analysis;
-  if (todo.length && a?.type === 'profile' && a.route) runStepAnalysis(a);
+  status(t('status.traced'), 2500);
 }
 
 // ---------------------------------------------------------------------------
@@ -740,7 +773,8 @@ async function runProfile(coords, title, route = null, { keepLine = true } = {})
       <span>${t('st.climb')} <b>${Math.round(s.ascent)} m</b> / ${t('st.descent')} <b>${Math.round(s.descent)} m</b></span>
       <span>${t('st.range')} <b>${Math.round(s.min)}–${Math.round(s.max)} m</b></span>
       <span>${t('st.steepest')} <b>${(s.maxGrade * 100).toFixed(0)}%</b> ${t('st.at')} ${fmtKm(s.maxGradeAt)}</span>
-      ${hours ? `<span>${t('st.walk')} <b>${fmtHours(hours)}</b> · ${t('st.army')} <b>${t('st.days', { n: marchDays(hours) })}</b></span>` : ''}`);
+      ${hours ? `<span>${t('st.walk')} <b>${fmtHours(hours)}</b> · ${t('st.army')} <b>${t('st.days', { n: marchDays(hours) })}</b></span>` : ''}
+      ${route?.preview ? `<span class="muted">${t('preview.note')}</span>` : ''}`);
     const markers = [];
     if (route) {
       // Mark named places that lie close to the route.
@@ -797,7 +831,8 @@ async function runCompare(ids, label) {
         <td>${mark(st.ascent, (x) => x.st.ascent, `${Math.round(st.ascent).toLocaleString()} m`)}</td>
         <td>${mark(st.max, (x) => x.st.max, `${Math.round(st.max).toLocaleString()} m`)}</td>
         <td>${(st.maxGrade * 100).toFixed(0)}%</td></tr>`).join('')}
-    </table></div><span class="muted compare-note">${t('compare.note')}</span>`;
+    </table></div><span class="muted compare-note">${t('compare.note')}</span>
+    ${routes.some((r) => r.preview) ? `<span class="muted">${t('preview.note')}</span>` : ''}`;
     openDrawer(label || t('compare.title'), table);
     renderCompare($('#chart'), rows.map(({ r, pts, color }) => ({ label: names(r)[0], color, points: pts })), {
       onHover: (pts) => map.getSource('cursor').setData({
