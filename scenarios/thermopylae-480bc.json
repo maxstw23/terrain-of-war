@@ -359,6 +359,9 @@
         "label": "From the wall to the Phocian post",
         "zh": {
           "label": "从城墙望福基斯人山顶阵地"
+        },
+        "expect": {
+          "sight": "blocked"
         }
       },
       "zh": {

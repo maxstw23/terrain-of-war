@@ -114,6 +114,12 @@ class Camera(BaseModel):
     zoom: float = Field(description="6 = region, 9 = valley, 11-12 = single battlefield (flat north-up map)")
 
 
+class Expect(BaseModel):
+    sight: Optional[Literal["blocked", "clear"]] = Field(None, description="for los: the text says the line of sight is blocked / clear")
+    hidden: Optional[list[str]] = Field(None, description="place ids the text says the observer cannot see (viewshed or los observer)")
+    visible: Optional[list[str]] = Field(None, description="place ids the text says the observer can see")
+
+
 class Analysis(BaseModel):
     type: Literal["profile", "viewshed", "los", "compare"]
     route: Optional[str] = Field(None, description="route id, for profile")
@@ -124,6 +130,7 @@ class Analysis(BaseModel):
     to: Optional[LonLat] = Field(None, description="target [lon, lat], for los")
     radiusKm: Optional[float] = None
     observerH: Optional[float] = Field(None, description="eye height above ground in m (tower 10-20, rider 3)")
+    expect: Optional[Expect] = Field(None, description="what the step text says this analysis shows; checked against the terrain")
     label: Optional[str] = None
     zh: Optional[ZhLabel] = Field(None, description="Chinese label, when label is set")
 
@@ -132,7 +139,9 @@ class Step(BaseModel):
     title: str
     text: str = Field(description="2-3 short paragraphs separated by blank lines")
     focus: list[str] = Field(description="ids of places/routes/zones to highlight in this step")
-    camera: Camera
+    camera: Optional[Camera] = Field(
+        None, description="usually omit: the app frames the step's focus and analysis itself; only for a step with neither"
+    )
     analysis: Optional[Analysis] = None
     zh: ZhStep
 

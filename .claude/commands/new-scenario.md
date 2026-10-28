@@ -24,8 +24,13 @@ $ARGUMENTS
 4. **Prepare and check:** `node tools/tow.mjs prep scenarios/<name>.json`. This snaps peaks and passes,
    pre-computes terrain-following routes and runs every check. Fix each ✗ and run it again
    until it prints OK. Read the · notes: a place far from its gazetteer entry is usually a
-   mistake.
+   mistake. When an `expect` fails because troops the text calls hidden are in view, the
+   text's spot is rough: find real dead ground near it with
+   `node tools/tow.mjs hidden scenarios/<name>.json <observer ids> --near <place id> --km 3`
+   and move the place there (marking it `approximate`).
 5. **Add the new places to the gazetteer:** `node tools/tow.mjs gazetteer scenarios/<name>.json`.
+   Camps are skipped; mark other positions that only make sense in this telling ("the
+   riders' hill") with `"gazetteer": false`.
    For a disputed site, add its alternative identifications (`alternatives`, `note`,
    `note_zh`) to its entry by hand.
 6. **Commit and push** to `main`, then give the user the link

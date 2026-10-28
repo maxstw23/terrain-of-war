@@ -8,6 +8,8 @@
 //   node tools/tow.mjs prep   scenarios/x.json       snap + bake + check (the usual run)
 //   node tools/tow.mjs place  马陵                    look a name up in the gazetteer
 //   node tools/tow.mjs gazetteer scenarios/x.json    add the scenario's new places to it
+//   node tools/tow.mjs hidden scenarios/x.json <observer ...> [--near id] [--km 5] [--h 15]
+//                                                    dead ground: spots no observer can see
 //
 // snap, bake and prep rewrite the file in place. Elevation tiles are cached in
 // ~/.cache/terrain-of-war (override with TOW_TILE_CACHE).
@@ -16,7 +18,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { normalizeScenario, routeKey, PLACE_KINDS } from '../js/scenario.js';
-import { leastCostRoute, bboxOf, haversine } from '../js/analysis.js';
+import { leastCostRoute, bboxOf, haversine, lineOfSight } from '../js/analysis.js';
 import { nodeDem } from './lib/node-dem.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -107,7 +109,6 @@ async function check(file) {
   (raw.steps || []).forEach((s, i) => {
     needZh(s, ['title', 'text'], `step ${i + 1}`);
     if (s.analysis) needZh(s.analysis, ['label'], `step ${i + 1} analysis`);
-    if (!s.camera) notes.push(`step ${i + 1} has no camera; it will frame its focus features`);
   });
 
   // Step analyses must point at something that exists.
@@ -123,6 +124,34 @@ async function check(file) {
     if (a.type === 'viewshed' && !a.at) problems.push(`${where}: "at" is not a known place or [lon, lat]`);
     if (a.type === 'los' && !(a.from && a.to)) problems.push(`${where}: "from"/"to" are not known places`);
   });
+
+  // Claims the step text makes about sight lines must hold on the elevation data.
+  const placeById = new Map(sc.places.map((p) => [p.id, p]));
+  for (const [i, s] of sc.steps.entries()) {
+    const a = s.analysis, x = a?.expect;
+    if (!x) continue;
+    const where = `step ${i + 1} ${a.type}`;
+    const obsH = a.observerH ?? 15, tgtH = a.targetH ?? 2;
+    if (x.sight && a.type === 'los' && a.from && a.to) {
+      const r = await lineOfSight(dem, a.from, a.to, { observerH: obsH, targetH: tgtH });
+      if ((x.sight === 'clear') !== r.visible)
+        problems.push(`${where}: expected the sight line ${x.sight}, but it is ${r.visible ? 'clear' : `blocked ${(r.blockedAt.d / 1000).toFixed(1)} km out`}`);
+    }
+    const from = a.at || a.from;
+    for (const want of ['hidden', 'visible']) {
+      for (const id of x[want] || []) {
+        const p = placeById.get(id);
+        if (!p) { problems.push(`${where}: expect.${want} names unknown place "${id}"`); continue; }
+        if (!from) continue;
+        const d = haversine(from, [p.lon, p.lat]);
+        const r = await lineOfSight(dem, from, [p.lon, p.lat], { observerH: obsH, targetH: tgtH });
+        const radius = (a.radiusKm ?? 12) * 1000;
+        if (want === 'visible' && d > radius) problems.push(`${where}: ${id} is ${(d / 1000).toFixed(1)} km away, outside the ${radius / 1000} km radius`);
+        else if ((want === 'visible') !== r.visible)
+          problems.push(`${where}: expected ${id} ${want}, but it is ${r.visible ? 'visible' : 'hidden'} from ${fmt(from)}${r.visible ? '; find dead ground with: tow.mjs hidden' : ''}`);
+      }
+    }
+  }
 
   for (const p of raw.places || []) if (p.kind && !PLACE_KINDS.includes(p.kind)) problems.push(`place ${p.id}: unknown kind "${p.kind}"`);
 
@@ -146,6 +175,7 @@ async function check(file) {
   // Gazetteer agreement: the same place should sit in the same spot in every scenario.
   const gaz = gazetteer();
   for (const p of sc.places) {
+    if (p.kind === 'region') continue; // a label, placed wherever it reads best
     for (const g of gazMatches(gaz, p)) {
       const d = haversine([p.lon, p.lat], [g.lon, g.lat]);
       const alt = (g.alternatives || []).some((a) => haversine([p.lon, p.lat], [a.lon, a.lat]) < 3000);
@@ -230,11 +260,17 @@ function addToGazetteer(file) {
   const doc = fs.existsSync(GAZETTEER) ? readJSON(GAZETTEER) : { places: [] };
   const ids = new Set(doc.places.map((g) => g.id));
   const added = [];
+  const skipped = [];
   for (const p of raw.places || []) {
     if (gazMatches(doc.places, p).length) continue;
+    // Camps and positions described rather than named belong to one telling of one battle.
+    if (p.gazetteer === false || p.kind === 'camp') { skipped.push(p.id); continue; }
     const zhFull = p.zh?.name || p.nameLocal || '';
+    let id = p.id.replace(/^r-/, '');
+    if (ids.has(id)) id = `${id}-${path.basename(file, '.json')}`;
+    for (let n = 2; ids.has(id); n++) id = `${id.replace(/-\d+$/, '')}-${n}`;
     const g = {
-      id: ids.has(p.id.replace(/^r-/, '')) ? `${p.id.replace(/^r-/, '')}-${path.basename(file, '.json')}` : p.id.replace(/^r-/, ''),
+      id,
       zh: zhFull.split(/[（(]/)[0].trim(), name: p.name.split(' (')[0].trim(), kind: p.kind, lon: p.lon, lat: p.lat,
     };
     if (p.approximate) g.approximate = true;
@@ -247,6 +283,47 @@ function addToGazetteer(file) {
   let out = JSON.stringify(doc, null, 1).replace(/\n\s+("(?:lon|lat|kind|approximate)")/g, ' $1');
   fs.writeFileSync(GAZETTEER, out + '\n');
   console.log(added.length ? `  added ${added.length}: ${added.join(', ')}` : '  nothing new');
+  if (skipped.length) console.log(`  not added (camps or "gazetteer": false): ${skipped.join(', ')}`);
+}
+
+/**
+ * Dead ground: points within km of `near` that none of the observers can see (a man
+ * standing there, from a lookout observerH up). For placing hidden troops where the
+ * terrain really hides them, rather than where a text loosely puts them.
+ */
+async function hidden(file, refs, { near, km = 5, h = 15 }) {
+  const { scenario: sc } = normalizeScenario(readJSON(file));
+  const at = (ref) => {
+    const p = sc.places.find((x) => x.id === ref);
+    if (p) return [p.lon, p.lat];
+    const ll = ref.split(',').map(Number);
+    if (ll.length === 2 && ll.every(Number.isFinite)) return ll;
+    throw new Error(`"${ref}" is neither a place id nor lon,lat`);
+  };
+  const observers = refs.map(at), centre = at(near ?? refs[0]);
+  const step = (km * 1000) / 10, kx = 111320 * Math.cos((centre[1] * Math.PI) / 180);
+  const found = [];
+  let total = 0;
+  for (let dy = -km * 1000; dy <= km * 1000; dy += step)
+    for (let dx = -km * 1000; dx <= km * 1000; dx += step) {
+      if (Math.hypot(dx, dy) > km * 1000) continue;
+      total++;
+      const pt = [centre[0] + dx / kx, centre[1] + dy / 111320];
+      let seen = false;
+      for (const o of observers) if ((seen = (await lineOfSight(dem, o, pt, { observerH: h, targetH: 2 })).visible)) break;
+      if (!seen) {
+        await dem.prefetchPoints([pt], 12);
+        found.push({ pt, d: Math.hypot(dx, dy), elev: dem.elevAt(pt[0], pt[1], 12) });
+      }
+    }
+  console.log(`  ${found.length} of ${total} sample points within ${km} km of ${fmt(centre)} are hidden from ${refs.join(', ')} (eye ${h} m):`);
+  const picked = [];
+  for (const f of found.sort((a, b) => a.d - b.d)) {
+    if (picked.some((p) => haversine(p.pt, f.pt) < step * 2.5)) continue;
+    picked.push(f);
+    console.log(`    [${f.pt[0].toFixed(4)}, ${f.pt[1].toFixed(4)}]  ${(f.d / 1000).toFixed(1)} km from centre, ${Math.round(f.elev)} m`);
+    if (picked.length >= 10) break;
+  }
 }
 
 function place(query) {
@@ -274,6 +351,11 @@ const report = ({ problems, notes }, file) => {
 try {
   if (cmd === 'place') place(args.join(' '));
   else if (cmd === 'gazetteer' && args.length) for (const f of args) addToGazetteer(f);
+  else if (cmd === 'hidden' && args.length >= 2) {
+    const flag = (k) => { const i = args.indexOf(`--${k}`); return i < 0 ? undefined : args.splice(i, 2)[1]; };
+    const near = flag('near'), km = +(flag('km') ?? 5), h = +(flag('h') ?? 15);
+    await hidden(args[0], args.slice(1), { near, km, h });
+  }
   else if (['check', 'snap', 'bake', 'prep'].includes(cmd) && args.length) {
     let failed = 0;
     for (const file of args.filter((f) => path.basename(f) !== 'index.json')) {
@@ -284,7 +366,7 @@ try {
     }
     process.exitCode = failed ? 1 : 0;
   } else {
-    console.log(fs.readFileSync(fileURLToPath(import.meta.url), 'utf8').split('\n').slice(1, 14).join('\n').replace(/^\/\/ ?/gm, ''));
+    console.log(fs.readFileSync(fileURLToPath(import.meta.url), 'utf8').split('\n').slice(1, 16).join('\n').replace(/^\/\/ ?/gm, ''));
     process.exitCode = 2;
   }
 } catch (e) {

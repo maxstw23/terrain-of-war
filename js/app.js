@@ -300,12 +300,14 @@ const esc = (s) => String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '
 const paragraphs = (t) => esc(t).split(/\n{2,}/).map((p) => `<p>${p.replace(/\n/g, '<br>')}</p>`).join('');
 
 function fmtHours(h) {
-  return h < 24 ? `${h.toFixed(1)} h` : `${(h / 24).toFixed(1)} days (24 h walking)`;
+  return h < 24 ? t('st.hours', { n: h.toFixed(1) }) : t('st.days24', { n: (h / 24).toFixed(1) });
 }
 
 /** March estimate: armies covered ~8 h of marching per day at well below hiking pace. */
-function marchDays(hours) {
-  return `${Math.max(1, Math.round((hours * 1.6) / 8))}`;
+/** An army with baggage: about 1.6× the walking time, 8 hours on the road a day. */
+function armyTime(hours) {
+  const h = hours * 1.6;
+  return h < 7 ? t('st.hours', { n: Math.max(1, Math.round(h)) }) : t('st.days', { n: Math.max(1, Math.round(h / 8)) });
 }
 
 // ---------------------------------------------------------------------------
@@ -871,7 +873,7 @@ async function runProfile(coords, title, route = null, { keepLine = true } = {})
       <span>${t('st.climb')} <b>${Math.round(s.ascent)} m</b> / ${t('st.descent')} <b>${Math.round(s.descent)} m</b></span>
       <span>${t('st.range')} <b>${Math.round(s.min)}–${Math.round(s.max)} m</b></span>
       <span>${t('st.steepest')} <b>${(s.maxGrade * 100).toFixed(0)}%</b> ${t('st.at')} ${fmtKm(s.maxGradeAt)}</span>
-      ${hours ? `<span>${t('st.walk')} <b>${fmtHours(hours)}</b> · ${t('st.army')} <b>${t('st.days', { n: marchDays(hours) })}</b></span>` : ''}
+      ${hours ? `<span>${t('st.walk')} <b>${fmtHours(hours)}</b> · ${t('st.army')} <b>${armyTime(hours)}</b></span>` : ''}
       ${route?.preview ? `<span class="muted">${t('preview.note')}</span>` : ''}`);
     const markers = [];
     if (route) {
@@ -924,7 +926,7 @@ async function runCompare(ids, label) {
     const table = `<div class="compare-wrap"><table class="compare-table">
       <tr><th>${t('col.route')}</th><th>${t('col.army')}</th><th>${t('st.length')}</th><th>${t('st.climb')}</th><th>${t('col.max')}</th><th>${t('col.steep')}</th></tr>
       ${rows.map(({ r, st, hours, color }) => `<tr><td><i style="background:${color}"></i>${esc(names(r)[0])}</td>
-        <td>${mark(hours, (x) => x.hours, t('st.days', { n: marchDays(hours) }))}</td>
+        <td>${mark(hours, (x) => x.hours, armyTime(hours))}</td>
         <td>${mark(st.length, (x) => x.st.length, fmtKm(st.length))}</td>
         <td>${mark(st.ascent, (x) => x.st.ascent, `${Math.round(st.ascent).toLocaleString()} m`)}</td>
         <td>${mark(st.max, (x) => x.st.max, `${Math.round(st.max).toLocaleString()} m`)}</td>

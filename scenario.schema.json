@@ -116,6 +116,17 @@
      ],
      "description": "eye height above ground in m (tower 10-20, rider 3)"
     },
+    "expect": {
+     "anyOf": [
+      {
+       "$ref": "#/$defs/Expect"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "description": "what the step text says this analysis shows; checked against the terrain"
+    },
     "label": {
      "anyOf": [
       {
@@ -161,6 +172,55 @@
     "center",
     "zoom"
    ],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "Expect": {
+   "properties": {
+    "sight": {
+     "anyOf": [
+      {
+       "enum": [
+        "blocked",
+        "clear"
+       ],
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "description": "for los: the text says the line of sight is blocked / clear"
+    },
+    "hidden": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "description": "place ids the text says the observer cannot see (viewshed or los observer)"
+    },
+    "visible": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "description": "place ids the text says the observer can see"
+    }
+   },
    "type": "object",
    "additionalProperties": false
   },
@@ -366,7 +426,15 @@
      "type": "array"
     },
     "camera": {
-     "$ref": "#/$defs/Camera"
+     "anyOf": [
+      {
+       "$ref": "#/$defs/Camera"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "description": "usually omit: the app frames the step's focus and analysis itself; only for a step with neither"
     },
     "analysis": {
      "anyOf": [
@@ -386,7 +454,6 @@
     "title",
     "text",
     "focus",
-    "camera",
     "zh"
    ],
    "type": "object",

@@ -115,6 +115,7 @@ script, regenerate the page's copy with
 node tools/tow.mjs prep  scenarios/x.json   # snap peaks, pre-compute routes, check (rewrites the file)
 node tools/tow.mjs check scenarios/*.json   # validate only
 node tools/tow.mjs place 街亭                # look a place up in the gazetteer
+node tools/tow.mjs hidden scenarios/x.json lookout --near camp --km 3   # dead ground near a place
 ```
 
 `tow.mjs` runs the app's own terrain code in Node (no npm install; needs `curl`), so what it
@@ -161,10 +162,11 @@ analyses shown in between are marked as previews and refresh themselves.
   "steps": [{ "title": "…", "text": "Paragraphs separated by blank lines.",
               "focus": ["gudao", "dasan"],      // highlighted; everything else dims
               "show": ["…"],                    // optional: hide everything else
-              "camera": { "center": [107.05, 34.28], "zoom": 10.6 },
-              "analysis": { "type": "viewshed", "at": "dasan", "radiusKm": 10, "observerH": 15 },
+              // the view frames the focus and the analysis; "camera": {center, zoom} only as a fallback
+              "analysis": { "type": "viewshed", "at": "dasan", "radiusKm": 10, "observerH": 15,
+                            "expect": { "hidden": ["camp"], "visible": ["gudao-mouth"] } },  // checked by tow.mjs
               // or { "type": "profile", "route": "gudao" } / { "type": "profile", "coords": [...] }
-              // or { "type": "los", "from": "a", "to": "b" }
+              // or { "type": "los", "from": "a", "to": "b", "expect": { "sight": "blocked" } }
               // or { "type": "compare", "routes": ["gudao", "baoxie"] }
               "zh": { "title": "…", "text": "…" } }]
 }

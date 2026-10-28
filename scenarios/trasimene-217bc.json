@@ -382,6 +382,12 @@
         "label": "the road in the middle of the valley",
         "zh": {
           "label": "谷地中段的道路"
+        },
+        "expect": {
+          "hidden": [
+            "light-troops",
+            "cavalry"
+          ]
         }
       },
       "zh": {

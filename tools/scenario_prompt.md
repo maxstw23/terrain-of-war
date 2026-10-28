@@ -12,14 +12,14 @@ Geography:
 - Use WGS84 decimal degrees, [lon, lat] order in every coordinate array.
 - When a place appears in the <gazetteer> list given with the text, use exactly those coordinates (and its alternatives, if the text is about where the place was). Add places that are not in the list yourself.
 - Place each site at its best-supported modern identification. If the identification is uncertain or your coordinates are rough, set approximate=true and say so briefly in the note. This is the one kind of uncertainty you should flag.
-- For marches through mountains, give waypoints at known stations (towns, passes, valley mouths) and set follow="terrain"; the app traces the least-effort path through the elevation model.
+- For marches through mountains, give waypoints at known stations (towns, passes, valley mouths) and set follow="terrain"; the app traces the least-effort path through the elevation model. Use `follow` only where the ground is much as it was: a route along a vanished coast, a drained marsh or a moved river course should be drawn by hand from its waypoints instead.
 - Draw the rivers that matter to the story (kind "river", follow "valley", points on the river in order) and name the main basins, plains, plateaus and ranges with kind "region" places, as on a printed relief map. The map also shows all modern rivers and lakes.
 - Use zones for ambush ground, kill zones, defensive lines, obstacles and areas of control.
 - Mention landscape change in a note where it matters (rivers that moved, reservoirs, drained marshes, coastlines), since the base map shows today's landscape.
 
 Narration:
-- 5–9 steps in the order of the text, each with a camera (centre and zoom on a flat north-up map) that frames that step's features, and the ids of the features to highlight.
-- Add a step analysis where it helps the reader see the geography the text relies on: a viewshed from a fortress, pass or hill (what defenders could see, and the dead ground they could not); a line of sight; an elevation profile of a route, or of two routes in successive steps, or a cross-section of a gorge; a `compare` of alternative routes. Describe what the analysis is meant to show in neutral terms ("the profile shows the climb over the range"); do not claim specific numbers.
+- 5–9 steps in the order of the text, each with the ids of the features to highlight (`focus`). The app frames each step on its focus and its analysis, so leave out `camera`; focus only what the step is about, since a far-off feature in the focus pulls the view out to include it.
+- Add a step analysis where it helps the reader see the geography the text relies on: a viewshed from a fortress, pass or hill (what defenders could see, and the dead ground they could not); a line of sight; an elevation profile of a route, or of two routes in successive steps, or a cross-section of a gorge; a `compare` of alternative routes. Describe what the analysis is meant to show in neutral terms ("the profile shows the climb over the range"); do not claim specific numbers. When the text says something is hidden or in view, record it in the analysis `expect` (`sight` blocked/clear for a line of sight; `hidden` / `visible` place ids for a viewshed) so the claim is checked against the terrain.
 - Notes and step text explain the terrain's role in plain language, 2–3 short paragraphs per step.
 - Every id referenced in focus or analysis.route must exist.
 
