@@ -1,5 +1,14 @@
 [
   {
+    "file": "scenarios/thermopylae-480bc.json",
+    "title": "Thermopylae",
+    "period": "480 BC",
+    "zh": {
+      "title": "温泉关",
+      "period": "前480年"
+    }
+  },
+  {
     "file": "scenarios/yinping-263.json",
     "title": "Deng Ai's march by Yinping",
     "period": "263",

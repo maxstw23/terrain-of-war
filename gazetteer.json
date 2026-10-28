@@ -854,6 +854,68 @@
    "id": "guangyuan",
    "zh": "广元",
    "name": "Guangyuan", "kind": "city", "lon": 105.84, "lat": 32.44
+  },
+  {
+   "id": "kallidromo",
+   "zh": "卡利德罗莫斯山",
+   "name": "Mount Kallidromo", "kind": "region", "lon": 22.53, "lat": 38.735
+  },
+  {
+   "id": "malian",
+   "zh": "马利亚湾",
+   "name": "Malian Gulf", "kind": "region", "lon": 22.62, "lat": 38.86
+  },
+  {
+   "id": "spercheios",
+   "zh": "斯佩尔凯奥斯平原",
+   "name": "Spercheios plain", "kind": "region", "lon": 22.38, "lat": 38.85
+  },
+  {
+   "id": "trachis",
+   "zh": "特拉基斯",
+   "name": "Trachis", "kind": "city", "lon": 22.44, "lat": 38.805, "approximate": true
+  },
+  {
+   "id": "anthela",
+   "zh": "安特拉",
+   "name": "Anthela", "kind": "landmark", "lon": 22.48, "lat": 38.802, "approximate": true,
+   "aliases": [
+    "安特拉（西门）",
+    "Anthela (west gate)"
+   ]
+  },
+  {
+   "id": "phocian-wall",
+   "zh": "福基斯墙",
+   "name": "Phocian wall", "kind": "fort", "lon": 22.535, "lat": 38.797, "approximate": true,
+   "aliases": [
+    "福基斯墙（中门）",
+    "Phocian wall (middle gate)"
+   ]
+  },
+  {
+   "id": "kolonos",
+   "zh": "最后坚守的小丘",
+   "name": "Hillock of the last stand", "kind": "battle", "lon": 22.538, "lat": 38.795, "approximate": true
+  },
+  {
+   "id": "alpenoi",
+   "zh": "阿尔佩诺伊",
+   "name": "Alpenus", "kind": "city", "lon": 22.6, "lat": 38.805, "approximate": true,
+   "aliases": [
+    "阿尔佩诺伊（东门）",
+    "Alpenus (east gate)"
+   ]
+  },
+  {
+   "id": "phocian-post",
+   "zh": "福基斯人守卫的山顶",
+   "name": "Phocian post on the path", "kind": "camp", "lon": 22.52, "lat": 38.76, "approximate": true
+  },
+  {
+   "id": "kallidromo-thermopylae-480bc",
+   "zh": "卡利德罗莫斯山顶",
+   "name": "Kallidromo summit", "kind": "mountain", "lon": 22.5448, "lat": 38.7371, "approximate": true
   }
  ]
 }
