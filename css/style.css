@@ -7,12 +7,18 @@
   --accent: #ffd60a;
   --btn: #232833;
   --btn-hover: #2e3542;
-  --font: system-ui, -apple-system, "Segoe UI", "PingFang SC", "Noto Sans CJK SC", sans-serif;
+  /* Latin-only system faces first, so Chinese characters (names in English mode) fall
+     through to the serif; in Chinese mode everything is set in the serif. */
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Serif SC", "Songti SC", SimSun, serif;
+  --font-zh: "Noto Serif SC", "Songti SC", SimSun, serif;
 }
 
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 html, body { margin: 0; height: 100%; background: var(--bg); color: var(--fg); font: 14px/1.45 var(--font); }
+/* MapLibre's stylesheet gives the map (and so every label on it) Helvetica; use ours. */
+.maplibregl-map { font-family: var(--font); }
+html[lang^="zh"] body, html[lang^="zh"] .maplibregl-map, html[lang^="zh"] .maplibregl-popup-content { font-family: var(--font-zh); }
 #map { position: absolute; inset: 0; }
 a { color: #8cc8ff; }
 code { font-size: 11px; word-break: break-all; }
