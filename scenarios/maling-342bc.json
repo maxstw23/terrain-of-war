@@ -175,8 +175,8 @@
       "id": "maling-tancheng",
       "name": "Maling hills (Tancheng)",
       "kind": "mountain",
-      "lon": 118.54,
-      "lat": 34.69,
+      "lon": 118.5554,
+      "lat": 34.6946,
       "approximate": true,
       "note": "Low hills between Tancheng and Xinyi that some identify as the Maling of the battle. Unlike the plain sites, they still have ridges and gullies today.",
       "zh": {
@@ -192,10 +192,7 @@
       "kind": "advance",
       "waypoints": [
         "daliang",
-        [
-          114.4,
-          35.7
-        ],
+        [114.4, 35.7],
         "handan"
       ],
       "zh": {
@@ -211,14 +208,8 @@
       "kind": "planned",
       "waypoints": [
         "linzi",
-        [
-          116.3,
-          36.2
-        ],
-        [
-          115.2,
-          35.4
-        ],
+        [116.3, 36.2],
+        [115.2, 35.4],
         "daliang"
       ],
       "zh": {
@@ -234,10 +225,7 @@
       "kind": "retreat",
       "waypoints": [
         "handan",
-        [
-          114.55,
-          35.9
-        ],
+        [114.55, 35.9],
         "guiling"
       ],
       "zh": {
@@ -266,18 +254,9 @@
       "kind": "advance",
       "waypoints": [
         "linzi",
-        [
-          116.3,
-          36.2
-        ],
-        [
-          115.2,
-          35.3
-        ],
-        [
-          114.75,
-          34.95
-        ]
+        [116.3, 36.2],
+        [115.2, 35.3],
+        [114.75, 34.95]
       ],
       "zh": {
         "name": "齐军直走大梁",
@@ -291,18 +270,9 @@
       "name": "Qi withdraws, cutting its cooking fires",
       "kind": "retreat",
       "waypoints": [
-        [
-          114.75,
-          34.95
-        ],
-        [
-          115.05,
-          35.35
-        ],
-        [
-          115.3,
-          35.65
-        ],
+        [114.75, 34.95],
+        [115.05, 35.35],
+        [115.3, 35.65],
         "maling"
       ],
       "zh": {
@@ -318,18 +288,9 @@
       "kind": "advance",
       "waypoints": [
         "xinzheng",
-        [
-          114.33,
-          34.85
-        ],
-        [
-          114.85,
-          35.15
-        ],
-        [
-          115.2,
-          35.55
-        ],
+        [114.33, 34.85],
+        [114.85, 35.15],
+        [115.2, 35.55],
         "maling"
       ],
       "zh": {
@@ -343,36 +304,7 @@
       "id": "yellow-river",
       "name": "Yellow River (course at the time, approximate)",
       "kind": "river",
-      "waypoints": [
-        [
-          113.4,
-          34.92
-        ],
-        [
-          114.55,
-          35.65
-        ],
-        [
-          115.0,
-          36.05
-        ],
-        [
-          115.45,
-          36.6
-        ],
-        [
-          116.0,
-          37.2
-        ],
-        [
-          116.6,
-          37.8
-        ],
-        [
-          117.3,
-          38.4
-        ]
-      ],
+      "waypoints": [[113.4, 34.92], [114.55, 35.65], [115, 36.05], [115.45, 36.6], [116, 37.2], [116.6, 37.8], [117.3, 38.4]],
       "zh": {
         "name": "黄河（当时河道，约略）",
         "note": "公元前4世纪，黄河向东北流经河北，在今黄骅一带入海，而不是走今天向东的河道。此线为约略示意；地图上的现代黄河与当时河道相去甚远。"
@@ -385,20 +317,7 @@
       "id": "ambush",
       "name": "Ten thousand crossbows on both sides of the road",
       "kind": "ambush",
-      "line": [
-        [
-          115.4,
-          35.77
-        ],
-        [
-          115.45,
-          35.8
-        ],
-        [
-          115.5,
-          35.83
-        ]
-      ],
+      "line": [[115.4, 35.77], [115.45, 35.8], [115.5, 35.83]],
       "widthKm": 2.5,
       "note": "Sun Bin's best archers wait on both sides of the road with orders to shoot together when they see a fire lit at dusk.",
       "zh": {
@@ -431,10 +350,7 @@
         "linzi"
       ],
       "camera": {
-        "center": [
-          116.0,
-          35.7
-        ],
+        "center": [116, 35.7],
         "zoom": 6.6
       },
       "zh": {
@@ -451,24 +367,12 @@
         "wei-heartland"
       ],
       "camera": {
-        "center": [
-          115.6,
-          35.6
-        ],
-        "zoom": 7.0
+        "center": [115.6, 35.6],
+        "zoom": 7
       },
       "analysis": {
         "type": "profile",
-        "coords": [
-          [
-            114.47,
-            36.6
-          ],
-          [
-            114.33,
-            34.8
-          ]
-        ],
+        "coords": [[114.47, 36.6], [114.33, 34.8]],
         "label": "Handan to Daliang",
         "zh": {
           "label": "邯郸至大梁"
@@ -488,10 +392,7 @@
         "qi-daliang-1"
       ],
       "camera": {
-        "center": [
-          115.0,
-          35.5
-        ],
+        "center": [115, 35.5],
         "zoom": 7.6
       },
       "zh": {
@@ -509,11 +410,8 @@
         "daliang"
       ],
       "camera": {
-        "center": [
-          115.3,
-          35.4
-        ],
-        "zoom": 7.0
+        "center": [115.3, 35.4],
+        "zoom": 7
       },
       "zh": {
         "title": "十三年后",
@@ -528,10 +426,7 @@
         "pangjuan"
       ],
       "camera": {
-        "center": [
-          114.9,
-          35.3
-        ],
+        "center": [114.9, 35.3],
         "zoom": 7.8
       },
       "zh": {
@@ -550,24 +445,12 @@
         "yellow-river"
       ],
       "camera": {
-        "center": [
-          115.45,
-          35.8
-        ],
+        "center": [115.45, 35.8],
         "zoom": 10.5
       },
       "analysis": {
         "type": "profile",
-        "coords": [
-          [
-            115.4,
-            35.85
-          ],
-          [
-            115.5,
-            35.75
-          ]
-        ],
+        "coords": [[115.4, 35.85], [115.5, 35.75]],
         "label": "Today's ground across the road at Maling (Fan county site)",
         "zh": {
           "label": "今日马陵（范县说）道路两侧地面"
@@ -586,10 +469,7 @@
         "maling-tancheng"
       ],
       "camera": {
-        "center": [
-          117.4,
-          35.2
-        ],
+        "center": [117.4, 35.2],
         "zoom": 6.9
       },
       "analysis": {
@@ -615,10 +495,7 @@
         "ambush"
       ],
       "camera": {
-        "center": [
-          115.45,
-          35.8
-        ],
+        "center": [115.45, 35.8],
         "zoom": 9.5
       },
       "zh": {

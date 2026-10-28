@@ -57,6 +57,14 @@ export function normalizeScenario(raw) {
     if (!ROUTE_KINDS.includes(r.kind)) r.kind = 'advance';
     r.color = r.kind === 'road' ? '#e0c28a' : r.kind === 'river' ? '#2f7fd8' : sideColor[r.side] || '#ffffff';
     r.geometry = r.waypoints; // replaced by the traced path when follow === 'terrain'
+    if (r.path && r.pathKey === routeKey(r)) {
+      // Pre-computed by `node tools/tow.mjs bake`: same algorithm, no tracing at load.
+      Object.assign(r, { geometry: r.path, traced: true, hours: r.pathHours ?? null });
+      if (r.pathProfile) r.profile = profileFromBaked(r.path, r.pathProfile);
+    } else if (r.path) {
+      warnings.push(`Route "${r.id}" changed since it was baked; tracing it again`);
+      delete r.path;
+    }
     return true;
   });
 
@@ -94,6 +102,36 @@ export function normalizeScenario(raw) {
   }
   sc.camera ||= cameraFor(allCoords(sc));
   return { scenario: sc, warnings };
+}
+
+/** Expand a baked [distance, elevation] profile into chart points along the path. */
+function profileFromBaked(path, samples) {
+  const R = 6371008.8, rad = Math.PI / 180;
+  const cum = [0];
+  for (let i = 1; i < path.length; i++) {
+    const [a, b] = [path[i - 1], path[i]];
+    const x = (b[0] - a[0]) * rad * Math.cos(((a[1] + b[1]) / 2) * rad), y = (b[1] - a[1]) * rad;
+    cum.push(cum[i - 1] + R * Math.hypot(x, y));
+  }
+  // Baked distances follow the raster cells, slightly longer than the simplified line.
+  const scale = cum[cum.length - 1] / (samples[samples.length - 1][0] || 1);
+  let k = 0;
+  return samples.map(([d, elev]) => {
+    const t = d * scale;
+    while (k < cum.length - 2 && cum[k + 1] < t) k++;
+    const f = cum[k + 1] > cum[k] ? (t - cum[k]) / (cum[k + 1] - cum[k]) : 0;
+    const a = path[k], b = path[k + 1] || a;
+    return { lon: a[0] + (b[0] - a[0]) * f, lat: a[1] + (b[1] - a[1]) * f, d, elev };
+  });
+}
+
+/**
+ * Fingerprint of what a traced route depends on (mode and resolved waypoints). A
+ * pre-computed path is used only while it still matches, so moving a place or a
+ * waypoint makes the app trace the route again instead of drawing a stale line.
+ */
+export function routeKey(r) {
+  return JSON.stringify([r.follow, r.waypoints.map(([x, y]) => [+x.toFixed(5), +y.toFixed(5)])]);
 }
 
 export function allCoords(sc) {

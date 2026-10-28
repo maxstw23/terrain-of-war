@@ -208,6 +208,19 @@ function stepHours(distM, slope, elevTo) {
   return h;
 }
 
+/**
+ * Walking time (hours) along a profile [{d, elev}], with the same cost model as the
+ * least-cost router, so any two routes can be compared on equal terms.
+ */
+export function walkingHours(points) {
+  let h = 0;
+  for (let i = 1; i < points.length; i++) {
+    const run = points[i].d - points[i - 1].d;
+    if (run > 0) h += stepHours(run, (points[i].elev - points[i - 1].elev) / run, points[i].elev);
+  }
+  return h;
+}
+
 class MinHeap {
   constructor(cap = 1 << 16) {
     this.ids = new Int32Array(cap);

@@ -2,9 +2,9 @@
 // is shown with hypsometric tint, hillshade and contours.
 
 import { DemSource, TERRARIUM } from './dem.js';
-import { elevationProfile, profileStats, lineOfSight, viewshed, leastCostRoute, lineLength, haversine, bboxOf } from './analysis.js';
+import { elevationProfile, profileStats, lineOfSight, viewshed, leastCostRoute, lineLength, haversine, bboxOf, walkingHours } from './analysis.js';
 import { normalizeScenario, routesGeoJSON, zonesGeoJSON, PLACE_ICONS, ZONE_STYLE, cameraFor, allCoords } from './scenario.js';
-import { renderProfile } from './chart.js';
+import { renderProfile, renderCompare } from './chart.js';
 import { registerReliefProtocols, elevationRange, rampCss } from './relief.js';
 import { t, tr, names, getLang, setLang, translateDom } from './i18n.js';
 import { generateScenario, GenerateError } from './generate.js';
@@ -135,8 +135,8 @@ const style = {
       filter: ['all', ['==', ['geometry-type'], 'LineString'], ['!=', ['get', 'role'], 'draft']],
       layout: { 'line-cap': 'round', 'line-join': 'round' },
       paint: {
-        'line-color': ['match', ['get', 'role'], 'los-blocked', '#ff6b6b', 'los-clear', '#63e6a0', 'march', '#ffd60a', '#ffffff'],
-        'line-width': ['match', ['get', 'role'], 'march', 4, 3],
+        'line-color': ['coalesce', ['get', 'color'], ['match', ['get', 'role'], 'los-blocked', '#ff6b6b', 'los-clear', '#63e6a0', 'march', '#ffd60a', '#ffffff']],
+        'line-width': ['match', ['get', 'role'], 'march', 4, 'compare', 5, 3],
       },
     },
     {
@@ -574,8 +574,11 @@ function goToStep(i, { instant = false, keepCamera = false } = {}) {
   $('#prev-step').disabled = i === 0;
   $('#next-step').disabled = i === sc.steps.length - 1;
 
-  const cam = s.camera || (i === 0 ? sc.camera : null) || cameraFor(focusCoords(s));
-  if (!keepCamera) moveCamera(cam, instant);
+  // A comparison frames every route it compares; otherwise use the step's camera.
+  const compared = s.analysis?.type === 'compare' ? sc.routes.filter((r) => s.analysis.routes.includes(r.id)) : [];
+  const cam = compared.length ? cameraFor(compared.flatMap((r) => r.geometry))
+    : s.camera || (i === 0 ? sc.camera : null) || cameraFor(focusCoords(s));
+  if (!keepCamera) moveCamera(cam, instant, !!s.analysis);
   applyStepVisibility();
   if (s.analysis) runStepAnalysis(s.analysis);
   else clearAnalysis();
@@ -596,10 +599,13 @@ function focusCoords(s) {
 }
 
 // Flat, north-up map: scenario pitch/bearing (used by 3D viewers) are ignored.
-function moveCamera(cam, instant) {
+function moveCamera(cam, instant, withDrawer = false) {
   const wide = window.innerWidth > 760;
-  // Keep the subject clear of the side panel (desktop) or bottom sheet (phone).
-  const panel = wide ? { top: 20, bottom: 20, left: 380, right: 20 } : { top: 20, bottom: window.innerHeight * 0.46, left: 0, right: 0 };
+  // Keep the subject clear of the side panel (desktop) or bottom sheet (phone),
+  // and of the analysis drawer when the step opens one.
+  const panel = wide
+    ? { top: 20, bottom: withDrawer ? 320 : 20, left: 380, right: 20 }
+    : { top: 20, bottom: window.innerHeight * 0.46 + (withDrawer ? 120 : 0), left: 0, right: 0 };
   const opts = { duration: instant ? 0 : 2000, essential: true };
   if (cam.bounds) map.fitBounds(cam.bounds, { ...opts, padding: { top: panel.top + 40, bottom: panel.bottom + 40, left: panel.left + 40, right: panel.right + 40 } });
   else map.flyTo({ ...opts, center: cam.center, zoom: cam.zoom ?? 9, padding: panel });
@@ -676,6 +682,7 @@ async function runStepAnalysis(a) {
   const label = tr(a, 'label');
   if (a.type === 'viewshed' && a.at) await runViewshed(a.at, label || t('vs.point'), a.radiusKm, obs, tgt);
   else if (a.type === 'los' && a.from && a.to) await runLOS(a.from, a.to, obs, tgt, label);
+  else if (a.type === 'compare' && a.routes?.length >= 2) await runCompare(a.routes, label);
   else if (a.type === 'profile' && a.coords?.length >= 2) await runProfile(a.coords, label || t('profile.generic'));
   else if (a.type === 'profile') {
     const r = sc.routes.find((x) => x.id === a.route);
@@ -751,6 +758,78 @@ async function runProfile(coords, title, route = null, { keepLine = true } = {})
   } catch (e) {
     status(t('status.failed', { what: t('profile.generic'), err: e.message }), 5000);
   }
+}
+
+/** Profile of a scenario route: the baked one when present, else sampled from the DEM. */
+async function routeProfile(r) {
+  if (!r.profile) r.profile = (await elevationProfile(dem, r.geometry)).points;
+  return r.profile;
+}
+
+const MOVE_KINDS = ['advance', 'retreat', 'supply', 'feint', 'planned', 'road'];
+// Compared routes often belong to the same side, so they get their own colours,
+// used for the chart, the table and a highlight on the map alike.
+const COMPARE_COLORS = ['#ff6b35', '#1e90ff', '#f7c600', '#c13cff', '#00b894'];
+
+/** Side-by-side comparison of routes: one chart, one table, same cost model for all. */
+async function runCompare(ids, label) {
+  const run = ++state.runId;
+  status(t('status.sampling'));
+  try {
+    const routes = ids.map((id) => state.scenario.routes.find((r) => r.id === id)).filter(Boolean);
+    const rows = [];
+    for (const r of routes) {
+      const pts = await routeProfile(r);
+      const st = profileStats(pts);
+      rows.push({ r, pts, st, hours: walkingHours(pts) });
+    }
+    if (run !== state.runId) return;
+    removeViewshed();
+    rows.forEach((row, i) => (row.color = COMPARE_COLORS[i % COMPARE_COLORS.length]));
+    setAnalysis(rows.map(({ r, color }) => ({ ...lineF(r.geometry, 'compare'), properties: { role: 'compare', color } })));
+    const best = (f) => Math.min(...rows.map(f));
+    const mark = (v, f, txt) => (rows.length > 1 && v === best(f) ? `<b>${txt}</b>` : txt);
+    const table = `<div class="compare-wrap"><table class="compare-table">
+      <tr><th>${t('col.route')}</th><th>${t('st.length')}</th><th>${t('st.climb')}</th><th>${t('col.max')}</th><th>${t('col.steep')}</th><th>${t('col.army')}</th></tr>
+      ${rows.map(({ r, st, hours, color }) => `<tr><td><i style="background:${color}"></i>${esc(names(r)[0])}</td>
+        <td>${mark(st.length, (x) => x.st.length, fmtKm(st.length))}</td>
+        <td>${mark(st.ascent, (x) => x.st.ascent, `${Math.round(st.ascent).toLocaleString()} m`)}</td>
+        <td>${mark(st.max, (x) => x.st.max, `${Math.round(st.max).toLocaleString()} m`)}</td>
+        <td>${(st.maxGrade * 100).toFixed(0)}%</td>
+        <td>${mark(hours, (x) => x.hours, t('st.days', { n: marchDays(hours) }))}</td></tr>`).join('')}
+    </table></div><span class="muted">${t('compare.note')}</span>`;
+    openDrawer(label || t('compare.title'), table);
+    renderCompare($('#chart'), rows.map(({ r, pts, color }) => ({ label: names(r)[0], color, points: pts })), {
+      onHover: (pts) => map.getSource('cursor').setData({
+        type: 'FeatureCollection',
+        features: (pts || []).filter(Boolean).map((p) => ptF([p.lon, p.lat])),
+      }),
+    });
+    status('');
+  } catch (e) {
+    status(t('status.failed', { what: t('compare.title'), err: e.message }), 5000);
+  }
+}
+
+function openComparePicker() {
+  const routes = (state.scenario?.routes || []).filter((r) => MOVE_KINDS.includes(r.kind));
+  const box = $('#compare-picker');
+  if (!box.hidden) { box.hidden = true; return; }
+  box.replaceChildren();
+  for (const r of routes) {
+    const l = document.createElement('label');
+    l.innerHTML = `<input type="checkbox" value="${esc(r.id)}"><i style="background:${r.color}"></i>${esc(names(r)[0])}`;
+    box.append(l);
+  }
+  const go = Object.assign(document.createElement('button'), { className: 'btn small primary', textContent: t('compare.go') });
+  go.onclick = () => {
+    const ids = [...box.querySelectorAll('input:checked')].map((i) => i.value);
+    if (ids.length < 2) { status(t('compare.need'), 3000); return; }
+    box.hidden = true;
+    runCompare(ids);
+  };
+  box.append(go);
+  box.hidden = false;
 }
 
 async function runLOS(a, b, observerH, targetH, label) {
@@ -936,6 +1015,7 @@ function bindUI() {
   };
 
   document.querySelectorAll('.tool').forEach((b) => (b.onclick = () => setTool(b.dataset.tool)));
+  $('#compare-btn').onclick = openComparePicker;
   $('#tool-finish').onclick = finishTool;
   $('#clear-analysis').onclick = () => { setTool(null); clearAnalysis(); };
   $('#drawer-close').onclick = clearAnalysis;

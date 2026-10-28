@@ -57,11 +57,20 @@ async function blobToRGBA(blob) {
   return ctx.getImageData(0, 0, TILE, TILE).data;
 }
 
+/** Browser loader: fetch a tile and decode its pixels. Node tools pass their own. */
+async function fetchRGBA(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(`DEM tile ${url}: HTTP ${r.status}`);
+  return blobToRGBA(await r.blob());
+}
+
 export class DemSource {
-  constructor({ url, encoding, maxzoom } = TERRARIUM) {
+  constructor({ url, encoding, maxzoom } = TERRARIUM, { loadRGBA = fetchRGBA } = {}) {
     this.url = url;
     this.encoding = encoding;
     this.maxzoom = maxzoom;
+    this.loadRGBA = loadRGBA;
+    this.failed = new Set(); // tiles that could not be loaded (treated as sea level)
     this.pending = new Map(); // key -> Promise<Float32Array>
     this.ready = new Map(); // key -> Float32Array
   }
@@ -72,15 +81,11 @@ export class DemSource {
     const key = `${z}/${x}/${y}`;
     if (!this.pending.has(key)) {
       const url = this.url.replace('{z}', z).replace('{x}', x).replace('{y}', y);
-      const p = fetch(url)
-        .then((r) => {
-          if (!r.ok) throw new Error(`DEM tile ${key}: HTTP ${r.status}`);
-          return r.blob();
-        })
-        .then(blobToRGBA)
+      const p = this.loadRGBA(url)
         .then((rgba) => decodeRGB(rgba, this.encoding))
         .catch((err) => {
           console.warn(err);
+          this.failed.add(key);
           this.pending.delete(key); // allow a later retry
           return new Float32Array(TILE * TILE);
         })

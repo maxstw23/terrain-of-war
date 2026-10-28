@@ -87,3 +87,58 @@ export function renderProfile(container, points, { onHover, blockedAt, markers =
   });
   container.append(svg);
 }
+
+/**
+ * Several routes' profiles on one distance axis. series: [{label, color, points}].
+ * onHover([{point}|null per series] | null) moves a marker along each route.
+ */
+export function renderCompare(container, series, { onHover } = {}) {
+  container.replaceChildren();
+  const W = container.clientWidth || 600, H = container.clientHeight || 170;
+  const m = { l: 48, r: 12, t: 10, b: 24 };
+  const D = Math.max(...series.map((s) => s.points[s.points.length - 1].d));
+  let lo = Math.min(...series.flatMap((s) => s.points.map((p) => p.elev)));
+  let hi = Math.max(...series.flatMap((s) => s.points.map((p) => p.elev)));
+  const pad = Math.max(20, (hi - lo) * 0.08);
+  lo -= pad; hi += pad;
+  const x = (d) => m.l + ((W - m.l - m.r) * d) / D;
+  const y = (e) => H - m.b - ((H - m.t - m.b) * (e - lo)) / (hi - lo);
+  const svg = el('svg', { viewBox: `0 0 ${W} ${H}`, width: W, height: H, class: 'profile-svg' });
+
+  const yStep = niceStep(hi - lo, 4);
+  for (let v = Math.ceil(lo / yStep) * yStep; v <= hi; v += yStep) {
+    svg.append(el('line', { x1: m.l, x2: W - m.r, y1: y(v), y2: y(v), class: 'grid' }));
+    const t = el('text', { x: m.l - 6, y: y(v) + 4, 'text-anchor': 'end', class: 'tick' });
+    t.textContent = `${Math.round(v)}`;
+    svg.append(t);
+  }
+  const xStep = niceStep(D / 1000, 6);
+  for (let v = 0; v <= D / 1000 + 1e-9; v += xStep) {
+    const t = el('text', { x: x(v * 1000), y: H - 6, 'text-anchor': 'middle', class: 'tick' });
+    t.textContent = `${+v.toFixed(1)} km`;
+    svg.append(t);
+  }
+  for (const s of series) {
+    const d = s.points.map((p, i) => `${i ? 'L' : 'M'}${x(p.d).toFixed(1)},${y(p.elev).toFixed(1)}`).join('');
+    svg.append(el('path', { d, class: 'compare-line', stroke: s.color }));
+  }
+
+  const cursor = el('line', { y1: m.t, y2: H - m.b, class: 'cursor', visibility: 'hidden' });
+  svg.append(cursor);
+  const at = (pts, d) => {
+    if (d > pts[pts.length - 1].d) return null;
+    let i = 0, j = pts.length - 1;
+    while (j - i > 1) { const k = (i + j) >> 1; if (pts[k].d < d) i = k; else j = k; }
+    return pts[j];
+  };
+  svg.addEventListener('pointermove', (ev) => {
+    const r = svg.getBoundingClientRect();
+    const d = ((ev.clientX - r.left - m.l) / (W - m.l - m.r)) * D;
+    if (d < 0 || d > D) return;
+    cursor.setAttribute('x1', x(d)); cursor.setAttribute('x2', x(d));
+    cursor.setAttribute('visibility', 'visible');
+    onHover?.(series.map((s) => at(s.points, d)), d);
+  });
+  svg.addEventListener('pointerleave', () => { cursor.setAttribute('visibility', 'hidden'); onHover?.(null); });
+  container.append(svg);
+}
