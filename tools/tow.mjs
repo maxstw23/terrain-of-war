@@ -42,7 +42,9 @@ function gazetteer() {
 
 /** Gazetteer entries whose names match a place (by zh name, local name or English name). */
 function gazMatches(gaz, p) {
-  const keys = [p.nameLocal, p.zh?.name, p.name].filter(Boolean).map((s) => s.trim().toLowerCase());
+  // Also without a bracketed gloss: "南郑（汉中）" is the gazetteer's "南郑".
+  const base = (s) => s.split(/\s*[（(]/)[0];
+  const keys = [p.nameLocal, p.zh?.name, p.name].filter(Boolean).flatMap((s) => [s, base(s)]).map((s) => s.trim().toLowerCase());
   return gaz.filter((g) => [g.name, g.zh, ...(g.aliases || [])].some((n) => n && keys.includes(n.toLowerCase())));
 }
 
@@ -274,13 +276,14 @@ function addToGazetteer(file) {
       zh: zhFull.split(/[（(]/)[0].trim(), name: p.name.split(' (')[0].trim(), kind: p.kind, lon: p.lon, lat: p.lat,
     };
     if (p.approximate) g.approximate = true;
+    g.source = 'estimated'; // until someone checks it against a reference
     const aliases = [zhFull, p.name, p.nameLocal].filter((a) => a && a !== g.zh && a !== g.name);
     if (aliases.length) g.aliases = [...new Set(aliases)];
     doc.places.push(g);
     ids.add(g.id);
     added.push(`${g.id} (${g.zh || g.name})`);
   }
-  let out = JSON.stringify(doc, null, 1).replace(/\n\s+("(?:lon|lat|kind|approximate)")/g, ' $1');
+  let out = JSON.stringify(doc, null, 1).replace(/\n\s+("(?:lon|lat|kind|approximate|source)")/g, ' $1');
   fs.writeFileSync(GAZETTEER, out + '\n');
   console.log(added.length ? `  added ${added.length}: ${added.join(', ')}` : '  nothing new');
   if (skipped.length) console.log(`  not added (camps or "gazetteer": false): ${skipped.join(', ')}`);

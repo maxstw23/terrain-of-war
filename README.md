@@ -37,6 +37,7 @@ Bundled scenarios:
 | Han Xin crosses at Chencang (韩信暗度陈仓) | 206 BC | Four Qinling roads; Baoxie vs Old Road profiles; Dasan Pass viewshed |
 | Zhuge Liang: Qishan and Jieting (诸葛亮：祁山与街亭) | 228 AD | Ziwu vs Qishan road; Jieting hill viewshed; Chencang; Wuzhangyuan |
 | Through the Ardennes to Sedan (穿越阿登直抵色当) | 1940 | Maginot Line, Dyle Plan lure, Marfée heights viewshed, Monthermé gorge section |
+| Why Jing province mattered (荆州为何重要：隆中对) | 207–219 | The Han and Yangtze hub; Qutang gorge section; Jing vs Yi armies compared; Fancheng flood and Lü Meng, 219 |
 
 ## Run it
 

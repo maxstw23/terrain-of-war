@@ -1,5 +1,14 @@
 [
   {
+    "file": "scenarios/jingzhou-208.json",
+    "title": "Why Jing province mattered",
+    "period": "207–219",
+    "zh": {
+      "title": "荆州为何重要：隆中对",
+      "period": "207—219年"
+    }
+  },
+  {
     "file": "scenarios/trasimene-217bc.json",
     "title": "Lake Trasimene",
     "period": "217 BC",

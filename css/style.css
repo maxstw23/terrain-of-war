@@ -221,6 +221,7 @@ html[lang="en"] .river-label { letter-spacing: 0.05em; }
   .compare-note { display: none; }
   .compare-table { font-size: 11px; }
   .compare-table th, .compare-table td { padding: 2px 5px; }
+  .compare-table td:first-child { white-space: normal; min-width: 6em; }
   .stats { font-size: 11.5px; }
   body:has(#drawer:not([hidden])) #elev-legend { display: none; }
 }

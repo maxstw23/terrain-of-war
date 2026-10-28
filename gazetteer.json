@@ -103,7 +103,11 @@
   {
    "id": "guanzhong",
    "zh": "关中平原",
-   "name": "Guanzhong plain", "kind": "region", "lon": 108.35, "lat": 34.47
+   "name": "Guanzhong plain", "kind": "region", "lon": 108.35, "lat": 34.47,
+   "aliases": [
+    "Qinchuan",
+    "秦川"
+   ]
   },
   {
    "id": "daba",
@@ -458,7 +462,12 @@
   {
    "id": "luoyang",
    "zh": "洛阳",
-   "name": "Luoyang", "kind": "city", "lon": 112.45, "lat": 34.62, "source": "estimated"
+   "name": "Luoyang", "kind": "city", "lon": 112.45, "lat": 34.62, "source": "estimated",
+   "alternatives": [
+    {
+     "label": "Han–Wei Luoyang (汉魏洛阳故城), the Eastern Han and Wei capital", "lon": 112.62, "lat": 34.72
+    }
+   ]
   },
   {
    "id": "xuchang",
@@ -530,10 +539,11 @@
    "zh": "建康",
    "name": "Jiankang", "kind": "city", "lon": 118.78, "lat": 32.06,
    "aliases": [
-    "南京",
+    "Jianye",
     "Nanjing",
-    "金陵",
-    "建业"
+    "南京",
+    "建业",
+    "金陵"
    ], "source": "estimated"
   },
   {
@@ -869,6 +879,113 @@
    "id": "passignano",
    "zh": "帕西尼亚诺狭道",
    "name": "Passignano narrows", "kind": "landmark", "lon": 12.14, "lat": 43.188
+  },
+  {
+   "id": "jianghan",
+   "zh": "江汉平原",
+   "name": "Jianghan plain", "kind": "region", "lon": 113.1, "lat": 30.55, "source": "estimated"
+  },
+  {
+   "id": "nanyang",
+   "zh": "南阳盆地",
+   "name": "Nanyang basin", "kind": "region", "lon": 112.25, "lat": 32.75, "source": "estimated"
+  },
+  {
+   "id": "funiu",
+   "zh": "伏牛山",
+   "name": "Funiu Mountains", "kind": "region", "lon": 111.9, "lat": 33.65, "source": "estimated"
+  },
+  {
+   "id": "tongbai",
+   "zh": "桐柏山—大别山",
+   "name": "Tongbai and Dabie Mountains", "kind": "region", "lon": 114.6, "lat": 31.75, "source": "estimated"
+  },
+  {
+   "id": "wushan",
+   "zh": "三峡",
+   "name": "Three Gorges", "kind": "region", "lon": 110.3, "lat": 31.3,
+   "aliases": [
+    "三峡（巫山）",
+    "Three Gorges (Wu Mountains)"
+   ], "source": "estimated"
+  },
+  {
+   "id": "wuling",
+   "zh": "武陵山",
+   "name": "Wuling Mountains", "kind": "region", "lon": 109.9, "lat": 29.1, "source": "estimated"
+  },
+  {
+   "id": "nanling",
+   "zh": "南岭",
+   "name": "Nanling", "kind": "region", "lon": 112.8, "lat": 25.4, "source": "estimated"
+  },
+  {
+   "id": "wukuai",
+   "zh": "吴、会",
+   "name": "Wu and Kuaiji", "kind": "region", "lon": 120.3, "lat": 30.8, "source": "estimated"
+  },
+  {
+   "id": "central",
+   "zh": "中原",
+   "name": "Central plain", "kind": "region", "lon": 114.3, "lat": 34.3, "source": "estimated"
+  },
+  {
+   "id": "longzhong",
+   "zh": "隆中",
+   "name": "Longzhong", "kind": "landmark", "lon": 112.03, "lat": 32, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "wan",
+   "zh": "宛",
+   "name": "Wan", "kind": "city", "lon": 112.53, "lat": 33,
+   "aliases": [
+    "Wan (Nanyang)",
+    "宛（南阳）"
+   ], "source": "estimated"
+  },
+  {
+   "id": "luyang",
+   "zh": "鲁阳",
+   "name": "Luyang", "kind": "city", "lon": 112.91, "lat": 33.74, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "yique",
+   "zh": "伊阙",
+   "name": "Yique gate", "kind": "pass", "lon": 112.47, "lat": 34.56, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "baidi",
+   "zh": "白帝城",
+   "name": "Baidi", "kind": "fort", "lon": 109.57, "lat": 31.04, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "xiakou",
+   "zh": "夏口",
+   "name": "Xiakou", "kind": "city", "lon": 114.29, "lat": 30.55, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "changsha",
+   "zh": "长沙",
+   "name": "Changsha", "kind": "city", "lon": 112.98, "lat": 28.2, "source": "estimated"
+  },
+  {
+   "id": "panyu",
+   "zh": "番禺",
+   "name": "Panyu", "kind": "city", "lon": 113.26, "lat": 23.13, "approximate": true,
+   "aliases": [
+    "番禺（南海）",
+    "Panyu (Nanhai)"
+   ], "source": "estimated"
+  },
+  {
+   "id": "xunyang",
+   "zh": "寻阳",
+   "name": "Xunyang", "kind": "city", "lon": 115.9, "lat": 29.88, "approximate": true, "source": "estimated"
+  },
+  {
+   "id": "gongan",
+   "zh": "公安",
+   "name": "Gong'an", "kind": "fort", "lon": 112.23, "lat": 30.06, "approximate": true, "source": "estimated"
   }
  ]
 }
