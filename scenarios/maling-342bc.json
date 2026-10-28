@@ -1,0 +1,630 @@
+{
+  "title": "Sun Bin at Guiling and Maling",
+  "period": "353 and 342 BC",
+  "summary": "Following the Shiji's account: Sun Bin twice relieves Qi's allies by marching on Wei's undefended capital, first at Guiling, then thirteen years later luring Pang Juan into a night ambush at Maling with the trick of reducing the cooking fires.",
+  "sources": [
+    "《史記·孫子吳起列傳》, from 其後魏伐趙 to 世傳其兵法 (full text: sources/maling-shiji.md)"
+  ],
+  "zh": {
+    "title": "孙膑：桂陵与马陵",
+    "period": "前353年、前342年",
+    "summary": "据《史记》所载：孙膑两次以直捣魏国空虚的都城来解救齐国的盟邦——先是桂陵之战（围魏救赵），十三年后又以减灶之计诱庞涓夜入马陵，伏兵歼之。",
+    "sources": [
+      "《史记·孙子吴起列传》，自“其后魏伐赵”至“世传其兵法”（原文见 sources/maling-shiji.md）"
+    ]
+  },
+  "sides": [
+    {
+      "id": "qi",
+      "name": "Qi (Tian Ji, Sun Bin)",
+      "color": "#2e9e5b",
+      "zh": {
+        "name": "齐（田忌、孙膑）"
+      }
+    },
+    {
+      "id": "wei",
+      "name": "Wei (Pang Juan)",
+      "color": "#2f6fde",
+      "zh": {
+        "name": "魏（庞涓）"
+      }
+    },
+    {
+      "id": "zhao",
+      "name": "Zhao",
+      "color": "#c77d12",
+      "zh": {
+        "name": "赵"
+      }
+    },
+    {
+      "id": "han",
+      "name": "Han",
+      "color": "#8a4fd1",
+      "zh": {
+        "name": "韩"
+      }
+    }
+  ],
+  "places": [
+    {
+      "id": "r-plain",
+      "name": "North China Plain",
+      "kind": "region",
+      "lon": 116.2,
+      "lat": 35.1,
+      "approximate": false,
+      "zh": {
+        "name": "华北平原"
+      }
+    },
+    {
+      "id": "r-taihang",
+      "name": "Taihang Mountains",
+      "kind": "region",
+      "lon": 113.4,
+      "lat": 36.4,
+      "approximate": false,
+      "zh": {
+        "name": "太行山"
+      }
+    },
+    {
+      "id": "r-lu",
+      "name": "Shandong hills",
+      "kind": "region",
+      "lon": 117.7,
+      "lat": 36.1,
+      "approximate": false,
+      "zh": {
+        "name": "鲁中山地"
+      }
+    },
+    {
+      "id": "daliang",
+      "name": "Daliang",
+      "kind": "city",
+      "lon": 114.33,
+      "lat": 34.8,
+      "approximate": false,
+      "note": "Capital of Wei (also called Liang), at modern Kaifeng. It stands on open plain with no mountain or river barrier around it, which is why Sun Bin's plan to march on it would pull Wei's army home.",
+      "zh": {
+        "name": "大梁",
+        "note": "魏都（魏又称梁），在今开封。四周是开阔平原，既无山险也无大河屏障，所以孙膑主张“疾走大梁”，就能逼魏军回救。"
+      },
+      "side": "wei",
+      "nameLocal": "大梁"
+    },
+    {
+      "id": "handan",
+      "name": "Handan",
+      "kind": "city",
+      "lon": 114.47,
+      "lat": 36.6,
+      "approximate": false,
+      "note": "Capital of Zhao, at the foot of the Taihang Mountains, besieged by Wei.",
+      "zh": {
+        "name": "邯郸",
+        "note": "赵都，在太行山东麓，被魏军围攻。"
+      },
+      "side": "zhao",
+      "nameLocal": "邯郸"
+    },
+    {
+      "id": "linzi",
+      "name": "Linzi",
+      "kind": "city",
+      "lon": 118.33,
+      "lat": 36.87,
+      "approximate": false,
+      "note": "Capital of Qi, on the northern edge of the Shandong hills; the Qi army set out from here.",
+      "zh": {
+        "name": "临淄",
+        "note": "齐都，在鲁中山地北缘，齐军由此出兵。"
+      },
+      "side": "qi",
+      "nameLocal": "临淄"
+    },
+    {
+      "id": "xinzheng",
+      "name": "Xinzheng",
+      "kind": "city",
+      "lon": 113.74,
+      "lat": 34.4,
+      "approximate": false,
+      "note": "Capital of Han, attacked by Wei and Zhao in the second campaign.",
+      "zh": {
+        "name": "新郑",
+        "note": "韩都，第二次战役中遭魏、赵进攻。"
+      },
+      "side": "han",
+      "nameLocal": "新郑"
+    },
+    {
+      "id": "guiling",
+      "name": "Guiling",
+      "kind": "battle",
+      "lon": 114.62,
+      "lat": 35.24,
+      "approximate": true,
+      "note": "Where Qi defeated the Wei army hurrying home from Handan. The site is uncertain: it is usually placed north-west of modern Changyuan (shown), sometimes near Heze.",
+      "zh": {
+        "name": "桂陵",
+        "note": "齐军大破从邯郸回救的魏军之处。地点不确定：一般认为在今长垣西北（图中位置），也有菏泽一带之说。"
+      },
+      "side": "qi",
+      "nameLocal": "桂陵"
+    },
+    {
+      "id": "maling",
+      "name": "Maling",
+      "kind": "battle",
+      "lon": 115.45,
+      "lat": 35.8,
+      "approximate": true,
+      "note": "Where Sun Bin's crossbowmen ambushed Pang Juan at dusk. The site is disputed: the most common identification is on the Henan–Shandong border near Fan county (shown); others place it near Shen county, or at the Maling hills by Tancheng far to the south-east. Today's ground here is flat alluvial plain: centuries of Yellow River floods have laid metres of silt over the old surface, so the narrow road and cover the text describes cannot be seen in modern elevation data.",
+      "zh": {
+        "name": "马陵",
+        "note": "孙膑万弩伏击庞涓之处。地点有争议：最常见的说法在豫鲁交界的范县一带（图中位置）；也有莘县说，以及远在东南的郯城马陵山说。今天这里是平坦的冲积平原：千百年来黄河泛滥，旧地面已被数米泥沙掩埋，所以文中所说的狭道和“阻隘”在现代高程数据中看不出来。"
+      },
+      "side": "qi",
+      "nameLocal": "马陵"
+    },
+    {
+      "id": "maling-tancheng",
+      "name": "Maling hills (Tancheng)",
+      "kind": "mountain",
+      "lon": 118.54,
+      "lat": 34.69,
+      "approximate": true,
+      "note": "Low hills between Tancheng and Xinyi that some identify as the Maling of the battle. Unlike the plain sites, they still have ridges and gullies today.",
+      "zh": {
+        "name": "马陵山（郯城）",
+        "note": "郯城与新沂之间的低山，一些人认为就是战役中的马陵。与平原上的几处地点不同，这里至今仍有山脊沟谷。"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "id": "wei-zhao",
+      "name": "Wei attacks Zhao",
+      "kind": "advance",
+      "waypoints": [
+        "daliang",
+        [
+          114.4,
+          35.7
+        ],
+        "handan"
+      ],
+      "zh": {
+        "name": "魏伐赵",
+        "note": "魏军北上围攻邯郸。"
+      },
+      "side": "wei",
+      "note": "Wei's army marches north to besiege Handan."
+    },
+    {
+      "id": "qi-daliang-1",
+      "name": "Sun Bin: 'march fast on Daliang'",
+      "kind": "planned",
+      "waypoints": [
+        "linzi",
+        [
+          116.3,
+          36.2
+        ],
+        [
+          115.2,
+          35.4
+        ],
+        "daliang"
+      ],
+      "zh": {
+        "name": "孙膑：“引兵疾走大梁”",
+        "note": "不去赵国，而是直捣魏国空虚的腹地，“据其街路，冲其方虚”。"
+      },
+      "side": "qi",
+      "note": "Instead of going to Zhao, strike at Wei's emptied heartland, 'seize its main roads and hit it where it is empty'."
+    },
+    {
+      "id": "wei-return-1",
+      "name": "Wei leaves Handan",
+      "kind": "retreat",
+      "waypoints": [
+        "handan",
+        [
+          114.55,
+          35.9
+        ],
+        "guiling"
+      ],
+      "zh": {
+        "name": "魏去邯郸",
+        "note": "魏军解邯郸之围回救，在桂陵与齐军遭遇。"
+      },
+      "side": "wei",
+      "note": "Wei lifts the siege and hurries back to save its capital, and meets Qi at Guiling."
+    },
+    {
+      "id": "wei-han",
+      "name": "Wei and Zhao attack Han",
+      "kind": "advance",
+      "waypoints": [
+        "daliang",
+        "xinzheng"
+      ],
+      "zh": {
+        "name": "魏与赵攻韩"
+      },
+      "side": "wei"
+    },
+    {
+      "id": "qi-daliang-2",
+      "name": "Qi marches straight on Daliang",
+      "kind": "advance",
+      "waypoints": [
+        "linzi",
+        [
+          116.3,
+          36.2
+        ],
+        [
+          115.2,
+          35.3
+        ],
+        [
+          114.75,
+          34.95
+        ]
+      ],
+      "zh": {
+        "name": "齐军直走大梁",
+        "note": "十三年后，田忌再次直趋大梁；庞涓从韩国回师时，齐军“既已过而西矣”。"
+      },
+      "side": "qi",
+      "note": "Thirteen years later Tian Ji again marches straight at Daliang; by the time Pang Juan turns back from Han, the Qi army has already passed west."
+    },
+    {
+      "id": "qi-stoves",
+      "name": "Qi withdraws, cutting its cooking fires",
+      "kind": "retreat",
+      "waypoints": [
+        [
+          114.75,
+          34.95
+        ],
+        [
+          115.05,
+          35.35
+        ],
+        [
+          115.3,
+          35.65
+        ],
+        "maling"
+      ],
+      "zh": {
+        "name": "齐军减灶而退",
+        "note": "齐军入魏地，第一天造十万灶，次日五万，再次日三万，装作士卒大量逃亡。"
+      },
+      "side": "qi",
+      "note": "Inside Wei territory the Qi army makes 100,000 cooking fires the first day, 50,000 the next and 30,000 the day after, to look as if its men are deserting."
+    },
+    {
+      "id": "pangjuan",
+      "name": "Pang Juan's pursuit",
+      "kind": "advance",
+      "waypoints": [
+        "xinzheng",
+        [
+          114.33,
+          34.85
+        ],
+        [
+          114.85,
+          35.15
+        ],
+        [
+          115.2,
+          35.55
+        ],
+        "maling"
+      ],
+      "zh": {
+        "name": "庞涓追击",
+        "note": "庞涓去韩而归，尾随齐军三日，随后“弃其步军，与其轻锐倍日并行逐之”。"
+      },
+      "side": "wei",
+      "note": "Pang Juan leaves Han, follows the Qi army for three days, then leaves his infantry behind and presses on at double pace with light troops only."
+    },
+    {
+      "id": "yellow-river",
+      "name": "Yellow River (course at the time, approximate)",
+      "kind": "river",
+      "waypoints": [
+        [
+          113.4,
+          34.92
+        ],
+        [
+          114.55,
+          35.65
+        ],
+        [
+          115.0,
+          36.05
+        ],
+        [
+          115.45,
+          36.6
+        ],
+        [
+          116.0,
+          37.2
+        ],
+        [
+          116.6,
+          37.8
+        ],
+        [
+          117.3,
+          38.4
+        ]
+      ],
+      "zh": {
+        "name": "黄河（当时河道，约略）",
+        "note": "公元前4世纪，黄河向东北流经河北，在今黄骅一带入海，而不是走今天向东的河道。此线为约略示意；地图上的现代黄河与当时河道相去甚远。"
+      },
+      "note": "In the 4th century BC the Yellow River flowed north-east across Hebei to the sea near modern Huanghua, not along its modern course to the east. This line is an approximation; the modern river on the map is far from where it ran then."
+    }
+  ],
+  "zones": [
+    {
+      "id": "ambush",
+      "name": "Ten thousand crossbows on both sides of the road",
+      "kind": "ambush",
+      "line": [
+        [
+          115.4,
+          35.77
+        ],
+        [
+          115.45,
+          35.8
+        ],
+        [
+          115.5,
+          35.83
+        ]
+      ],
+      "widthKm": 2.5,
+      "note": "Sun Bin's best archers wait on both sides of the road with orders to shoot together when they see a fire lit at dusk.",
+      "zh": {
+        "name": "万弩夹道而伏",
+        "note": "孙膑令齐军善射者万弩夹道埋伏，约定“暮见火举而俱发”。"
+      }
+    },
+    {
+      "id": "wei-heartland",
+      "name": "Wei's heartland, emptied of troops",
+      "kind": "control",
+      "center": "daliang",
+      "radiusKm": 60,
+      "note": "With its best troops away in Zhao, 'the light troops and picked men are worn out abroad, the old and weak exhausted at home'.",
+      "zh": {
+        "name": "精兵在外、国内空虚的魏国腹地",
+        "note": "魏国精兵在赵，“轻兵锐卒必竭于外，老弱罢于内”。"
+      }
+    }
+  ],
+  "overlays": [],
+  "steps": [
+    {
+      "title": "Wei besieges Zhao",
+      "text": "Wei attacks its neighbour Zhao and besieges the capital, Handan; Zhao asks Qi for help. Qi gives command to Tian Ji, with Sun Bin as adviser riding in a covered wagon.\n\nThe map shows why distance and direction matter here: Qi lies far to the east beyond the Shandong hills, while Wei's capital Daliang and Zhao's capital Handan sit on the same open plain.",
+      "focus": [
+        "wei-zhao",
+        "handan",
+        "daliang",
+        "linzi"
+      ],
+      "camera": {
+        "center": [
+          116.0,
+          35.7
+        ],
+        "zoom": 6.6
+      },
+      "zh": {
+        "title": "魏伐赵",
+        "text": "魏国攻赵，围其都城邯郸；赵向齐求救。齐以田忌为将，孙膑为师，坐在辎车中出谋划策。\n\n地图显示了距离和方向的意义：齐国远在东方鲁中山地之外，而魏都大梁与赵都邯郸同处一片开阔平原。"
+      }
+    },
+    {
+      "title": "Strike where it is empty",
+      "text": "Tian Ji wants to march to Zhao. Sun Bin argues instead: to break up a fight you don't join the blows, you 'strike at the throat and hit where it is empty'. Wei's best troops are away at Handan, so march fast on Daliang, seize its roads, and Wei will have to let Zhao go to save itself.\n\nThe profile from Handan to Daliang shows the ground between them: open plain all the way, with nothing to shelter Wei's capital once its army is gone.",
+      "focus": [
+        "qi-daliang-1",
+        "daliang",
+        "wei-heartland"
+      ],
+      "camera": {
+        "center": [
+          115.6,
+          35.6
+        ],
+        "zoom": 7.0
+      },
+      "analysis": {
+        "type": "profile",
+        "coords": [
+          [
+            114.47,
+            36.6
+          ],
+          [
+            114.33,
+            34.8
+          ]
+        ],
+        "label": "Handan to Daliang",
+        "zh": {
+          "label": "邯郸至大梁"
+        }
+      },
+      "zh": {
+        "title": "批亢捣虚",
+        "text": "田忌想引兵赴赵。孙膑认为：解开乱麻不能硬拉，劝架不能动手，要“批亢捣虚”。魏国精兵都在邯郸，不如引兵疾走大梁，据其街路，冲其方虚，魏必然放弃赵国回来自救。\n\n邯郸至大梁的剖面显示了两地之间的地形：一路都是开阔平原，魏军一旦离开，都城便毫无屏障。"
+      }
+    },
+    {
+      "title": "Guiling",
+      "text": "Tian Ji follows the plan. Wei abandons Handan and hurries home, and Qi meets it at Guiling and routs the Liang army. One move both lifts the siege of Zhao and wears out Wei.",
+      "focus": [
+        "wei-return-1",
+        "guiling",
+        "qi-daliang-1"
+      ],
+      "camera": {
+        "center": [
+          115.0,
+          35.5
+        ],
+        "zoom": 7.6
+      },
+      "zh": {
+        "title": "桂陵",
+        "text": "田忌依计而行。魏军果然离开邯郸回救，与齐军战于桂陵，梁军大败。一举既解了赵国之围，又使魏国疲于奔命。"
+      }
+    },
+    {
+      "title": "Thirteen years later",
+      "text": "Wei and Zhao attack Han, and Han appeals to Qi. Tian Ji again marches straight at Daliang. Wei's general Pang Juan hears of it and turns back from Han, but by then the Qi army has already passed to the west.",
+      "focus": [
+        "wei-han",
+        "qi-daliang-2",
+        "xinzheng",
+        "daliang"
+      ],
+      "camera": {
+        "center": [
+          115.3,
+          35.4
+        ],
+        "zoom": 7.0
+      },
+      "zh": {
+        "title": "十三年后",
+        "text": "魏与赵攻韩，韩向齐告急。田忌再次率军直走大梁。魏将庞涓闻讯，离开韩国回师，但齐军“既已过而西矣”。"
+      }
+    },
+    {
+      "title": "Fewer fires each night",
+      "text": "Sun Bin reasons that the troops of the Three Jin despise Qi as cowardly, and that a good commander turns that to his advantage: an army that races a hundred li after gain loses its leading general. So the Qi army withdraws through Wei territory, making 100,000 cooking fires the first night, 50,000 the next and 30,000 the next.\n\nAfter three days Pang Juan is delighted: half the Qi soldiers must have deserted. He leaves his infantry behind and pursues with light troops at double pace, stretching his force out along the road.",
+      "focus": [
+        "qi-stoves",
+        "pangjuan"
+      ],
+      "camera": {
+        "center": [
+          114.9,
+          35.3
+        ],
+        "zoom": 7.8
+      },
+      "zh": {
+        "title": "减灶",
+        "text": "孙膑认为，三晋之兵素来悍勇而轻视齐军，善战者应当因势利导：兵法说，百里而趣利者蹶上将。于是齐军在魏地后撤，第一天造十万灶，次日五万，再次日三万。\n\n庞涓追了三天，大喜，以为齐军士卒已逃亡过半，便抛下步兵，只带轻锐部队倍日并行追赶，队伍在路上越拉越长。"
+      }
+    },
+    {
+      "title": "The road at Maling",
+      "text": "Sun Bin calculates that Pang Juan will reach Maling at dusk. The text describes the road there as narrow, with plenty of cover on either side where troops can hide. He has a large tree stripped of bark and writes on it: 'Pang Juan dies under this tree.' Ten thousand crossbowmen lie in wait on both sides of the road, told to shoot together when they see a fire lit.\n\nThe cross-section shows today's ground at the most common identification of the site: flat. The plain here has been buried under metres of Yellow River silt since then, so the ancient defile no longer shows in the terrain; the map can only mark where the ambush is described.",
+      "focus": [
+        "maling",
+        "ambush",
+        "pangjuan",
+        "qi-stoves",
+        "yellow-river"
+      ],
+      "camera": {
+        "center": [
+          115.45,
+          35.8
+        ],
+        "zoom": 10.5
+      },
+      "analysis": {
+        "type": "profile",
+        "coords": [
+          [
+            115.4,
+            35.85
+          ],
+          [
+            115.5,
+            35.75
+          ]
+        ],
+        "label": "Today's ground across the road at Maling (Fan county site)",
+        "zh": {
+          "label": "今日马陵（范县说）道路两侧地面"
+        }
+      },
+      "zh": {
+        "title": "马陵道陕",
+        "text": "孙膑算定庞涓天黑时会到马陵。文中说，马陵道路狭窄，两旁多有险阻，可以埋伏。他命人砍去一棵大树的树皮，在白木上写道：“庞涓死于此树之下。”又令万名善射的弩手夹道埋伏，约定看到火光就一齐放箭。\n\n横剖面显示的是最常见的那处地点今天的地面：一片平坦。此后这一带被数米厚的黄河泥沙掩埋，古时的狭道已经看不出来；地图只能标出文中所述伏击的位置。"
+      }
+    },
+    {
+      "title": "Where was Maling?",
+      "text": "The site is not settled. Besides the Fan county identification on the plain, some place Maling near Shen county to the north, and others at the Maling hills by Tancheng, far to the south-east, where low ridges and gullies still survive. The viewshed from those hills shows the kind of broken ground that can still hide troops today.",
+      "focus": [
+        "maling",
+        "maling-tancheng"
+      ],
+      "camera": {
+        "center": [
+          117.4,
+          35.2
+        ],
+        "zoom": 6.9
+      },
+      "analysis": {
+        "type": "viewshed",
+        "at": "maling-tancheng",
+        "radiusKm": 6,
+        "observerH": 2,
+        "label": "Maling hills (Tancheng)",
+        "zh": {
+          "label": "马陵山（郯城）"
+        }
+      },
+      "zh": {
+        "title": "马陵在哪里？",
+        "text": "马陵的位置尚无定论。除了平原上的范县说，还有北面的莘县说，以及远在东南的郯城马陵山说——那里至今仍有低矮的山脊和沟谷。从马陵山看出去的可视域，显示了今天仍能藏兵的那种破碎地形。"
+      }
+    },
+    {
+      "title": "Pang Juan dies under the tree",
+      "text": "Pang Juan reaches the tree that night, sees the writing on the white wood and strikes a light to read it. Before he finishes, the ten thousand crossbows loose together; the Wei army falls into confusion and loses contact. Knowing he is beaten, Pang Juan cuts his own throat: 'So I have made that boy's name!'\n\nQi follows up the victory, destroys the whole Wei army and takes Crown Prince Shen of Wei prisoner. Sun Bin becomes famous throughout the land, and his art of war is handed down.",
+      "focus": [
+        "maling",
+        "ambush"
+      ],
+      "camera": {
+        "center": [
+          115.45,
+          35.8
+        ],
+        "zoom": 9.5
+      },
+      "zh": {
+        "title": "庞涓死于此树之下",
+        "text": "庞涓果然夜里来到砍白的树下，看见树上有字，便钻火照看。字还没读完，齐军万弩齐发，魏军大乱，彼此失去联系。庞涓自知智穷兵败，拔剑自刎，说：“遂成竖子之名！”\n\n齐军乘胜全歼魏军，俘虏魏太子申而归。孙膑由此名显天下，他的兵法也流传于世。"
+      }
+    }
+  ]
+}
