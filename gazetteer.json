@@ -214,7 +214,7 @@
     }
    ],
    "note": "Usually placed north-west of Changyuan.",
-  "note_zh": "一般认为在今长垣西北。"
+   "note_zh": "一般认为在今长垣西北。"
   },
   {
    "id": "maling",
@@ -229,7 +229,7 @@
     }
    ],
    "note": "Disputed. Main position: the Fan county identification on the Henan–Shandong border.",
-  "note_zh": "有争议。主要说法：豫鲁交界的范县一带。"
+   "note_zh": "有争议。主要说法：豫鲁交界的范县一带。"
   },
   {
    "id": "maling-tancheng",
@@ -298,7 +298,7 @@
     }
    ],
    "note": "Main position: Longshan, Zhuanglang county.",
-  "note_zh": "主要说法：庄浪县龙山镇。"
+   "note_zh": "主要说法：庄浪县龙山镇。"
   },
   {
    "id": "longguan",
@@ -324,6 +324,69 @@
    "id": "wuzhangyuan",
    "zh": "五丈原",
    "name": "Wuzhangyuan", "kind": "camp", "lon": 107.63, "lat": 34.28, "approximate": true
+  },
+  {
+   "id": "alps",
+   "zh": "阿尔卑斯山",
+   "name": "Alps", "kind": "region", "lon": 6.45, "lat": 45.05
+  },
+  {
+   "id": "po",
+   "zh": "波河平原",
+   "name": "Po plain", "kind": "region", "lon": 8.3, "lat": 44.95
+  },
+  {
+   "id": "rhone",
+   "zh": "罗讷河谷",
+   "name": "Rhône valley", "kind": "region", "lon": 4.95, "lat": 44.55
+  },
+  {
+   "id": "rhone-crossing",
+   "zh": "渡罗讷河处",
+   "name": "Rhône crossing", "kind": "river", "lon": 4.78, "lat": 44.06, "approximate": true
+  },
+  {
+   "id": "traversette",
+   "zh": "特拉韦塞特山口",
+   "name": "Col de la Traversette", "kind": "pass", "lon": 7.0661, "lat": 44.7125, "approximate": true
+  },
+  {
+   "id": "clapier",
+   "zh": "克拉皮耶山口",
+   "name": "Col du Clapier", "kind": "pass", "lon": 6.975, "lat": 45.222, "approximate": true
+  },
+  {
+   "id": "cenis",
+   "zh": "塞尼山口",
+   "name": "Mont Cenis pass", "kind": "pass", "lon": 6.901, "lat": 45.26
+  },
+  {
+   "id": "stbernard",
+   "zh": "小圣伯纳德山口",
+   "name": "Little St Bernard", "kind": "pass", "lon": 6.8836, "lat": 45.6806
+  },
+  {
+   "id": "montgenevre",
+   "zh": "蒙热内夫尔山口",
+   "name": "Montgenèvre", "kind": "pass", "lon": 6.7244, "lat": 44.9318
+  },
+  {
+   "id": "taurini",
+   "zh": "陶里尼人",
+   "name": "Taurini", "kind": "city", "lon": 7.686, "lat": 45.07,
+   "aliases": [
+    "陶里尼人（都灵）",
+    "Taurini (Turin)"
+   ]
+  },
+  {
+   "id": "aosta",
+   "zh": "奥斯塔河谷",
+   "name": "Aosta valley", "kind": "city", "lon": 7.32, "lat": 45.74,
+   "aliases": [
+    "奥斯塔河谷（萨拉西人）",
+    "Aosta valley (Salassi)"
+   ]
   }
  ]
 }

@@ -7,6 +7,7 @@
 //   node tools/tow.mjs bake   scenarios/x.json       pre-compute terrain-following routes
 //   node tools/tow.mjs prep   scenarios/x.json       snap + bake + check (the usual run)
 //   node tools/tow.mjs place  马陵                    look a name up in the gazetteer
+//   node tools/tow.mjs gazetteer scenarios/x.json    add the scenario's new places to it
 //
 // snap, bake and prep rewrite the file in place. Elevation tiles are cached in
 // ~/.cache/terrain-of-war (override with TOW_TILE_CACHE).
@@ -54,6 +55,34 @@ async function highPointNear([lon, lat], radiusM = 1500) {
       if (e > best) { best = e; at = ll; }
     }
   return { elev: best, at };
+}
+
+/**
+ * The col of a pass on a route. Trace the route's two legs through the given point, from
+ * the valley floor ~4 km away on each side; a rough point on the slope below the col
+ * still makes the trace climb on over the col, so the col is the trace's highest point
+ * within maxShiftM of the given position. Returns null when nothing nearby is higher.
+ */
+async function colOnRoute(pass, prev, next, maxShiftM = 3000) {
+  // Start and end on the valley floor: the lowest ground within 2.5 km of a point 4 km
+  // from the pass towards each neighbour (a straight line can end on a high slope).
+  const valleyToward = async (to) => {
+    const d = haversine(pass, to), f = Math.min(1, 4000 / d);
+    const c = [pass[0] + (to[0] - pass[0]) * f, pass[1] + (to[1] - pass[1]) * f];
+    const g = await dem.grid(bboxOf([c], 0, 2500), 12);
+    let lo = Infinity, at = c;
+    for (let j = 0; j < g.height; j++)
+      for (let i = 0; i < g.width; i++) {
+        const ll = g.cellToLonLat(i, j);
+        if (haversine(ll, c) <= 2500 && g.data[j * g.width + i] < lo) { lo = g.data[j * g.width + i]; at = ll; }
+      }
+    return at;
+  };
+  const res = await leastCostRoute(dem, [await valleyToward(prev), pass, await valleyToward(next)], { padM: 3000, maxCells: 4e5 });
+  const near = res.profile.filter((p) => haversine([p.lon, p.lat], pass) <= maxShiftM);
+  if (!near.length) return null;
+  const top = near.reduce((a, p) => (p.elev > a.elev ? p : a));
+  return { elev: top.elev, at: [top.lon, top.lat] };
 }
 
 // ---------------------------------------------------------------------------
@@ -129,15 +158,35 @@ async function check(file) {
 
 async function snap(file) {
   const raw = readJSON(file);
+  const { scenario: sc } = normalizeScenario(raw);
   let moved = 0;
+  // For each pass, the neighbouring waypoints of a terrain route through it.
+  const neighbours = (id) => {
+    for (const r of raw.routes || []) {
+      const i = (r.waypoints || []).indexOf(id);
+      if (i <= 0 || i >= r.waypoints.length - 1) continue;
+      const nr = sc.routes.find((x) => x.id === r.id);
+      if (nr) return [nr.waypoints[i - 1], nr.waypoints[i + 1]];
+    }
+    return null;
+  };
   for (const p of raw.places || []) {
-    if (p.kind !== 'mountain') continue;
-    await dem.prefetchPoints([[p.lon, p.lat]], 12);
-    const e = dem.elevAt(p.lon, p.lat, 12);
-    const hp = await highPointNear([p.lon, p.lat]);
-    if (hp.elev - e > 30) {
-      console.log(`  snap ${p.id}: ${fmt([p.lon, p.lat])} (${Math.round(e)} m) -> ${fmt(hp.at)} (${Math.round(hp.elev)} m)`);
-      [p.lon, p.lat] = hp.at.map((v) => +v.toFixed(4));
+    if (p.kind !== 'mountain' && p.kind !== 'pass') continue;
+    if (p.snap === false) continue; // the author placed it deliberately
+    await dem.prefetchPoints([[p.lon, p.lat]], 13);
+    const e = dem.elevAt(p.lon, p.lat, 13);
+    let target;
+    if (p.kind === 'mountain') target = await highPointNear([p.lon, p.lat]);
+    else {
+      const nb = neighbours(p.id);
+      if (!nb) { console.log(`  snap ${p.id}: pass is not a waypoint inside a route; left as is`); continue; }
+      target = await colOnRoute([p.lon, p.lat], ...nb);
+      if (!target) { console.log(`  snap ${p.id}: no crossing found near it; left as is (check it)`); continue; }
+    }
+    const shift = haversine([p.lon, p.lat], target.at);
+    if (Math.abs(target.elev - e) > 30 && shift > 60) {
+      console.log(`  snap ${p.id} (${p.kind}): ${fmt([p.lon, p.lat])} (${Math.round(e)} m) -> ${fmt(target.at)} (${Math.round(target.elev)} m), ${Math.round(shift)} m away`);
+      [p.lon, p.lat] = target.at.map((v) => +v.toFixed(4));
       moved++;
     }
   }
@@ -175,6 +224,31 @@ async function bake(file) {
   console.log(`  ${n} route(s) baked`);
 }
 
+/** Add a scenario's places that the gazetteer does not have yet. */
+function addToGazetteer(file) {
+  const raw = readJSON(file);
+  const doc = fs.existsSync(GAZETTEER) ? readJSON(GAZETTEER) : { places: [] };
+  const ids = new Set(doc.places.map((g) => g.id));
+  const added = [];
+  for (const p of raw.places || []) {
+    if (gazMatches(doc.places, p).length) continue;
+    const zhFull = p.zh?.name || p.nameLocal || '';
+    const g = {
+      id: ids.has(p.id.replace(/^r-/, '')) ? `${p.id.replace(/^r-/, '')}-${path.basename(file, '.json')}` : p.id.replace(/^r-/, ''),
+      zh: zhFull.split(/[（(]/)[0].trim(), name: p.name.split(' (')[0].trim(), kind: p.kind, lon: p.lon, lat: p.lat,
+    };
+    if (p.approximate) g.approximate = true;
+    const aliases = [zhFull, p.name, p.nameLocal].filter((a) => a && a !== g.zh && a !== g.name);
+    if (aliases.length) g.aliases = [...new Set(aliases)];
+    doc.places.push(g);
+    ids.add(g.id);
+    added.push(`${g.id} (${g.zh || g.name})`);
+  }
+  let out = JSON.stringify(doc, null, 1).replace(/\n\s+("(?:lon|lat|kind|approximate)")/g, ' $1');
+  fs.writeFileSync(GAZETTEER, out + '\n');
+  console.log(added.length ? `  added ${added.length}: ${added.join(', ')}` : '  nothing new');
+}
+
 function place(query) {
   const q = query.trim().toLowerCase();
   const hits = gazetteer().filter((g) => [g.id, g.name, g.zh, ...(g.aliases || [])].some((n) => n && n.toLowerCase().includes(q)));
@@ -198,6 +272,7 @@ const report = ({ problems, notes }, file) => {
 
 try {
   if (cmd === 'place') place(args.join(' '));
+  else if (cmd === 'gazetteer' && args.length) for (const f of args) addToGazetteer(f);
   else if (['check', 'snap', 'bake', 'prep'].includes(cmd) && args.length) {
     let failed = 0;
     for (const file of args.filter((f) => path.basename(f) !== 'index.json')) {
@@ -208,7 +283,7 @@ try {
     }
     process.exitCode = failed ? 1 : 0;
   } else {
-    console.log(fs.readFileSync(fileURLToPath(import.meta.url), 'utf8').split('\n').slice(1, 13).join('\n').replace(/^\/\/ ?/gm, ''));
+    console.log(fs.readFileSync(fileURLToPath(import.meta.url), 'utf8').split('\n').slice(1, 14).join('\n').replace(/^\/\/ ?/gm, ''));
     process.exitCode = 2;
   }
 } catch (e) {

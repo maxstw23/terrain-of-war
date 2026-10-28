@@ -1,5 +1,14 @@
 [
   {
+    "file": "scenarios/hannibal-alps-218bc.json",
+    "title": "Hannibal's pass over the Alps",
+    "period": "218 BC",
+    "zh": {
+      "title": "汉尼拔翻越阿尔卑斯的山口",
+      "period": "前218年"
+    }
+  },
+  {
     "file": "scenarios/maling-342bc.json",
     "title": "Sun Bin at Guiling and Maling",
     "period": "353 and 342 BC",

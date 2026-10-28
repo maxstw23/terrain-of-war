@@ -345,39 +345,42 @@ function simplify(pts, tol) {
  */
 export async function leastCostRoute(dem, waypoints, { maxCells = 1.5e6, padM = 8000, mode = 'march' } = {}) {
   if (waypoints.length < 2) throw new Error('Need at least two waypoints');
-  const bbox = bboxOf(waypoints, 0.15, padM);
-  const z = dem.zoomFor(bbox, maxCells, 12);
-  const g = await dem.grid(bbox, z);
-  const rowMpp = new Float64Array(g.height);
-  for (let j = 0; j < g.height; j++) rowMpp[j] = metersPerPixel(g.cellToLonLat(0, j)[1], z);
-
-  const cellOf = ([lon, lat]) => {
-    const [i, j] = g.toCell(lon, lat);
-    const ci = Math.max(0, Math.min(g.width - 1, Math.round(i)));
-    const cj = Math.max(0, Math.min(g.height - 1, Math.round(j)));
-    return cj * g.width + ci;
-  };
-  let cells = [], hours = 0;
+  // Each leg gets its own grid at the finest zoom its area allows, so a short leg over a
+  // pass is traced at full detail even when the whole route is hundreds of km long.
+  const coords = [], profile = [];
+  let hours = 0, d = 0, zMin = Infinity;
   for (let w = 1; w < waypoints.length; w++) {
-    const leg = astar(g, rowMpp, cellOf(waypoints[w - 1]), cellOf(waypoints[w]), mode);
+    const a = waypoints[w - 1], b = waypoints[w];
+    const bbox = bboxOf([a, b], 0.25, padM);
+    const z = dem.zoomFor(bbox, maxCells, 12);
+    zMin = Math.min(zMin, z);
+    const g = await dem.grid(bbox, z);
+    const rowMpp = new Float64Array(g.height);
+    for (let j = 0; j < g.height; j++) rowMpp[j] = metersPerPixel(g.cellToLonLat(0, j)[1], z);
+    const cellOf = ([lon, lat]) => {
+      const [i, j] = g.toCell(lon, lat);
+      const ci = Math.max(0, Math.min(g.width - 1, Math.round(i)));
+      const cj = Math.max(0, Math.min(g.height - 1, Math.round(j)));
+      return cj * g.width + ci;
+    };
+    const leg = astar(g, rowMpp, cellOf(a), cellOf(b), mode);
     if (!leg) throw new Error(`No route found for leg ${w}`);
     hours += leg.hours;
-    cells = cells.concat(w === 1 ? leg.path : leg.path.slice(1));
+    const xy = leg.path.map((k) => [k % g.width, (k / g.width) | 0]);
+    const legCoords = simplify(xy, 0.8).map(([i, j]) => g.cellToLonLat(i, j));
+    legCoords[0] = a;
+    legCoords[legCoords.length - 1] = b;
+    coords.push(...(w === 1 ? legCoords : legCoords.slice(1)));
+    // Profile straight from the cells the path runs through. Re-sampling the simplified
+    // line instead would put points on the walls of narrow gorges and inflate the climb.
+    let prevLL = profile.length ? [profile[profile.length - 1].lon, profile[profile.length - 1].lat] : null;
+    for (const [i, j] of w === 1 ? xy : xy.slice(1)) {
+      const ll = g.cellToLonLat(i, j);
+      if (prevLL) d += haversine(prevLL, ll);
+      profile.push({ lon: ll[0], lat: ll[1], d, elev: g.data[j * g.width + i] });
+      prevLL = ll;
+    }
   }
-  const xy = cells.map((k) => [k % g.width, (k / g.width) | 0]);
-  const coords = simplify(xy, 0.8).map(([i, j]) => g.cellToLonLat(i, j));
-  coords[0] = waypoints[0];
-  coords[coords.length - 1] = waypoints[waypoints.length - 1];
-  // Profile straight from the cells the path runs through. Re-sampling the simplified
-  // line instead would put points on the walls of narrow gorges and inflate the climb.
-  const profile = [];
-  let d = 0, prevLL = null;
-  for (const [i, j] of xy) {
-    const ll = g.cellToLonLat(i, j);
-    if (prevLL) d += haversine(prevLL, ll);
-    profile.push({ lon: ll[0], lat: ll[1], d, elev: g.data[j * g.width + i] });
-    prevLL = ll;
-  }
-  return { coords, hours, length: d, z, profile };
+  return { coords, hours, length: d, z: zMin, profile };
 }
 
