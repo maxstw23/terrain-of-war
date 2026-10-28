@@ -54,15 +54,6 @@
     }
   },
   {
-    "file": "scenarios/maling-342bc.json",
-    "title": "Sun Bin at Guiling and Maling",
-    "period": "353 and 342 BC",
-    "zh": {
-      "title": "孙膑：桂陵与马陵",
-      "period": "前353、前342年"
-    }
-  },
-  {
     "file": "scenarios/han-xin-chencang.json",
     "title": "Han Xin crosses at Chencang",
     "period": "206 BC",
