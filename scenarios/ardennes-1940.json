@@ -1,0 +1,854 @@
+{
+  "title": "Through the Ardennes: Sedan and the sickle cut",
+  "period": "May 1940",
+  "summary": "France fortified its border with Germany (the Maginot Line) and planned to meet a German attack in central Belgium. The main German blow instead came through Luxembourg and the forested, broken Ardennes, crossed the Meuse at Sedan, Monthermé and Dinant, and drove to the Channel, cutting off the best Allied armies in Belgium.",
+  "sources": [
+    "Karl-Heinz Frieser, The Blitzkrieg Legend (2005)",
+    "Ernest R. May, Strange Victory (2000)",
+    "Julian Jackson, The Fall of France (2003)"
+  ],
+  "sides": [
+    {
+      "id": "de",
+      "name": "Germany",
+      "color": "#7f7f7f",
+      "zh": {
+        "name": "德国"
+      }
+    },
+    {
+      "id": "allies",
+      "name": "France / Britain / Belgium",
+      "color": "#2f6fde",
+      "zh": {
+        "name": "法国 / 英国 / 比利时"
+      }
+    }
+  ],
+  "places": [
+    {
+      "id": "r-belgian-plain",
+      "name": "Central Belgian plain",
+      "kind": "region",
+      "lon": 4.3,
+      "lat": 50.8,
+      "approximate": false,
+      "zh": {
+        "name": "比利时中部平原"
+      }
+    },
+    {
+      "id": "r-lorraine",
+      "name": "Lorraine",
+      "kind": "region",
+      "lon": 6.4,
+      "lat": 49.05,
+      "approximate": false,
+      "zh": {
+        "name": "洛林"
+      }
+    },
+    {
+      "id": "sedan",
+      "name": "Sedan",
+      "kind": "battle",
+      "side": "de",
+      "lon": 4.94,
+      "lat": 49.7,
+      "note": "Guderian's XIX Panzer Corps forced the Meuse here on 13 May 1940, behind the heaviest air bombardment of the campaign. The French 55th Division — older reservists — broke.",
+      "zh": {
+        "name": "色当",
+        "note": "1940年5月13日，古德里安的第19装甲军在空军规模最大的一次轰炸掩护下在此强渡默兹河。由老龄预备役人员组成的法军第55师崩溃。"
+      }
+    },
+    {
+      "id": "marfee",
+      "name": "Marfée heights",
+      "kind": "mountain",
+      "side": "allies",
+      "lon": 4.9,
+      "lat": 49.67,
+      "approximate": true,
+      "note": "The wooded ridge south of the Meuse bend that overlooks Sedan and the crossing sites. French artillery observers here could see every move in the river loop — until the Stukas and the infantry assault drove them off.",
+      "zh": {
+        "name": "马尔菲高地",
+        "note": "默兹河弯道以南、俯瞰色当和各渡河点的林木覆盖的山脊。法军炮兵观察员在此可以看清河湾里的一举一动——直到斯图卡和步兵突击把他们赶走。"
+      }
+    },
+    {
+      "id": "montherme",
+      "name": "Monthermé",
+      "kind": "battle",
+      "side": "de",
+      "lon": 4.73,
+      "lat": 49.88,
+      "note": "Reinhardt's XLI Panzer Corps crossed in the Meuse gorge here: steep wooded slopes 200 m high on both banks. A single French colonial machine-gun half-brigade held the panzers for two days.",
+      "zh": {
+        "name": "蒙泰尔梅",
+        "note": "莱因哈特的第41装甲军在此处的默兹河峡谷渡河：两岸是200米高、林木茂密的陡坡。仅一个法国殖民地机枪半旅就把装甲部队挡了两天。"
+      }
+    },
+    {
+      "id": "dinant",
+      "name": "Dinant / Houx",
+      "kind": "battle",
+      "side": "de",
+      "lon": 4.9,
+      "lat": 50.28,
+      "note": "Rommel's 7th Panzer Division found an unguarded weir at Houx on 12–13 May and got infantry across the Meuse before the French were in position.",
+      "zh": {
+        "name": "迪南 / 乌克斯",
+        "note": "隆美尔的第7装甲师在乌克斯发现一座无人看守的拦河坝，于5月12—13日在法军就位前把步兵送过了默兹河。"
+      }
+    },
+    {
+      "id": "luxembourg",
+      "name": "Luxembourg",
+      "kind": "city",
+      "lon": 6.13,
+      "lat": 49.61,
+      "note": "Neutral and undefended; overrun on 10 May. Its roads gave the panzer columns a quick start westward.",
+      "zh": {
+        "name": "卢森堡",
+        "note": "中立且不设防，5月10日即被占领。它的道路让装甲纵队得以迅速西进。"
+      }
+    },
+    {
+      "id": "bastogne",
+      "name": "Bastogne",
+      "kind": "city",
+      "lon": 5.72,
+      "lat": 50.0,
+      "note": "Road hub of the Belgian Ardennes (and of the 1944 battle).",
+      "zh": {
+        "name": "巴斯托涅",
+        "note": "比利时阿登地区的交通枢纽（也是1944年那场战役的焦点）。"
+      }
+    },
+    {
+      "id": "bouillon",
+      "name": "Bouillon",
+      "kind": "city",
+      "lon": 5.07,
+      "lat": 49.79,
+      "note": "On the Semois, a deep, winding valley that the Belgian and French cavalry screen was meant to hold. It delayed the Germans by hours, not days.",
+      "zh": {
+        "name": "布永",
+        "note": "位于瑟穆瓦河畔，这条深切、曲折的河谷本应由比利时和法国的骑兵掩护部队坚守。它只迟滞了德军几个小时，而不是几天。"
+      }
+    },
+    {
+      "id": "longuyon",
+      "name": "Longuyon",
+      "kind": "fort",
+      "side": "allies",
+      "lon": 5.6,
+      "lat": 49.44,
+      "note": "Western end of the main Maginot Line. West of here, facing the Ardennes, the line thinned to a few isolated works such as La Ferté.",
+      "zh": {
+        "name": "隆吉永",
+        "note": "马其诺防线主体的西端。从这里往西、面对阿登的一段，防线只剩下拉费尔泰等少数孤立工事。"
+      }
+    },
+    {
+      "id": "laferte",
+      "name": "La Ferté",
+      "kind": "fort",
+      "side": "allies",
+      "lon": 5.24,
+      "lat": 49.59,
+      "approximate": true,
+      "note": "Small Maginot work on the extension toward Sedan, overrun on 19 May with its whole garrison killed.",
+      "zh": {
+        "name": "拉费尔泰",
+        "note": "马其诺防线向色当延伸段上的一座小型工事，5月19日被攻陷，守军全部阵亡。"
+      }
+    },
+    {
+      "id": "gembloux",
+      "name": "Gembloux",
+      "kind": "battle",
+      "side": "allies",
+      "lon": 4.69,
+      "lat": 50.56,
+      "note": "The open 'Gembloux gap' between the Dyle and Meuse, the classic invasion corridor. The French First Army held the German panzers here on 14–15 May — exactly where France expected the battle to be.",
+      "zh": {
+        "name": "让布卢",
+        "note": "代尔河与默兹河之间开阔的“让布卢缺口”，是传统的入侵通道。法国第1集团军于5月14—15日在此挡住了德军装甲部队——恰恰是法国预料决战发生的地方。"
+      }
+    },
+    {
+      "id": "wavre",
+      "name": "Wavre (Dyle line)",
+      "kind": "fort",
+      "side": "allies",
+      "lon": 4.61,
+      "lat": 50.72,
+      "zh": {
+        "name": "瓦夫尔（代尔防线）"
+      }
+    },
+    {
+      "id": "eben-emael",
+      "name": "Eben-Emael",
+      "kind": "fort",
+      "side": "allies",
+      "lon": 5.68,
+      "lat": 50.8,
+      "note": "Belgium's strongest fort, taken on 10 May by glider-borne pioneers landing on its roof. Spectacular — and part of the lure that drew Allied eyes north.",
+      "zh": {
+        "name": "埃本-埃马尔",
+        "note": "比利时最坚固的要塞，5月10日被乘滑翔机降落在其顶部的德军工兵攻占。场面惊人——也是把盟军目光引向北方的诱饵的一部分。"
+      }
+    },
+    {
+      "id": "montcornet",
+      "name": "Montcornet",
+      "kind": "battle",
+      "side": "allies",
+      "lon": 3.98,
+      "lat": 49.69,
+      "note": "De Gaulle's improvised 4th Armoured Division counter-attacked the panzer corridor's flank here on 17 May.",
+      "zh": {
+        "name": "蒙科尔内",
+        "note": "5月17日，戴高乐临时拼凑的第4装甲师在此对德军装甲走廊的侧翼发动反击。"
+      }
+    },
+    {
+      "id": "arras",
+      "name": "Arras",
+      "kind": "battle",
+      "side": "allies",
+      "lon": 2.78,
+      "lat": 50.29,
+      "note": "British counter-attack on 21 May; it shook Rommel but was too small to cut the corridor.",
+      "zh": {
+        "name": "阿拉斯",
+        "note": "5月21日英军的反击，让隆美尔吃了一惊，但规模太小，无法切断走廊。"
+      }
+    },
+    {
+      "id": "abbeville",
+      "name": "Abbeville",
+      "kind": "city",
+      "side": "de",
+      "lon": 1.83,
+      "lat": 50.11,
+      "note": "2nd Panzer Division reached the Channel at the Somme estuary on the evening of 20 May. The Allied armies in Belgium were cut off.",
+      "zh": {
+        "name": "阿布维尔",
+        "note": "5月20日晚，第2装甲师在索姆河口抵达海峡。比利时境内的盟军被切断。"
+      }
+    },
+    {
+      "id": "dunkirk",
+      "name": "Dunkirk",
+      "kind": "port",
+      "side": "allies",
+      "lon": 2.38,
+      "lat": 51.03,
+      "note": "The pocket's last port: 338,000 Allied troops were evacuated by 4 June.",
+      "zh": {
+        "name": "敦刻尔克",
+        "note": "包围圈中最后的港口：到6月4日共撤出盟军33.8万人。"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "id": "guderian",
+      "name": "XIX Panzer Corps (Guderian)",
+      "kind": "advance",
+      "side": "de",
+      "waypoints": [
+        [
+          6.22,
+          49.93
+        ],
+        [
+          5.74,
+          49.83
+        ],
+        [
+          5.43,
+          49.84
+        ],
+        "bouillon",
+        "sedan"
+      ],
+      "note": "Through northern Luxembourg and the Belgian Ardennes. Kleist's panzer group formed the greatest traffic jam in history to that date — at one point a column 250 km long — but Allied aircraft never seriously attacked it.",
+      "zh": {
+        "name": "第19装甲军（古德里安）",
+        "note": "穿过卢森堡北部和比利时阿登。克莱斯特装甲集群造成了当时史上最大的交通堵塞——一度绵延250公里——但盟军空军始终没有认真攻击它。"
+      }
+    },
+    {
+      "id": "reinhardt",
+      "name": "XLI Panzer Corps (Reinhardt)",
+      "kind": "advance",
+      "side": "de",
+      "waypoints": [
+        [
+          6.12,
+          50.28
+        ],
+        [
+          5.6,
+          50.05
+        ],
+        [
+          5.12,
+          49.93
+        ],
+        "montherme"
+      ],
+      "zh": {
+        "name": "第41装甲军（莱因哈特）"
+      }
+    },
+    {
+      "id": "rommel",
+      "name": "XV Panzer Corps (Hoth, Rommel)",
+      "kind": "advance",
+      "side": "de",
+      "waypoints": [
+        [
+          6.12,
+          50.36
+        ],
+        [
+          5.34,
+          50.23
+        ],
+        "dinant"
+      ],
+      "zh": {
+        "name": "第15装甲军（霍特、隆美尔）"
+      }
+    },
+    {
+      "id": "army-b",
+      "name": "Army Group B (the lure)",
+      "kind": "advance",
+      "side": "de",
+      "waypoints": [
+        [
+          6.08,
+          50.78
+        ],
+        [
+          5.69,
+          50.85
+        ],
+        [
+          5.08,
+          50.67
+        ],
+        "gembloux"
+      ],
+      "note": "Loud, visible, and with airborne coups at Eben-Emael and in the Netherlands. It looked like the main effort — the 1914 Schlieffen route again — and fixed the Allied armies on the Dyle.",
+      "zh": {
+        "name": "B集团军群（诱饵）",
+        "note": "声势浩大、引人注目，还有在埃本-埃马尔和荷兰的空降奇袭。它看上去像是主攻方向——又一次1914年施里芬路线——并把盟军牢牢吸在代尔河一线。"
+      }
+    },
+    {
+      "id": "dyle",
+      "name": "Allied advance to the Dyle",
+      "kind": "advance",
+      "side": "allies",
+      "waypoints": [
+        [
+          3.97,
+          50.28
+        ],
+        [
+          4.45,
+          50.45
+        ],
+        "gembloux"
+      ],
+      "note": "The Dyle Plan: on 10 May the French First Army and the BEF wheeled into Belgium — moving the Allies' most mobile forces away from the Ardennes.",
+      "zh": {
+        "name": "盟军向代尔河推进",
+        "note": "代尔计划：5月10日，法国第1集团军和英国远征军转入比利时——把盟军机动性最强的部队调离了阿登。"
+      }
+    },
+    {
+      "id": "bef",
+      "name": "BEF",
+      "kind": "advance",
+      "side": "allies",
+      "waypoints": [
+        [
+          3.06,
+          50.63
+        ],
+        [
+          4.1,
+          50.75
+        ],
+        "wavre"
+      ],
+      "zh": {
+        "name": "英国远征军"
+      }
+    },
+    {
+      "id": "sickle",
+      "name": "Sickle cut to the Channel",
+      "kind": "advance",
+      "side": "de",
+      "waypoints": [
+        "sedan",
+        "montcornet",
+        [
+          3.29,
+          49.85
+        ],
+        [
+          2.93,
+          49.93
+        ],
+        [
+          2.3,
+          49.89
+        ],
+        "abbeville"
+      ],
+      "note": "Once across the Meuse the panzers turned west, not south toward Paris or the Maginot Line's rear, and ran 250 km to the sea in a week.",
+      "zh": {
+        "name": "“镰刀收割”直抵海峡",
+        "note": "渡过默兹河后，装甲部队没有南下巴黎或迂回马其诺防线后方，而是转向西进，一周内奔袭250公里直抵海边。"
+      }
+    },
+    {
+      "id": "meuse",
+      "name": "Meuse",
+      "kind": "river",
+      "follow": "valley",
+      "waypoints": [
+        [
+          4.87,
+          50.46
+        ],
+        [
+          4.9,
+          50.27
+        ],
+        [
+          4.82,
+          50.13
+        ],
+        [
+          4.77,
+          49.98
+        ],
+        [
+          4.735,
+          49.88
+        ],
+        [
+          4.72,
+          49.77
+        ],
+        [
+          4.95,
+          49.71
+        ],
+        [
+          5.07,
+          49.61
+        ]
+      ],
+      "zh": {
+        "name": "默兹河"
+      }
+    },
+    {
+      "id": "semois",
+      "name": "Semois",
+      "kind": "river",
+      "follow": "valley",
+      "waypoints": [
+        [
+          5.81,
+          49.69
+        ],
+        [
+          5.31,
+          49.71
+        ],
+        [
+          5.07,
+          49.79
+        ],
+        [
+          4.74,
+          49.88
+        ]
+      ],
+      "zh": {
+        "name": "瑟穆瓦河"
+      }
+    }
+  ],
+  "zones": [
+    {
+      "id": "ardennes",
+      "name": "Ardennes forest",
+      "kind": "forest",
+      "coords": [
+        [
+          4.95,
+          50.32
+        ],
+        [
+          5.9,
+          50.45
+        ],
+        [
+          6.35,
+          50.2
+        ],
+        [
+          6.1,
+          49.85
+        ],
+        [
+          5.5,
+          49.66
+        ],
+        [
+          4.8,
+          49.76
+        ],
+        [
+          4.6,
+          50.0
+        ]
+      ],
+      "note": "Wooded hills cut by deep valleys (Ourthe, Semois, Meuse) with narrow, winding roads. French planners believed an army could not cross it and then force the Meuse in less than about two weeks; it took the Germans three days.",
+      "zh": {
+        "name": "阿登森林",
+        "note": "林木覆盖的丘陵被深切的河谷（乌尔特河、瑟穆瓦河、默兹河）切割，道路狭窄曲折。法国的计划人员认为，一支军队穿越这里再强渡默兹河，至少需要约两周；德军只用了三天。"
+      }
+    },
+    {
+      "id": "maginot",
+      "name": "Maginot Line",
+      "kind": "defense",
+      "line": [
+        "longuyon",
+        [
+          5.9,
+          49.42
+        ],
+        [
+          6.17,
+          49.36
+        ],
+        [
+          6.6,
+          49.25
+        ],
+        [
+          7.0,
+          49.13
+        ],
+        [
+          7.43,
+          49.05
+        ],
+        [
+          7.8,
+          49.05
+        ],
+        [
+          8.18,
+          48.97
+        ]
+      ],
+      "widthKm": 8,
+      "note": "The heavily fortified border with Germany. It did what it was built for — no frontal assault was even attempted — and it channelled the German attack north.",
+      "zh": {
+        "name": "马其诺防线",
+        "note": "对德边境上的重型筑垒地带。它完成了设计使命——德军根本没有尝试正面进攻——并把德军的进攻引向了北方。"
+      }
+    },
+    {
+      "id": "maginot-ext",
+      "name": "Weak extension toward Sedan",
+      "kind": "defense",
+      "line": [
+        "longuyon",
+        "laferte",
+        [
+          5.07,
+          49.63
+        ],
+        "sedan"
+      ],
+      "widthKm": 3,
+      "zh": {
+        "name": "通往色当的薄弱延伸段"
+      }
+    },
+    {
+      "id": "dyle-line",
+      "name": "Dyle line",
+      "kind": "defense",
+      "line": [
+        [
+          4.4,
+          51.22
+        ],
+        [
+          4.7,
+          50.88
+        ],
+        "wavre",
+        "gembloux",
+        [
+          4.87,
+          50.46
+        ]
+      ],
+      "widthKm": 6,
+      "zh": {
+        "name": "代尔防线"
+      }
+    },
+    {
+      "id": "pocket",
+      "name": "Allied armies cut off",
+      "kind": "control",
+      "coords": [
+        [
+          2.3,
+          51.1
+        ],
+        [
+          4.5,
+          51.3
+        ],
+        [
+          4.9,
+          50.7
+        ],
+        [
+          3.8,
+          50.2
+        ],
+        [
+          2.6,
+          50.15
+        ],
+        [
+          1.75,
+          50.4
+        ],
+        [
+          1.9,
+          50.95
+        ]
+      ],
+      "zh": {
+        "name": "被切断的盟军"
+      }
+    }
+  ],
+  "overlays": [],
+  "steps": [
+    {
+      "title": "Two ways into France",
+      "text": "France's eastern border with Germany was sealed by the Maginot Line. That left the Low Countries — the open plain of central Belgium, the 1914 invasion route — and, between them, the Ardennes: forested hills and gorges that French planners judged too slow for a modern army.\n\nThe Allied plan was to rush into Belgium and meet the Germans on the Dyle line.",
+      "focus": [
+        "maginot",
+        "maginot-ext",
+        "ardennes",
+        "dyle-line"
+      ],
+      "camera": {
+        "center": [
+          5.3,
+          50.0
+        ],
+        "zoom": 6.7,
+        "pitch": 40,
+        "bearing": 0
+      },
+      "zh": {
+        "title": "进入法国的两条路",
+        "text": "法国与德国接壤的东部边境被马其诺防线封住。剩下的是低地国家——比利时中部的开阔平原，即1914年的入侵路线——以及两者之间的阿登：森林覆盖的丘陵和峡谷，法国计划人员认为现代军队在这里走不快。\n\n盟军的计划是迅速进入比利时，在代尔河一线迎击德军。"
+      }
+    },
+    {
+      "title": "The lure in the north",
+      "text": "On 10 May Army Group B invaded the Netherlands and Belgium with airborne landings and the glider assault on Eben-Emael. It looked exactly like the expected main effort. The French First Army and the BEF — the Allies' best and most mobile troops — wheeled forward into Belgium to meet it.",
+      "focus": [
+        "army-b",
+        "dyle",
+        "bef",
+        "dyle-line",
+        "eben-emael",
+        "gembloux"
+      ],
+      "camera": {
+        "center": [
+          4.7,
+          50.6
+        ],
+        "zoom": 7.8,
+        "pitch": 45,
+        "bearing": 0
+      },
+      "zh": {
+        "title": "北方的诱饵",
+        "text": "5月10日，B集团军群入侵荷兰和比利时，伴以空降作战和对埃本-埃马尔的滑翔机突袭。这完全像是预料中的主攻。法国第1集团军和英国远征军——盟军最精锐、机动性最强的部队——随即转入比利时迎战。"
+      }
+    },
+    {
+      "title": "Through Luxembourg and the Ardennes",
+      "text": "Meanwhile Panzer Group Kleist (five panzer divisions), with Hoth's two more on its northern flank, threaded through Luxembourg and the Ardennes on a handful of roads, screened only by Belgian Chasseurs Ardennais and French cavalry. The profile of Guderian's route shows the problem the French counted on: repeated climbs and drops into the Sûre, Semois and Meuse valleys, each a natural delaying line.\n\nThey were held for hours, not days. The panzers reached the Meuse on the evening of 12 May.",
+      "focus": [
+        "guderian",
+        "reinhardt",
+        "rommel",
+        "ardennes",
+        "luxembourg",
+        "bouillon"
+      ],
+      "analysis": {
+        "type": "profile",
+        "route": "guderian"
+      },
+      "camera": {
+        "center": [
+          5.5,
+          49.85
+        ],
+        "zoom": 8.3,
+        "pitch": 55,
+        "bearing": 0
+      },
+      "zh": {
+        "title": "穿越卢森堡与阿登",
+        "text": "与此同时，克莱斯特装甲集群（五个装甲师）连同其北翼霍特的另外两个师，沿着屈指可数的几条道路穿过卢森堡和阿登，面前只有比利时阿登猎兵和法国骑兵的薄弱掩护。古德里安路线的剖面显示了法国人寄予希望的难题：一次次下到叙尔河、瑟穆瓦河、默兹河河谷又爬上来，每一条都是天然的迟滞线。\n\n结果它们只挡了几个小时，而不是几天。5月12日傍晚，装甲部队抵达默兹河。"
+      }
+    },
+    {
+      "title": "Sedan: the river loop under the guns",
+      "text": "At Sedan the Meuse makes a loop overlooked by the Marfée heights to the south. In theory this is a defender's dream: the viewshed from the crest of the heights (amber) shows that French artillery observers there could watch most of the river loop and its crossing sites.\n\nThe Germans answered with a day-long air bombardment on 13 May that broke the nerve of the reservist gunners, and with assault pioneers who crossed in rubber boats and worked up the slopes, knocking out bunkers one by one.",
+      "focus": [
+        "sedan",
+        "marfee",
+        "guderian"
+      ],
+      "analysis": {
+        "type": "viewshed",
+        "at": "marfee",
+        "radiusKm": 6,
+        "observerH": 8,
+        "label": "Marfée heights",
+        "zh": {
+          "label": "马尔菲高地"
+        }
+      },
+      "camera": {
+        "center": [
+          4.93,
+          49.69
+        ],
+        "zoom": 11.6,
+        "pitch": 0,
+        "bearing": 0
+      },
+      "zh": {
+        "title": "色当：炮口下的河湾",
+        "text": "默兹河在色当拐了一个弯，南面的马尔菲高地俯瞰着它。理论上这是守方梦寐以求的地形：从高地山脊看出去的可视域（琥珀色）表明，在那里的法军炮兵观察员能看清河湾的大部分和各个渡河点。\n\n德军的回答是：5月13日持续一整天的空中轰炸，击垮了预备役炮手的意志；突击工兵乘橡皮艇渡河，沿坡而上，逐个拔除碉堡。"
+      }
+    },
+    {
+      "title": "Monthermé: a crossing that should have failed",
+      "text": "Reinhardt's crossing point was far worse: the Meuse runs here in a gorge with steep wooded walls 200 m high (see the cross-section). Defended by a single half-brigade of colonial machine-gunners, it held the panzer corps for two days — showing what the whole Meuse line could have done with proper troops.",
+      "focus": [
+        "montherme",
+        "reinhardt"
+      ],
+      "analysis": {
+        "type": "profile",
+        "coords": [
+          [
+            4.7,
+            49.895
+          ],
+          [
+            4.765,
+            49.87
+          ]
+        ],
+        "label": "Cross-section of the Meuse gorge at Monthermé",
+        "zh": {
+          "label": "蒙泰尔梅默兹河峡谷横剖面"
+        }
+      },
+      "camera": {
+        "center": [
+          4.735,
+          49.88
+        ],
+        "zoom": 12.2,
+        "pitch": 65,
+        "bearing": 30
+      },
+      "zh": {
+        "title": "蒙泰尔梅：本该失败的渡河",
+        "text": "莱因哈特的渡河点要糟糕得多：这里的默兹河流经一道两岸是200米高、林木茂密陡坡的峡谷（见横剖面）。仅一个殖民地机枪半旅防守，就把整个装甲军挡了两天——这说明，若有像样的部队，整条默兹河防线本可以有怎样的作为。"
+      }
+    },
+    {
+      "title": "The sickle cut",
+      "text": "Once across, the panzers turned west instead of south. Counter-attacks at Montcornet and Arras were too small and too late. On 20 May the 2nd Panzer Division reached the sea at Abbeville; the Allied armies in Belgium, drawn north by the lure, were cut off from France and pushed back on Dunkirk.",
+      "focus": [
+        "sickle",
+        "pocket",
+        "abbeville",
+        "montcornet",
+        "arras",
+        "dunkirk"
+      ],
+      "camera": {
+        "center": [
+          3.3,
+          50.3
+        ],
+        "zoom": 7.2,
+        "pitch": 40,
+        "bearing": 0
+      },
+      "zh": {
+        "title": "镰刀收割",
+        "text": "渡河之后，装甲部队没有南下，而是转向西进。在蒙科尔内和阿拉斯的反击规模太小、来得太晚。5月20日，第2装甲师在阿布维尔抵达海边；被诱饵吸引北上的比利时境内盟军与法国本土的联系被切断，被压缩到敦刻尔克。"
+      }
+    },
+    {
+      "title": "Why it worked",
+      "text": "The Maginot Line succeeded — it made the Germans go elsewhere. The failure lay in assuming the elsewhere had to be the Belgian plain, and in holding the 'impassable' Ardennes and the Meuse behind it with the weakest divisions.\n\nTerrain is an obstacle only for as long as it is defended. Difficult ground that is believed impassable is often the least watched — the same lesson as Chencang, 2,145 years earlier.",
+      "zh": {
+        "title": "为何成功",
+        "text": "马其诺防线是成功的——它迫使德军另寻他路。失败在于认定这条“他路”只能是比利时平原，并用最弱的师去守“无法通行”的阿登以及其后的默兹河。\n\n地形只有在有人防守时才是障碍。被认为无法通行的险地，往往恰恰是最无人看守的——这与2145年前陈仓的教训如出一辙。"
+      }
+    }
+  ],
+  "zh": {
+    "title": "穿越阿登：色当与“镰刀收割”",
+    "period": "1940年5月",
+    "summary": "法国用马其诺防线封住了对德边境，并计划在比利时中部迎击德军。然而德军主攻却穿过卢森堡和林木茂密、地形破碎的阿登山区，在色当、蒙泰尔梅和迪南强渡默兹河，一路直插英吉利海峡，把盟军在比利时的精锐部队拦腰截断。",
+    "sources": [
+      "卡尔-海因茨·弗里泽《闪击英雄》（The Blitzkrieg Legend，2005）",
+      "欧内斯特·梅《奇怪的胜利》（Strange Victory，2000）",
+      "朱利安·杰克逊《法国的沦陷》（The Fall of France，2003）"
+    ]
+  }
+}

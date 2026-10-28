@@ -1,0 +1,895 @@
+{
+  "title": "Zhuge Liang's first northern expedition: Qishan and Jieting",
+  "period": "228 AD",
+  "summary": "Zhuge Liang of Shu Han avoided the direct Qinling roads to the Wei valley and swung west through Qishan into the Longyou uplands, where three Wei commanderies went over to him. Everything then hinged on holding Jieting, the gap through the Long Mountains by which Wei relief would come. Ma Su lost it, and the campaign collapsed.",
+  "sources": [
+    "Chen Shou, Sanguozhi: biographies of Zhuge Liang, Ma Su, Zhang He, Zhao Yun, Wei Yan (with Pei Songzhi's commentary)",
+    "Sima Guang, Zizhi Tongjian, ch. 71",
+    "The location of Jieting is disputed (Zhuanglang Longshan town vs. Qin'an Longcheng); it is shown approximately"
+  ],
+  "sides": [
+    {
+      "id": "shu",
+      "name": "Shu Han (Zhuge Liang)",
+      "color": "#2e9e5b",
+      "zh": {
+        "name": "蜀汉（诸葛亮）"
+      }
+    },
+    {
+      "id": "wei",
+      "name": "Cao Wei",
+      "color": "#2f6fde",
+      "zh": {
+        "name": "曹魏"
+      }
+    }
+  ],
+  "places": [
+    {
+      "id": "r-hanzhong",
+      "name": "Hanzhong basin",
+      "kind": "region",
+      "lon": 107.35,
+      "lat": 33.0,
+      "approximate": false,
+      "zh": {
+        "name": "汉中盆地"
+      }
+    },
+    {
+      "id": "r-guanzhong",
+      "name": "Guanzhong plain",
+      "kind": "region",
+      "lon": 108.35,
+      "lat": 34.47,
+      "approximate": false,
+      "zh": {
+        "name": "关中平原"
+      }
+    },
+    {
+      "id": "r-qinling",
+      "name": "Qinling",
+      "kind": "region",
+      "lon": 107.4,
+      "lat": 33.75,
+      "approximate": false,
+      "zh": {
+        "name": "秦岭"
+      }
+    },
+    {
+      "id": "r-longyou",
+      "name": "Longyou",
+      "kind": "region",
+      "lon": 104.9,
+      "lat": 35.35,
+      "approximate": false,
+      "zh": {
+        "name": "陇右"
+      }
+    },
+    {
+      "id": "mianyang",
+      "name": "Mianyang (Hanzhong base)",
+      "nameLocal": "沔阳",
+      "kind": "camp",
+      "side": "shu",
+      "lon": 106.67,
+      "lat": 33.15,
+      "approximate": true,
+      "note": "Zhuge Liang's forward base in the Hanzhong basin; his tomb on nearby Mt Dingjun is still there.",
+      "zh": {
+        "name": "沔阳（汉中基地）",
+        "note": "诸葛亮在汉中盆地的前进基地；他的墓在附近的定军山下，至今犹存。"
+      }
+    },
+    {
+      "id": "qishan",
+      "name": "Qishan",
+      "nameLocal": "祁山",
+      "kind": "fort",
+      "side": "wei",
+      "lon": 105.33,
+      "lat": 34.1,
+      "approximate": true,
+      "note": "A fortified hill above the Xihan River valley on the road from Hanzhong into Longyou. Holding it opens the upper Wei basin (Tianshui) from the south.",
+      "zh": {
+        "name": "祁山",
+        "note": "西汉水河谷上方一座筑有城堡的山丘，扼守汉中通往陇右的道路。据有此地，即可从南面打开渭河上游的天水盆地。"
+      }
+    },
+    {
+      "id": "shanggui",
+      "name": "Shanggui (Tianshui)",
+      "nameLocal": "上邽",
+      "kind": "city",
+      "side": "wei",
+      "lon": 105.72,
+      "lat": 34.58,
+      "note": "Main city of Tianshui commandery on the upper Wei River — the granary of Longyou.",
+      "zh": {
+        "name": "上邽（天水）",
+        "note": "天水郡的主要城市，位于渭河上游——陇右的粮仓。"
+      }
+    },
+    {
+      "id": "ji",
+      "name": "Ji",
+      "nameLocal": "冀县",
+      "kind": "city",
+      "side": "shu",
+      "lon": 105.27,
+      "lat": 34.74,
+      "approximate": true,
+      "note": "Seat of Tianshui commandery (modern Gangu). Here Zhuge Liang gained Jiang Wei, who would carry on the northern campaigns after him.",
+      "zh": {
+        "name": "冀县",
+        "note": "天水郡治所（今甘谷）。诸葛亮在此得到姜维，后者日后继承了北伐事业。"
+      }
+    },
+    {
+      "id": "nanan",
+      "name": "Nan'an",
+      "nameLocal": "南安",
+      "kind": "city",
+      "side": "shu",
+      "lon": 104.63,
+      "lat": 34.98,
+      "approximate": true,
+      "note": "One of the three commanderies that went over to Shu.",
+      "zh": {
+        "name": "南安",
+        "note": "归附蜀汉的三郡之一。"
+      }
+    },
+    {
+      "id": "anding",
+      "name": "Anding",
+      "nameLocal": "安定",
+      "kind": "city",
+      "side": "shu",
+      "lon": 106.95,
+      "lat": 35.55,
+      "approximate": true,
+      "note": "The third defecting commandery, north of the Long Mountains.",
+      "zh": {
+        "name": "安定",
+        "note": "第三个归附的郡，位于陇山以北。"
+      }
+    },
+    {
+      "id": "jieting",
+      "name": "Jieting",
+      "nameLocal": "街亭",
+      "kind": "battle",
+      "side": "shu",
+      "lon": 105.98,
+      "lat": 35.08,
+      "approximate": true,
+      "note": "The road junction on the west side of the Long Mountains where the route from the Wei valley comes down into Longyou. Ma Su was sent to block it; he left the road and the water and camped on a hill.",
+      "zh": {
+        "name": "街亭",
+        "note": "陇山西侧的道路枢纽，从渭河谷地来的道路由此下到陇右。马谡奉命扼守此地，却舍弃道路和水源，上山扎营。"
+      }
+    },
+    {
+      "id": "longguan",
+      "name": "Long Pass",
+      "nameLocal": "陇关",
+      "kind": "pass",
+      "side": "wei",
+      "lon": 106.55,
+      "lat": 34.9,
+      "approximate": true,
+      "note": "Crossing of the Long Mountains (Guanshan) on the road from the Wei valley to Longyou.",
+      "zh": {
+        "name": "陇关",
+        "note": "渭河谷地通往陇右的道路翻越陇山（关山）之处。"
+      }
+    },
+    {
+      "id": "chencang",
+      "name": "Chencang",
+      "nameLocal": "陈仓",
+      "kind": "fort",
+      "side": "wei",
+      "lon": 107.33,
+      "lat": 34.36,
+      "approximate": true,
+      "note": "Exit of the Old Road onto the Wei plain. Fortified by Hao Zhao after the first expedition; in the winter of 228 his ~1,000 men held it for 20 days against Zhuge Liang's whole army.",
+      "zh": {
+        "name": "陈仓",
+        "note": "故道出口、渭河平原入口。第一次北伐后郝昭在此筑城；228年冬，他以一千余人坚守二十余日，抵住了诸葛亮全军。"
+      }
+    },
+    {
+      "id": "jigu",
+      "name": "Ji valley",
+      "nameLocal": "箕谷",
+      "kind": "pass",
+      "side": "shu",
+      "lon": 107.0,
+      "lat": 33.45,
+      "approximate": true,
+      "note": "In the Baoxie corridor. Zhao Yun and Deng Zhi made a show of advancing here toward Mei to pin down Cao Zhen.",
+      "zh": {
+        "name": "箕谷",
+        "note": "在褒斜道中。赵云、邓芝在此虚张声势，扬言进攻郿县，以牵制曹真。"
+      }
+    },
+    {
+      "id": "mei",
+      "name": "Mei",
+      "nameLocal": "郿",
+      "kind": "camp",
+      "side": "wei",
+      "lon": 107.75,
+      "lat": 34.27,
+      "approximate": true,
+      "note": "Where Cao Zhen massed the Wei army, expecting the main attack down the Xie valley.",
+      "zh": {
+        "name": "郿",
+        "note": "曹真集结魏军之处，他预料蜀军主力会沿斜谷而下。"
+      }
+    },
+    {
+      "id": "changan",
+      "name": "Chang'an",
+      "nameLocal": "长安",
+      "kind": "city",
+      "side": "wei",
+      "lon": 108.94,
+      "lat": 34.27,
+      "note": "The great city of the Wei valley and Wei's western bastion.",
+      "zh": {
+        "name": "长安",
+        "note": "渭河谷地的大城，曹魏在西方的堡垒。"
+      }
+    },
+    {
+      "id": "wuzhangyuan",
+      "name": "Wuzhangyuan",
+      "nameLocal": "五丈原",
+      "kind": "camp",
+      "side": "shu",
+      "lon": 107.63,
+      "lat": 34.28,
+      "approximate": true,
+      "note": "234 AD, fifth expedition: a loess plateau between the Xie valley mouth and the Wei. Zhuge Liang faced Sima Yi across the river for months and died here.",
+      "zh": {
+        "name": "五丈原",
+        "note": "234年第五次北伐：斜谷口与渭河之间的黄土台塬。诸葛亮与司马懿隔渭对峙数月，病逝于此。"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "id": "qishan-road",
+      "name": "Qishan road (main army)",
+      "kind": "advance",
+      "side": "shu",
+      "follow": "terrain",
+      "waypoints": [
+        "mianyang",
+        [
+          106.15,
+          33.33
+        ],
+        [
+          105.73,
+          33.74
+        ],
+        [
+          105.3,
+          34.0
+        ],
+        "qishan"
+      ],
+      "note": "West then north via Lueyang and the Xihan valley. Hilly and long, but it enters the Wei basin at its weakly held upper end, far from the main Wei army.",
+      "zh": {
+        "name": "祁山道（主力）",
+        "note": "经略阳和西汉水河谷先西后北。山多路长，但它通往渭河盆地守备薄弱的上游，远离魏军主力。"
+      }
+    },
+    {
+      "id": "to-tianshui",
+      "name": "Into Tianshui",
+      "kind": "advance",
+      "side": "shu",
+      "waypoints": [
+        "qishan",
+        [
+          105.5,
+          34.35
+        ],
+        "shanggui"
+      ],
+      "zh": {
+        "name": "进军天水"
+      }
+    },
+    {
+      "id": "masu",
+      "name": "Ma Su to Jieting",
+      "kind": "advance",
+      "side": "shu",
+      "follow": "terrain",
+      "waypoints": [
+        "shanggui",
+        [
+          105.85,
+          34.85
+        ],
+        "jieting"
+      ],
+      "note": "The vanguard sent to hold the gap through which any Wei relief must come.",
+      "zh": {
+        "name": "马谡赴街亭",
+        "note": "先锋部队，奉命扼守魏国援军必经的通道。"
+      }
+    },
+    {
+      "id": "zhanghe",
+      "name": "Zhang He's relief army",
+      "kind": "advance",
+      "side": "wei",
+      "follow": "terrain",
+      "waypoints": [
+        "changan",
+        [
+          107.9,
+          34.38
+        ],
+        [
+          107.13,
+          34.53
+        ],
+        "longguan",
+        "jieting"
+      ],
+      "note": "Wei's veteran general came west up the Wei valley and over the Long Mountains. At Jieting he found Ma Su on the hill, surrounded it and cut off the water.",
+      "zh": {
+        "name": "张郃援军",
+        "note": "魏国宿将张郃沿渭河谷地西进，翻越陇山。到了街亭，他发现马谡屯兵山上，便围山断其水道。"
+      }
+    },
+    {
+      "id": "zhaoyun",
+      "name": "Zhao Yun's decoy",
+      "kind": "feint",
+      "side": "shu",
+      "follow": "terrain",
+      "waypoints": [
+        [
+          106.98,
+          33.21
+        ],
+        "jigu",
+        [
+          107.32,
+          34.06
+        ],
+        [
+          107.65,
+          34.23
+        ]
+      ],
+      "note": "A secondary force advertised as the main army, aimed at Mei down the Baoxie road. It fixed Cao Zhen and was defeated at Ji valley, but Zhao Yun brought it back in good order.",
+      "zh": {
+        "name": "赵云疑兵",
+        "note": "一支号称主力的偏师，沿褒斜道指向郿县。它牵制住了曹真，在箕谷失利，但赵云收拢部队，全师而退。"
+      }
+    },
+    {
+      "id": "ziwu-plan",
+      "name": "Wei Yan's Ziwu valley plan",
+      "kind": "planned",
+      "side": "shu",
+      "follow": "terrain",
+      "waypoints": [
+        "mianyang",
+        [
+          108.25,
+          33.05
+        ],
+        [
+          108.31,
+          33.31
+        ],
+        [
+          108.87,
+          34.07
+        ],
+        "changan"
+      ],
+      "note": "Wei Yan asked for 10,000 men to rush Chang'an through the Ziwu valley in ten days while the main army followed by the Xie valley. Zhuge Liang refused: too much could go wrong in the gorges, and failure meant losing the army.",
+      "zh": {
+        "name": "魏延子午谷之谋",
+        "note": "魏延请求率精兵万人经子午谷奔袭长安，十日可到，主力随后由斜谷跟进。诸葛亮没有采纳：峡谷中变数太多，一旦失败就会葬送全军。"
+      }
+    },
+    {
+      "id": "retreat",
+      "name": "Withdrawal to Hanzhong",
+      "kind": "retreat",
+      "side": "shu",
+      "waypoints": [
+        "shanggui",
+        "qishan",
+        [
+          105.73,
+          33.74
+        ],
+        [
+          106.15,
+          33.33
+        ],
+        "mianyang"
+      ],
+      "zh": {
+        "name": "撤回汉中"
+      }
+    },
+    {
+      "id": "wei-river",
+      "name": "Wei River",
+      "kind": "river",
+      "follow": "valley",
+      "waypoints": [
+        [
+          104.63,
+          35.0
+        ],
+        [
+          105.33,
+          34.76
+        ],
+        [
+          105.9,
+          34.57
+        ],
+        [
+          106.6,
+          34.42
+        ],
+        [
+          107.14,
+          34.35
+        ],
+        [
+          107.75,
+          34.29
+        ],
+        [
+          108.25,
+          34.22
+        ],
+        [
+          108.7,
+          34.31
+        ],
+        [
+          109.1,
+          34.42
+        ]
+      ],
+      "zh": {
+        "name": "渭河"
+      }
+    },
+    {
+      "id": "han-river",
+      "name": "Han River",
+      "kind": "river",
+      "follow": "valley",
+      "waypoints": [
+        [
+          106.55,
+          33.12
+        ],
+        [
+          106.67,
+          33.15
+        ],
+        [
+          107.03,
+          33.06
+        ],
+        [
+          107.33,
+          33.13
+        ],
+        [
+          107.55,
+          33.2
+        ],
+        [
+          108.25,
+          33.04
+        ],
+        [
+          109.03,
+          32.68
+        ]
+      ],
+      "zh": {
+        "name": "汉江",
+        "note": "汉江东流穿过汉中盆地，在洋县以下进入峡谷。"
+      },
+      "note": "The Han flows east through the Hanzhong basin, then into gorges below Yang county."
+    },
+    {
+      "id": "jialing",
+      "name": "Jialing River",
+      "kind": "river",
+      "follow": "valley",
+      "waypoints": [
+        [
+          106.95,
+          34.17
+        ],
+        [
+          106.52,
+          33.92
+        ],
+        [
+          106.15,
+          33.33
+        ],
+        [
+          105.85,
+          32.43
+        ]
+      ],
+      "zh": {
+        "name": "嘉陵江",
+        "note": "发源于大散关以南的秦岭之中；故道有很长一段沿它而行。"
+      },
+      "note": "Rises in the Qinling just south of Dasan Pass; the Old Road follows it for long stretches."
+    }
+  ],
+  "zones": [
+    {
+      "id": "longshan",
+      "name": "Long Mountains",
+      "kind": "obstacle",
+      "line": [
+        [
+          106.2,
+          35.6
+        ],
+        [
+          106.35,
+          35.2
+        ],
+        [
+          106.55,
+          34.9
+        ],
+        [
+          106.7,
+          34.6
+        ],
+        [
+          106.8,
+          34.4
+        ]
+      ],
+      "widthKm": 22,
+      "note": "The north–south range that separates Longyou from the Wei valley. Wei relief had to cross it; whoever held its western exit at Jieting decided whether Longyou could be held.",
+      "zh": {
+        "name": "陇山",
+        "note": "分隔陇右与渭河谷地的南北向山脉。魏国援军必须翻越它；谁控制它在街亭的西侧出口，谁就决定了陇右能否守住。"
+      }
+    },
+    {
+      "id": "defected",
+      "name": "Commanderies that went over to Shu",
+      "kind": "control",
+      "coords": [
+        [
+          104.4,
+          35.2
+        ],
+        [
+          105.2,
+          35.25
+        ],
+        [
+          106.2,
+          35.85
+        ],
+        [
+          107.3,
+          35.8
+        ],
+        [
+          106.4,
+          35.15
+        ],
+        [
+          105.9,
+          34.4
+        ],
+        [
+          105.1,
+          34.2
+        ],
+        [
+          104.5,
+          34.6
+        ]
+      ],
+      "zh": {
+        "name": "归附蜀汉的诸郡"
+      }
+    },
+    {
+      "id": "masu-hill",
+      "name": "Ma Su's hill camp",
+      "kind": "killzone",
+      "center": "jieting",
+      "radiusKm": 3,
+      "note": "Ma Su ignored his orders to hold the town and road, camped on a hill away from the water, and was surrounded. Elevation is an advantage only if you can stay on it.",
+      "zh": {
+        "name": "马谡山上营地",
+        "note": "马谡违背节度，不守城镇和道路，而在远离水源的山上扎营，结果被围。居高临下，只有守得住才算优势。"
+      }
+    },
+    {
+      "id": "mei-watch",
+      "name": "Cao Zhen's army at Mei",
+      "kind": "defense",
+      "center": "mei",
+      "radiusKm": 10,
+      "zh": {
+        "name": "曹真驻郿大军"
+      }
+    }
+  ],
+  "overlays": [],
+  "steps": [
+    {
+      "title": "The problem: the Qinling again",
+      "text": "In 228 AD Shu Han, holding Hanzhong and Sichuan, faced Cao Wei in the Wei valley. The obstacles were the same that faced Han Xin in 206 BC: the Qinling and its few gorges.\n\nBut Wei knew the story of Chencang, and Shu was the weaker state. A failed march through a gorge could destroy its only field army.",
+      "camera": {
+        "center": [
+          106.8,
+          34.1
+        ],
+        "zoom": 7.2,
+        "pitch": 55,
+        "bearing": 0
+      },
+      "zh": {
+        "title": "难题：又是秦岭",
+        "text": "公元228年，据有汉中和四川的蜀汉，面对的是盘踞渭河谷地的曹魏。障碍与公元前206年韩信面对的一样：秦岭和它屈指可数的几条峡谷。\n\n但魏国人知道陈仓的故事，而蜀汉是弱国。在峡谷中行军一旦失败，就可能葬送它唯一的野战军。"
+      }
+    },
+    {
+      "title": "The bold option: Ziwu valley",
+      "text": "Wei Yan proposed a dash for Chang'an through the Ziwu valley — the most direct road to Wei's western capital. The profile shows what it meant on the ground: some 300 km of mountain road with repeated climbs to around 2,000 m, much of it along gorges where an army moves in a single column, can carry little, and can be stopped by a small force at the exit.\n\nA plan that works only if nobody is watching the exit is a gamble with the whole state.",
+      "focus": [
+        "ziwu-plan"
+      ],
+      "analysis": {
+        "type": "profile",
+        "route": "ziwu-plan"
+      },
+      "camera": {
+        "center": [
+          108.45,
+          33.6
+        ],
+        "zoom": 8.2,
+        "pitch": 58,
+        "bearing": -15
+      },
+      "zh": {
+        "title": "冒险之策：子午谷",
+        "text": "魏延建议经子午谷奔袭长安——这是通往曹魏西部重镇最直接的道路。剖面图显示了这在实地意味着什么：约300公里山路，反复爬升到2000米左右，大部分沿峡谷而行，军队只能单列行进，携带有限，出口处一支小部队就能把它挡住。\n\n一个只有在没人盯着谷口时才能成功的计划，是拿整个国家去赌。"
+      }
+    },
+    {
+      "title": "Decoy in the east, main blow in the west",
+      "text": "Zhuge Liang announced an attack down the Xie valley toward Mei, sending Zhao Yun and Deng Zhi into the Ji valley as a decoy. Cao Zhen took the bait and massed at Mei.\n\nThe main army went west via Lueyang and up the Xihan valley to Qishan — a long road that enters the Wei basin at its upper end, in Longyou, where Wei garrisons were thin.",
+      "focus": [
+        "zhaoyun",
+        "qishan-road",
+        "mei-watch",
+        "qishan"
+      ],
+      "camera": {
+        "center": [
+          106.4,
+          33.8
+        ],
+        "zoom": 7.6,
+        "pitch": 55,
+        "bearing": 0
+      },
+      "zh": {
+        "title": "东路佯动，西路主攻",
+        "text": "诸葛亮扬言由斜谷进攻郿县，派赵云、邓芝进入箕谷作为疑兵。曹真中计，在郿县集结重兵。\n\n主力则向西经略阳，溯西汉水河谷北上祁山——这条路很长，但进入的是渭河盆地的上游，即魏军守备薄弱的陇右。"
+      }
+    },
+    {
+      "title": "Qishan road profile",
+      "text": "The Qishan road is no easy walk either: per kilometre it climbs about as much as the Ziwu road, over passes near 2,000 m. Its advantage was where it led, not the going. It came out in the thinly held upper Wei basin, far from Cao Zhen's army, among commanderies that might change sides — and if things went wrong, the army could fall back the way it came. Zhuge Liang preferred that to a gamble on speed.",
+      "focus": [
+        "qishan-road"
+      ],
+      "analysis": {
+        "type": "profile",
+        "route": "qishan-road"
+      },
+      "camera": {
+        "center": [
+          105.8,
+          33.65
+        ],
+        "zoom": 8.2,
+        "pitch": 55,
+        "bearing": 20
+      },
+      "zh": {
+        "title": "祁山道剖面",
+        "text": "祁山道也并不好走：按每公里计，它的爬升与子午道相差无几，还要翻越近2000米的山口。它的优势在于通往何处，而不在于路好不好走。它出口在守备薄弱的渭河上游，远离曹真大军，周围是可能倒戈的郡县——万一失利，大军还能原路退回。诸葛亮宁取这一点，也不去赌速度。"
+      }
+    },
+    {
+      "title": "Longyou falls",
+      "text": "The surprise worked. Tianshui, Nan'an and Anding went over to Shu; Jiang Wei joined at Ji. If Shu could keep Longyou, it gained a horse-rearing upland on Wei's flank and a road east down the Wei River.\n\nWei's answer had to come over the Long Mountains — and the road over them comes down at Jieting.",
+      "focus": [
+        "defected",
+        "to-tianshui",
+        "shanggui",
+        "ji",
+        "nanan",
+        "anding",
+        "longshan"
+      ],
+      "camera": {
+        "center": [
+          105.8,
+          35.0
+        ],
+        "zoom": 7.6,
+        "pitch": 50,
+        "bearing": 0
+      },
+      "zh": {
+        "title": "陇右震动",
+        "text": "奇袭奏效。天水、南安、安定三郡归附蜀汉；姜维在冀县来投。蜀汉若能守住陇右，就能在魏国侧翼得到一块产马的高原，以及一条沿渭河东下的道路。\n\n魏国的反击必须翻越陇山——而翻山的道路正是在街亭下山。"
+      }
+    },
+    {
+      "title": "Jieting: hold the road, keep the water",
+      "text": "Zhuge Liang sent Ma Su to block Jieting. Ma Su ignored orders, left the road and the town, and camped on a hill. Zhang He came over the Long Mountains, cut him off from water, and broke the starving camp.\n\nThe viewshed from the hill (the site is approximate) shows the trap: from up there little of the surrounding valleys can be seen (amber), so a besieger can sit in the dead ground below and cut the water. High ground without water or a line of retreat is a prison.",
+      "focus": [
+        "masu",
+        "zhanghe",
+        "jieting",
+        "masu-hill",
+        "longguan"
+      ],
+      "analysis": {
+        "type": "viewshed",
+        "at": "jieting",
+        "radiusKm": 8,
+        "observerH": 10,
+        "label": "Jieting hill",
+        "zh": {
+          "label": "街亭山头"
+        }
+      },
+      "camera": {
+        "center": [
+          106.05,
+          35.04
+        ],
+        "zoom": 10.2,
+        "pitch": 62,
+        "bearing": 60
+      },
+      "zh": {
+        "title": "街亭：守住道路，守住水源",
+        "text": "诸葛亮派马谡扼守街亭。马谡违背节度，舍弃道路和城镇，上山扎营。张郃翻过陇山，断其水道，击破了缺水的营寨。\n\n山上的可视域（遗址位置为约略推定）揭示了这个陷阱：从山头能看到的周围山谷寥寥无几（琥珀色），围攻者可以待在下方的视线死角里，切断水源。没有水源、没有退路的高地，就是一座牢笼。"
+      }
+    },
+    {
+      "title": "The fall-back",
+      "text": "With Jieting gone, Wei relief could pour into Longyou and the army around Tianshui risked being cut off from Hanzhong. Zhuge Liang pulled back down the Qishan road, taking the population of Xi county with him. He executed Ma Su and demoted himself.",
+      "focus": [
+        "retreat",
+        "zhanghe"
+      ],
+      "camera": {
+        "center": [
+          105.9,
+          34.3
+        ],
+        "zoom": 7.6,
+        "pitch": 50,
+        "bearing": 0
+      },
+      "zh": {
+        "title": "退兵",
+        "text": "街亭一失，魏国援军即可涌入陇右，天水一带的蜀军有被截断归路的危险。诸葛亮沿祁山道退回，迁西县千余家随军南还。他斩了马谡，并上疏自贬三等。"
+      }
+    },
+    {
+      "title": "Chencang, winter 228",
+      "text": "On the second expedition Zhuge Liang came out by the Old Road, Han Xin's route — but Wei had learned. Hao Zhao had fortified Chencang where the road reaches the plain, and with about 1,000 men held it for 20 days until Zhuge Liang's food ran out.\n\nA gorge exit with a fort on it is close to impregnable: the attacker can only bring a fraction of his strength to bear, and every grain of food comes down the same road.",
+      "focus": [
+        "chencang"
+      ],
+      "analysis": {
+        "type": "viewshed",
+        "at": "chencang",
+        "radiusKm": 10,
+        "observerH": 12,
+        "label": "Chencang",
+        "zh": {
+          "label": "陈仓"
+        }
+      },
+      "camera": {
+        "center": [
+          107.25,
+          34.33
+        ],
+        "zoom": 10,
+        "pitch": 60,
+        "bearing": 200
+      },
+      "zh": {
+        "title": "228年冬，陈仓",
+        "text": "第二次北伐，诸葛亮走故道，也就是韩信当年的路线——但魏国已经吸取了教训。郝昭在故道抵达平原之处修筑了陈仓城，以一千余人坚守二十余日，直到诸葛亮粮尽退兵。\n\n筑有城堡的峡谷出口几乎无法攻克：进攻方只能投入一小部分兵力，而每一粒粮食都要从同一条路运来。"
+      }
+    },
+    {
+      "title": "Wuzhangyuan, 234",
+      "text": "On his last expedition Zhuge Liang came straight down the Xie valley and dug in on the Wuzhangyuan plateau, south of the Wei. Sima Yi refused battle. The plateau is a natural fortress — but it is also a dead end. Zhuge Liang died there in the autumn and the army went home.",
+      "focus": [
+        "wuzhangyuan",
+        "wei-river"
+      ],
+      "analysis": {
+        "type": "viewshed",
+        "at": "wuzhangyuan",
+        "radiusKm": 12,
+        "observerH": 10,
+        "label": "Wuzhangyuan",
+        "zh": {
+          "label": "五丈原"
+        }
+      },
+      "camera": {
+        "center": [
+          107.63,
+          34.26
+        ],
+        "zoom": 10.4,
+        "pitch": 62,
+        "bearing": 0
+      },
+      "zh": {
+        "title": "234年，五丈原",
+        "text": "最后一次北伐，诸葛亮直接出斜谷，在渭河南岸的五丈原台塬上扎营。司马懿坚守不战。台塬是天然的堡垒——但也是一条死胡同。这年秋天诸葛亮病逝于此，大军撤回。"
+      }
+    }
+  ],
+  "zh": {
+    "title": "诸葛亮第一次北伐：祁山与街亭",
+    "period": "公元228年",
+    "summary": "蜀汉诸葛亮不走直通渭河谷地的秦岭诸道，而是向西绕道祁山进入陇右，魏国三郡随之归附。此后全局系于能否守住街亭——魏国援军翻越陇山的必经之地。马谡失守，北伐随之瓦解。",
+    "sources": [
+      "陈寿《三国志》诸葛亮、马谡、张郃、赵云、魏延传（及裴松之注）",
+      "司马光《资治通鉴》卷七十一",
+      "街亭的位置有争议（庄浪县龙山镇说与秦安县陇城镇说），图中为约略位置"
+    ]
+  }
+}

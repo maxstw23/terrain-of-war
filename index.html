@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Terrain of War</title>
+  <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+</head>
+<body>
+  <div id="map"></div>
+
+  <aside id="panel">
+    <header class="panel-head">
+      <div class="row tight">
+        <button id="lang-toggle" class="btn small" title="Language / 语言">中文</button>
+        <button id="panel-toggle" class="icon-btn" data-i18n-title="collapse">⟨</button>
+      </div>
+      <div>
+        <h1 data-i18n="app.title">Terrain of War</h1>
+        <p class="sub" data-i18n="app.sub">Military history on real terrain</p>
+      </div>
+    </header>
+
+    <section class="block">
+      <label class="field">
+        <span data-i18n="scenario">Scenario</span>
+        <select id="scenario-select"></select>
+      </label>
+      <div class="row">
+        <label class="btn small" data-i18n-title="open.title">
+          <span data-i18n="open">Open JSON…</span><input id="file-input" type="file" accept=".json,application/json" hidden />
+        </label>
+        <button id="export-btn" class="btn small" data-i18n="export" data-i18n-title="export.title">Export</button>
+      </div>
+      <div id="warnings" class="warnings" hidden></div>
+    </section>
+
+    <details id="gen-block" class="block">
+      <summary data-i18n="gen.title">Create from text</summary>
+      <p class="hint" data-i18n="gen.intro"></p>
+      <textarea id="gen-text" rows="7" data-i18n-ph="gen.placeholder"></textarea>
+      <input id="gen-key" type="password" autocomplete="off" data-i18n-ph="gen.key" />
+      <label class="check small"><input id="gen-remember" type="checkbox" /> <span data-i18n="gen.remember"></span></label>
+      <div class="row">
+        <button id="gen-go" class="btn small primary" data-i18n="gen.go"></button>
+        <button id="gen-cancel" class="btn small" data-i18n="gen.cancel" hidden></button>
+      </div>
+      <p id="gen-status" class="hint" aria-live="polite"></p>
+      <p class="hint" data-i18n="gen.privacy"></p>
+    </details>
+
+    <section class="block story">
+      <div class="story-head">
+        <span id="step-count" class="muted"></span>
+        <div class="row tight">
+          <button id="prev-step" class="icon-btn" data-i18n-title="prev">←</button>
+          <button id="next-step" class="icon-btn" data-i18n-title="next">→</button>
+        </div>
+      </div>
+      <h2 id="step-title"></h2>
+      <div id="step-text" class="step-text"></div>
+      <ol id="step-list" class="step-list"></ol>
+      <div id="legend" class="legend"></div>
+    </section>
+
+    <details class="block" open>
+      <summary data-i18n="layers">Map layers</summary>
+      <label class="field">
+        <span data-i18n="basemap">Base map</span>
+        <select id="basemap">
+          <option value="hypso" data-i18n="base.hypso"></option>
+          <option value="s2" data-i18n="base.s2"></option>
+          <option value="esri" data-i18n="base.esri"></option>
+          <option value="otm" data-i18n="base.otm"></option>
+        </select>
+      </label>
+      <label class="check"><input id="rivers-on" type="checkbox" checked /> <span data-i18n="rivers"></span></label>
+      <label class="check"><input id="hillshade-on" type="checkbox" checked /> <span data-i18n="hillshade"></span></label>
+      <label class="check"><input id="contours-on" type="checkbox" /> <span data-i18n="contours"></span></label>
+      <label class="check"><input id="labels-on" type="checkbox" /> <span data-i18n="labels"></span></label>
+      <div id="overlay-list"></div>
+      <details class="sub-details">
+        <summary data-i18n="overlay.add">Add historical map overlay</summary>
+        <p id="overlay-hint" class="hint"></p>
+        <input id="xyz-url" type="url" placeholder="https://…/{z}/{x}/{y}.png" />
+        <input id="xyz-name" type="text" data-i18n-ph="overlay.name" />
+        <button id="xyz-add" class="btn small" data-i18n="overlay.button"></button>
+      </details>
+    </details>
+
+    <details class="block" open>
+      <summary data-i18n="tools">Terrain tools</summary>
+      <div class="tools">
+        <button class="tool btn" data-tool="profile" data-i18n="tool.profile"></button>
+        <button class="tool btn" data-tool="los" data-i18n="tool.los"></button>
+        <button class="tool btn" data-tool="viewshed" data-i18n="tool.viewshed"></button>
+        <button class="tool btn" data-tool="march" data-i18n="tool.march"></button>
+      </div>
+      <div class="tool-params">
+        <label><span data-i18n="obs.h"></span> <span><input id="obs-h" type="number" min="0" max="200" value="15" /> m</span></label>
+        <label><span data-i18n="tgt.h"></span> <span><input id="tgt-h" type="number" min="0" max="50" value="2" /> m</span></label>
+        <label><span data-i18n="vs.r"></span> <span><input id="vs-r" type="number" min="1" max="40" value="12" /> km</span></label>
+      </div>
+      <p id="tool-hint" class="hint"></p>
+      <div class="row">
+        <button id="tool-finish" class="btn small" data-i18n="finish" hidden></button>
+        <button id="clear-analysis" class="btn small" data-i18n="clear"></button>
+      </div>
+    </details>
+
+    <footer class="panel-foot muted" data-i18n="footer"></footer>
+  </aside>
+
+  <div id="elev-legend">
+    <div class="elev-title" data-i18n="elev.legend"></div>
+    <div id="elev-bar"></div>
+    <div class="elev-ticks"><span id="elev-lo"></span><span id="elev-mid"></span><span id="elev-hi"></span></div>
+    <div id="cursor-elev" class="muted"></div>
+  </div>
+
+  <section id="drawer" hidden>
+    <div class="drawer-head">
+      <h3 id="drawer-title"></h3>
+      <button id="drawer-close" class="icon-btn" data-i18n-title="close">✕</button>
+    </div>
+    <div id="drawer-stats" class="stats"></div>
+    <div id="chart" class="chart"></div>
+  </section>
+
+  <div id="status" hidden></div>
+  <div id="drop-hint" data-i18n="drop" hidden></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

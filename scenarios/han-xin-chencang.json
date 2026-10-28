@@ -1,0 +1,710 @@
+{
+  "title": "Han Xin crosses the Qinling by Chencang",
+  "period": "206 BC",
+  "summary": "Bottled up in the Hanzhong basin behind the Qinling range, Liu Bang's general Han Xin broke out to the Wei valley by the long western 'Old Road' (Gudao) and surprised Zhang Han, King of Yong, at Chencang. Later tradition condensed it into the idiom 'openly repair the plank roads, secretly cross at Chencang' (明修栈道，暗度陈仓).",
+  "sources": [
+    "Sima Qian, Shiji ch. 8 (Gaozu benji) and ch. 92 (Huaiyin hou liezhuan)",
+    "The 'repair the plank road' feint itself is first attested in Yuan-era drama, not in the Shiji"
+  ],
+  "sides": [
+    {
+      "id": "han",
+      "name": "Han (Liu Bang, Han Xin)",
+      "color": "#d64545",
+      "zh": {
+        "name": "汉（刘邦、韩信）"
+      }
+    },
+    {
+      "id": "yong",
+      "name": "Yong (Zhang Han)",
+      "color": "#2f6fde",
+      "zh": {
+        "name": "雍（章邯）"
+      }
+    }
+  ],
+  "places": [
+    {
+      "id": "r-hanzhong",
+      "name": "Hanzhong basin",
+      "kind": "region",
+      "lon": 107.35,
+      "lat": 33.0,
+      "approximate": false,
+      "zh": {
+        "name": "汉中盆地"
+      }
+    },
+    {
+      "id": "r-guanzhong",
+      "name": "Guanzhong plain",
+      "kind": "region",
+      "lon": 108.35,
+      "lat": 34.47,
+      "approximate": false,
+      "zh": {
+        "name": "关中平原"
+      }
+    },
+    {
+      "id": "r-daba",
+      "name": "Daba Mountains",
+      "kind": "region",
+      "lon": 107.6,
+      "lat": 32.6,
+      "approximate": false,
+      "zh": {
+        "name": "大巴山"
+      }
+    },
+    {
+      "id": "nanzheng",
+      "name": "Nanzheng",
+      "nameLocal": "南郑",
+      "kind": "city",
+      "side": "han",
+      "lon": 107.03,
+      "lat": 33.07,
+      "note": "Capital of the Kingdom of Han in the Hanzhong basin, the fertile pocket on the upper Han River where Xiang Yu parked Liu Bang in 206 BC. The Qinling, 2,000–3,700 m high, separates it from the Wei valley and the old Qin heartland.",
+      "zh": {
+        "name": "南郑",
+        "note": "汉国都城，位于汉水上游的汉中盆地——公元前206年项羽把刘邦安置在这块肥沃的河谷盆地里。海拔2000—3700米的秦岭把它与渭河谷地和秦国故地隔开。"
+      }
+    },
+    {
+      "id": "baogu",
+      "name": "Bao valley mouth",
+      "nameLocal": "褒谷口",
+      "kind": "pass",
+      "lon": 106.98,
+      "lat": 33.21,
+      "approximate": true,
+      "note": "Southern entrance of the Baoxie road. The ancient Shimen tunnel and its Han inscriptions here were drowned by the Shimen reservoir in the 1970s — the modern landscape is not the ancient one.",
+      "zh": {
+        "name": "褒谷口",
+        "note": "褒斜道南口。古代的石门隧道和汉代摩崖石刻在20世纪70年代修建石门水库时被淹没——今天的地貌已不是古时的原貌。"
+      }
+    },
+    {
+      "id": "xiegu",
+      "name": "Xie valley mouth",
+      "nameLocal": "斜谷口",
+      "kind": "pass",
+      "side": "yong",
+      "lon": 107.65,
+      "lat": 34.23,
+      "approximate": true,
+      "note": "Where the Baoxie road debouches onto the Wei plain near Mei. Any army coming out of this gorge emerges in single file under the eyes of a defender on the plain.",
+      "zh": {
+        "name": "斜谷口",
+        "note": "褒斜道北出渭河平原之处，靠近郿县。从峡谷里出来的军队只能鱼贯而出，暴露在平原守军的眼皮底下。"
+      }
+    },
+    {
+      "id": "taibai",
+      "name": "Mt Taibai",
+      "nameLocal": "太白山",
+      "kind": "mountain",
+      "lon": 107.77,
+      "lat": 33.96,
+      "note": "3,771 m, the highest peak of the Qinling. The direct line from Hanzhong to the Wei valley runs straight across this massif.",
+      "zh": {
+        "name": "太白山",
+        "note": "海拔3771米，秦岭最高峰。从汉中直趋渭河谷地的直线正好横穿这一山体。"
+      }
+    },
+    {
+      "id": "dasan",
+      "name": "Dasan Pass",
+      "nameLocal": "大散关",
+      "kind": "pass",
+      "lon": 106.99,
+      "lat": 34.23,
+      "approximate": true,
+      "note": "The northern gate of the Old Road, a narrow saddle about 15 km south of Chencang. A few hundred men could hold it; Han Xin's surprise depended on it being unwatched.",
+      "zh": {
+        "name": "大散关",
+        "note": "故道的北门，位于陈仓以南约15公里的狭窄鞍部。数百人即可扼守；韩信能否出其不意，全看这里有没有防备。"
+      }
+    },
+    {
+      "id": "fengxian",
+      "name": "Gudao (Feng county)",
+      "nameLocal": "故道",
+      "kind": "camp",
+      "lon": 106.52,
+      "lat": 33.92,
+      "approximate": true,
+      "note": "The Qin/Han county called simply 'Old Road', on the upper Jialing. The road follows the Jialing valley for long stretches.",
+      "zh": {
+        "name": "故道（凤县）",
+        "note": "秦汉时名为“故道”的县，在嘉陵江上游。道路有很长一段沿嘉陵江河谷而行。"
+      }
+    },
+    {
+      "id": "lueyang",
+      "name": "Lueyang",
+      "nameLocal": "略阳",
+      "kind": "landmark",
+      "lon": 106.15,
+      "lat": 33.33,
+      "note": "Where the Old Road turns from the Jialing gorge east toward the Han River plain.",
+      "zh": {
+        "name": "略阳",
+        "note": "故道由嘉陵江峡谷折向东、通往汉水平原之处。"
+      }
+    },
+    {
+      "id": "chencang",
+      "name": "Chencang",
+      "nameLocal": "陈仓",
+      "kind": "battle",
+      "side": "han",
+      "lon": 107.33,
+      "lat": 34.36,
+      "approximate": true,
+      "note": "At modern Baoji, where the Wei River leaves its western gorges and the Old Road reaches the plain. Han Xin defeated Zhang Han here in the 8th month of 206 BC.",
+      "zh": {
+        "name": "陈仓",
+        "note": "今宝鸡，渭河流出西部峡谷、故道抵达平原的地方。公元前206年八月，韩信在此击败章邯。"
+      }
+    },
+    {
+      "id": "haozhi",
+      "name": "Haozhi",
+      "nameLocal": "好畤",
+      "kind": "battle",
+      "side": "han",
+      "lon": 108.22,
+      "lat": 34.56,
+      "approximate": true,
+      "note": "Zhang Han's second defeat as he fell back east toward his capital.",
+      "zh": {
+        "name": "好畤",
+        "note": "章邯向东退往都城途中的第二次败仗。"
+      }
+    },
+    {
+      "id": "feiqiu",
+      "name": "Feiqiu",
+      "nameLocal": "废丘",
+      "kind": "fort",
+      "side": "yong",
+      "lon": 108.49,
+      "lat": 34.3,
+      "approximate": true,
+      "note": "Zhang Han's capital (near modern Xingping). Besieged until 205 BC, when the Han flooded it by diverting water; Zhang Han killed himself.",
+      "zh": {
+        "name": "废丘",
+        "note": "章邯的都城（近今兴平）。被围至公元前205年，汉军引水灌城，章邯自杀。"
+      }
+    },
+    {
+      "id": "xianyang",
+      "name": "Xianyang",
+      "nameLocal": "咸阳",
+      "kind": "city",
+      "lon": 108.71,
+      "lat": 34.33,
+      "note": "The burned Qin capital. Whoever held the Wei valley (Guanzhong, 'within the passes') held the strongest strategic base in China.",
+      "zh": {
+        "name": "咸阳",
+        "note": "被焚毁的秦都。谁据有渭河谷地（关中，“四塞之地”），谁就拥有当时中国最坚固的战略根据地。"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "id": "gudao",
+      "name": "Old Road (Chencang road)",
+      "kind": "advance",
+      "side": "han",
+      "follow": "terrain",
+      "waypoints": [
+        "nanzheng",
+        [
+          106.67,
+          33.15
+        ],
+        "lueyang",
+        "fengxian",
+        "dasan",
+        "chencang"
+      ],
+      "note": "Han Xin's actual route, 8th month of 206 BC. Much longer than the Baoxie road and no less hilly, but it comes out at the western end of the Wei plain — far from where Zhang Han expected trouble.",
+      "zh": {
+        "name": "故道（陈仓道）",
+        "note": "韩信实际所走的路线，公元前206年八月。比褒斜道长得多，起伏也不小，但出口在渭河平原西端——远离章邯预料会出事的地方。"
+      }
+    },
+    {
+      "id": "baoxie",
+      "name": "Baoxie plank road",
+      "kind": "feint",
+      "side": "han",
+      "follow": "terrain",
+      "waypoints": [
+        "baogu",
+        [
+          107.02,
+          33.62
+        ],
+        [
+          107.32,
+          34.06
+        ],
+        "xiegu"
+      ],
+      "note": "The shortest road from Hanzhong to the Wei valley, using cantilevered timber galleries (栈道) bolted to the cliffs of the Bao and Xie gorges. Burned by Liu Bang on entering Hanzhong; in the later legend, ostentatiously 'repaired' to fix Zhang Han's attention.",
+      "zh": {
+        "name": "褒斜栈道",
+        "note": "汉中通往渭河谷地最近的道路，在褒水、斜水峡谷的绝壁上凿孔架木为栈道。刘邦入汉中时将其烧毁；后世传说韩信大张旗鼓地“修复”它，以牵制章邯的注意力。"
+      }
+    },
+    {
+      "id": "ziwu",
+      "name": "Ziwu road",
+      "kind": "road",
+      "follow": "terrain",
+      "waypoints": [
+        "nanzheng",
+        [
+          108.25,
+          33.05
+        ],
+        [
+          108.31,
+          33.31
+        ],
+        [
+          108.87,
+          34.07
+        ],
+        [
+          108.94,
+          34.27
+        ]
+      ],
+      "note": "Easternmost Qinling road, straight toward Chang'an but over the highest, roughest country. Many scholars identify it with the 'Shi' route by which Liu Bang entered Hanzhong.",
+      "zh": {
+        "name": "子午道",
+        "note": "秦岭最东的一条道路，直指长安，但要穿越最高峻崎岖的山地。不少学者认为刘邦入汉中所走的“蚀中”就是此道。"
+      }
+    },
+    {
+      "id": "tangluo",
+      "name": "Tangluo road",
+      "kind": "road",
+      "follow": "terrain",
+      "waypoints": [
+        [
+          107.55,
+          33.22
+        ],
+        [
+          107.53,
+          33.58
+        ],
+        [
+          107.95,
+          33.85
+        ],
+        [
+          108.22,
+          34.16
+        ]
+      ],
+      "note": "Through the Tang and Luo valleys; the shortest line but the hardest going, rarely used by large armies.",
+      "zh": {
+        "name": "傥骆道",
+        "note": "循傥水、骆水河谷而行，线路最短但最为艰险，大军很少使用。"
+      }
+    },
+    {
+      "id": "zhanghan-retreat",
+      "name": "Zhang Han falls back",
+      "kind": "retreat",
+      "side": "yong",
+      "waypoints": [
+        "chencang",
+        "haozhi",
+        "feiqiu"
+      ],
+      "note": "Beaten at Chencang, Zhang Han retreated east and was beaten again at Haozhi before shutting himself up in Feiqiu.",
+      "zh": {
+        "name": "章邯败退",
+        "note": "章邯在陈仓战败后东撤，在好畤再败，最后退守废丘。"
+      }
+    },
+    {
+      "id": "han-pursuit",
+      "name": "Han pursuit",
+      "kind": "advance",
+      "side": "han",
+      "waypoints": [
+        "chencang",
+        [
+          107.9,
+          34.4
+        ],
+        "haozhi"
+      ],
+      "zh": {
+        "name": "汉军追击"
+      }
+    },
+    {
+      "id": "wei",
+      "name": "Wei River",
+      "kind": "river",
+      "follow": "valley",
+      "waypoints": [
+        [
+          106.75,
+          34.45
+        ],
+        [
+          107.14,
+          34.35
+        ],
+        [
+          107.75,
+          34.29
+        ],
+        [
+          108.25,
+          34.22
+        ],
+        [
+          108.7,
+          34.31
+        ],
+        [
+          109.1,
+          34.42
+        ]
+      ],
+      "zh": {
+        "name": "渭河"
+      }
+    },
+    {
+      "id": "han-river",
+      "name": "Han River",
+      "kind": "river",
+      "follow": "valley",
+      "waypoints": [
+        [
+          106.55,
+          33.12
+        ],
+        [
+          106.67,
+          33.15
+        ],
+        [
+          107.03,
+          33.06
+        ],
+        [
+          107.33,
+          33.13
+        ],
+        [
+          107.55,
+          33.2
+        ],
+        [
+          108.25,
+          33.04
+        ],
+        [
+          109.03,
+          32.68
+        ]
+      ],
+      "zh": {
+        "name": "汉江",
+        "note": "汉江东流穿过汉中盆地，在洋县以下进入峡谷。"
+      },
+      "note": "The Han flows east through the Hanzhong basin, then into gorges below Yang county."
+    },
+    {
+      "id": "jialing",
+      "name": "Jialing River",
+      "kind": "river",
+      "follow": "valley",
+      "waypoints": [
+        [
+          106.95,
+          34.17
+        ],
+        [
+          106.52,
+          33.92
+        ],
+        [
+          106.15,
+          33.33
+        ],
+        [
+          105.85,
+          32.43
+        ]
+      ],
+      "zh": {
+        "name": "嘉陵江",
+        "note": "发源于大散关以南的秦岭之中；故道有很长一段沿它而行。"
+      },
+      "note": "Rises in the Qinling just south of Dasan Pass; the Old Road follows it for long stretches."
+    }
+  ],
+  "zones": [
+    {
+      "id": "qinling",
+      "name": "Qinling range",
+      "kind": "obstacle",
+      "coords": [
+        [
+          106.6,
+          33.75
+        ],
+        [
+          107.4,
+          33.55
+        ],
+        [
+          108.4,
+          33.45
+        ],
+        [
+          109.0,
+          33.7
+        ],
+        [
+          109.0,
+          34.0
+        ],
+        [
+          108.2,
+          34.05
+        ],
+        [
+          107.6,
+          34.15
+        ],
+        [
+          107.0,
+          34.15
+        ],
+        [
+          106.6,
+          34.0
+        ]
+      ],
+      "note": "The barrier between the Han and Wei basins: few passable valleys, each a defile.",
+      "zh": {
+        "name": "秦岭",
+        "note": "汉水与渭河两大盆地之间的屏障：可通行的河谷寥寥无几，每一条都是隘道。"
+      }
+    },
+    {
+      "id": "yong-watch",
+      "name": "Zhang Han's watch on the Xie valley",
+      "kind": "defense",
+      "center": "xiegu",
+      "radiusKm": 9,
+      "note": "Where a defender expecting the Baoxie road would concentrate: the army coming out of the gorge can be met while still strung out in column.",
+      "zh": {
+        "name": "章邯对斜谷的戒备",
+        "note": "预料敌军走褒斜道的守将会在这里集中兵力：出谷的军队还拉成长蛇队形时便可迎头痛击。"
+      }
+    },
+    {
+      "id": "feiqiu-flood",
+      "name": "Feiqiu flooded (205 BC)",
+      "kind": "flood",
+      "center": "feiqiu",
+      "radiusKm": 4,
+      "zh": {
+        "name": "水灌废丘（公元前205年）"
+      }
+    }
+  ],
+  "overlays": [],
+  "steps": [
+    {
+      "title": "A wall of mountains",
+      "text": "In 206 BC Xiang Yu divided the fallen Qin empire. Liu Bang got the remote Kingdom of Han — the Hanzhong basin — while three surrendered Qin generals were installed in the Wei valley to his north to bottle him in.\n\nBetween them stands the Qinling: a range 2,000–3,700 m high that can only be crossed along a handful of river gorges. Look at the elevation colours and relief shading to see how completely it seals the basin.",
+      "camera": {
+        "center": [
+          107.5,
+          33.55
+        ],
+        "zoom": 7.6,
+        "pitch": 62,
+        "bearing": 10
+      },
+      "zh": {
+        "title": "天堑秦岭",
+        "text": "公元前206年，项羽瓜分灭亡的秦帝国。刘邦分得偏远的汉国——汉中盆地；三位投降的秦将被封在其北面的渭河谷地，把他堵在里面。\n\n两者之间横亘着秦岭：海拔2000—3700米，只能沿少数几条河谷峡谷穿越。看看地图上的分层设色和地貌晕渲，就能明白它把盆地封得有多严实。"
+      }
+    },
+    {
+      "title": "Four roads over the Qinling",
+      "text": "Every crossing follows a gorge: from west to east the Old Road (Chencang road), the Baoxie road, the Tangluo road and the Ziwu road. The direct ones (Baoxie, Ziwu) needed plank galleries — timber walkways bolted into cliff faces — that could be burned in an afternoon and took months to rebuild.\n\nOn entering Hanzhong Liu Bang burned the galleries behind him, both to guard against attack and to signal that he had no ambitions in the north.",
+      "focus": [
+        "baoxie",
+        "ziwu",
+        "tangluo",
+        "gudao"
+      ],
+      "camera": {
+        "center": [
+          107.6,
+          33.65
+        ],
+        "zoom": 7.7,
+        "pitch": 55,
+        "bearing": 0
+      },
+      "zh": {
+        "title": "翻越秦岭的四条道路",
+        "text": "每条通道都循峡谷而行：自西向东依次是故道（陈仓道）、褒斜道、傥骆道和子午道。较直的几条（褒斜、子午）需要栈道——钉在崖壁上的木构通道，一个下午就能烧掉，重修却要好几个月。\n\n刘邦入汉中时烧毁身后的栈道，一是防备偷袭，二是表明自己无意北还。"
+      }
+    },
+    {
+      "title": "Where the enemy is looking",
+      "text": "The Baoxie road is the obvious invasion route: shortest, and it emerges on the Wei plain at the Xie valley mouth, a day's march from the heart of Zhang Han's kingdom. A defender only has to watch the gorge exit and fight the attacker while he is still strung out in column.\n\nLater tradition says Han Xin had men openly repairing these galleries to keep Zhang Han's eyes here. The profile shows the road is the most direct, but no easy walk: it tops out above 2,000 m. What the elevation model cannot show is the worst part — gorge sections where there was no ground to walk on at all, only the burned timber galleries.",
+      "focus": [
+        "baoxie",
+        "yong-watch",
+        "xiegu"
+      ],
+      "analysis": {
+        "type": "profile",
+        "route": "baoxie"
+      },
+      "camera": {
+        "center": [
+          107.35,
+          33.85
+        ],
+        "zoom": 8.6,
+        "pitch": 60,
+        "bearing": -20
+      },
+      "zh": {
+        "title": "敌人在看哪里",
+        "text": "褒斜道是最显而易见的进攻路线：最短，出口在斜谷口，离章邯国都的核心地带不过一日路程。守方只需盯住谷口，趁进攻者还拉成长蛇队形时迎战即可。\n\n后世传说韩信派人公开修复这些栈道，吸引章邯的目光。剖面图显示，这条路最为直捷，但并不好走：最高处超过2000米。而高程模型显示不出的才是最难的部分——有些峡谷路段根本无地可行，只能靠那些已被烧毁的木栈道。"
+      }
+    },
+    {
+      "title": "The Old Road",
+      "text": "Han Xin instead marched west and north on the Old Road (Gudao): up the Han, through the Jialing valley, and over Dasan Pass to Chencang. The line traced here is the least-effort path through the terrain between known stations on the road.\n\nCompare the profile with the Baoxie road's: the Old Road is not easier — it is far longer and in total climbs even more, though its high point is lower. Its value was elsewhere: it was not the road whose galleries had been burned and whose exit was being watched, and it came out at the western end of the Wei plain, behind Zhang Han's expected front.",
+      "focus": [
+        "gudao"
+      ],
+      "analysis": {
+        "type": "profile",
+        "route": "gudao"
+      },
+      "camera": {
+        "center": [
+          106.65,
+          33.75
+        ],
+        "zoom": 8.0,
+        "pitch": 55,
+        "bearing": 15
+      },
+      "zh": {
+        "title": "故道",
+        "text": "韩信转而向西、再向北走故道：溯汉水而上，穿行嘉陵江河谷，越过大散关到达陈仓。图上的路线是在故道沿线已知地点之间、按地形推算出的最省力路径。\n\n把它的剖面与褒斜道比较：故道并不更好走——它长得多，累计爬升甚至更多，只是最高点较低。它的价值在别处：它不是栈道被烧、谷口被盯的那条路，而且出口在渭河平原西端，正在章邯预料的正面之后。"
+      }
+    },
+    {
+      "title": "The gate at Dasan Pass",
+      "text": "The Old Road's weakness is its last stretch: the narrow saddle of Dasan Pass, then a gorge down to Chencang. The viewshed (amber = visible from a 15 m watchtower on the pass) shows how little of the approach a sentry could see — and how much dead ground there is in the gorge below.\n\nHeld in strength, this pass would have stopped the army cold. Unwatched, it delivered Han Xin onto the plain behind Zhang Han's expected front.",
+      "focus": [
+        "dasan",
+        "gudao"
+      ],
+      "analysis": {
+        "type": "viewshed",
+        "at": "dasan",
+        "radiusKm": 10,
+        "observerH": 15,
+        "label": "Dasan Pass",
+        "zh": {
+          "label": "大散关"
+        }
+      },
+      "camera": {
+        "center": [
+          107.05,
+          34.28
+        ],
+        "zoom": 10.6,
+        "pitch": 65,
+        "bearing": 200
+      },
+      "zh": {
+        "title": "大散关之门",
+        "text": "故道的弱点在最后一段：大散关狭窄的鞍部，然后是下到陈仓的峡谷。可视域（琥珀色 = 关上15米高望楼可见的范围）显示，哨兵能看到的来路少得可怜，下方峡谷里则到处是视线死角。\n\n若以重兵把守，这道关足以把大军挡住。无人看守，它便把韩信送上了章邯预料正面后方的平原。"
+      }
+    },
+    {
+      "title": "Chencang, Haozhi, Feiqiu",
+      "text": "Zhang Han hurried west and met the Han army at Chencang — on ground of Han Xin's choosing, with the gorge behind Han Xin and open plain in front. He was beaten, beaten again at Haozhi, and shut up in Feiqiu, which held out until the Han flooded it in 205 BC.\n\nWithin months the whole Wei valley — the old Qin base, protected on every side by mountains and passes — belonged to Liu Bang. It became the springboard for his victory over Xiang Yu.",
+      "focus": [
+        "zhanghan-retreat",
+        "han-pursuit",
+        "chencang",
+        "haozhi",
+        "feiqiu",
+        "feiqiu-flood"
+      ],
+      "camera": {
+        "center": [
+          107.95,
+          34.4
+        ],
+        "zoom": 8.6,
+        "pitch": 50,
+        "bearing": 0
+      },
+      "zh": {
+        "title": "陈仓、好畤、废丘",
+        "text": "章邯急忙西进，在陈仓与汉军遭遇——战场由韩信选定：他背靠峡谷，面前是开阔平原。章邯战败，在好畤再败，退守废丘；废丘一直坚守到公元前205年，被汉军引水灌城。\n\n几个月之内，整个渭河谷地——四面皆有山川关隘屏护的秦国故地——尽归刘邦，成为他战胜项羽的跳板。"
+      }
+    },
+    {
+      "title": "Why it worked",
+      "text": "Mountain barriers are defended at their exits, not along their length. A defender cannot hold every gorge in strength, so he guards the one that matters most — here the short road to his capital. The attacker who accepts a longer, gentler march to a less-watched exit gains surprise and fights on the plain instead of in the defile.\n\nZhuge Liang tried to repeat this 433 years later from the very same basin (see the next scenario); by then everyone knew the trick.",
+      "camera": {
+        "center": [
+          107.5,
+          33.75
+        ],
+        "zoom": 7.5,
+        "pitch": 45,
+        "bearing": 0
+      },
+      "zh": {
+        "title": "为何成功",
+        "text": "山地屏障要守在出口，而不是沿全线去守。守方不可能在每条峡谷都布重兵，只能守最要紧的一条——这里就是通往其都城的捷径。进攻方若肯走一条更长、更不受注意的路，就能获得突然性，并在平原而不是隘道中作战。\n\n433年后，诸葛亮从同一个盆地试图重演此计（见下一个战例）；那时人人都已知道这一招。"
+      }
+    }
+  ],
+  "zh": {
+    "title": "韩信暗度陈仓",
+    "period": "公元前206年",
+    "summary": "被困在秦岭以南汉中盆地的刘邦，派大将韩信取道西面漫长的“故道”北出渭河谷地，在陈仓突袭雍王章邯。后世把此事凝练为成语“明修栈道，暗度陈仓”。",
+    "sources": [
+      "司马迁《史记》卷八《高祖本纪》、卷九十二《淮阴侯列传》",
+      "“明修栈道”的佯动情节最早见于元代杂剧，《史记》并无记载"
+    ]
+  }
+}
