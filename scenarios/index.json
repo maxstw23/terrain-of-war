@@ -1,5 +1,14 @@
 [
   {
+    "file": "scenarios/yinping-263.json",
+    "title": "Deng Ai's march by Yinping",
+    "period": "263",
+    "zh": {
+      "title": "邓艾偷渡阴平",
+      "period": "263年"
+    }
+  },
+  {
     "file": "scenarios/jingxing-204bc.json",
     "title": "Han Xin at Jingxing",
     "period": "204 BC",

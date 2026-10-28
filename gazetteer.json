@@ -790,27 +790,6 @@
    ]
   },
   {
-   "id": "han-camp",
-   "zh": "汉军营地",
-   "name": "Han camp", "kind": "camp", "lon": 114.15, "lat": 38.04, "approximate": true
-  },
-  {
-   "id": "zhao-camp",
-   "zh": "赵军壁垒",
-   "name": "Zhao fortified camp", "kind": "fort", "lon": 114.29, "lat": 38.09, "approximate": true,
-   "aliases": [
-    "井陉口"
-   ]
-  },
-  {
-   "id": "water-camp",
-   "zh": "背水阵",
-   "name": "Han river camp", "kind": "camp", "lon": 114.19, "lat": 38.07, "approximate": true,
-   "aliases": [
-    "Han river camp (背水阵)"
-   ]
-  },
-  {
    "id": "bishan",
    "zh": "萆山",
    "name": "Hill above the Zhao camp", "kind": "mountain", "lon": 114.2467, "lat": 38.1317, "approximate": true,
@@ -819,14 +798,62 @@
    ]
   },
   {
-   "id": "cavalry-hide",
-   "zh": "奇兵隐蔽处",
-   "name": "Cavalry hiding place", "kind": "camp", "lon": 114.23, "lat": 38.13, "approximate": true
-  },
-  {
    "id": "zhishui",
    "zh": "泜水",
    "name": "Zhi river", "kind": "river", "lon": 114.62, "lat": 37.45, "approximate": true
+  },
+  {
+   "id": "basin",
+   "zh": "四川盆地",
+   "name": "Sichuan basin", "kind": "region", "lon": 104.6, "lat": 31.1
+  },
+  {
+   "id": "longmen",
+   "zh": "龙门山",
+   "name": "Longmen Mountains", "kind": "region", "lon": 104.35, "lat": 31.95
+  },
+  {
+   "id": "minshan",
+   "zh": "岷山",
+   "name": "Min Mountains", "kind": "region", "lon": 104.2, "lat": 32.85
+  },
+  {
+   "id": "yinping",
+   "zh": "阴平",
+   "name": "Yinping", "kind": "city", "lon": 104.68, "lat": 32.94, "approximate": true
+  },
+  {
+   "id": "motianling",
+   "zh": "摩天岭",
+   "name": "Motianling ridge", "kind": "pass", "lon": 104.896, "lat": 32.606, "approximate": true
+  },
+  {
+   "id": "jiangyou",
+   "zh": "江由",
+   "name": "Jiangyou", "kind": "fort", "lon": 104.828, "lat": 32.239, "approximate": true,
+   "aliases": [
+    "江由（江油关）"
+   ]
+  },
+  {
+   "id": "fu",
+   "zh": "涪",
+   "name": "Fu", "kind": "city", "lon": 104.73, "lat": 31.47, "approximate": true
+  },
+  {
+   "id": "mianzhu",
+   "zh": "绵竹",
+   "name": "Mianzhu", "kind": "battle", "lon": 104.22, "lat": 31.34, "approximate": true
+  },
+  {
+   "id": "luo",
+   "zh": "雒",
+   "name": "Luo", "kind": "city", "lon": 104.28, "lat": 30.98, "approximate": true
+  },
+  {
+   "id": "guangyuan",
+   "zh": "广元",
+   "name": "Guangyuan", "kind": "city", "lon": 105.84, "lat": 32.44
   }
  ]
 }
