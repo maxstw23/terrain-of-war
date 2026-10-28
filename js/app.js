@@ -790,14 +790,14 @@ async function runCompare(ids, label) {
     const best = (f) => Math.min(...rows.map(f));
     const mark = (v, f, txt) => (rows.length > 1 && v === best(f) ? `<b>${txt}</b>` : txt);
     const table = `<div class="compare-wrap"><table class="compare-table">
-      <tr><th>${t('col.route')}</th><th>${t('st.length')}</th><th>${t('st.climb')}</th><th>${t('col.max')}</th><th>${t('col.steep')}</th><th>${t('col.army')}</th></tr>
+      <tr><th>${t('col.route')}</th><th>${t('col.army')}</th><th>${t('st.length')}</th><th>${t('st.climb')}</th><th>${t('col.max')}</th><th>${t('col.steep')}</th></tr>
       ${rows.map(({ r, st, hours, color }) => `<tr><td><i style="background:${color}"></i>${esc(names(r)[0])}</td>
+        <td>${mark(hours, (x) => x.hours, t('st.days', { n: marchDays(hours) }))}</td>
         <td>${mark(st.length, (x) => x.st.length, fmtKm(st.length))}</td>
         <td>${mark(st.ascent, (x) => x.st.ascent, `${Math.round(st.ascent).toLocaleString()} m`)}</td>
         <td>${mark(st.max, (x) => x.st.max, `${Math.round(st.max).toLocaleString()} m`)}</td>
-        <td>${(st.maxGrade * 100).toFixed(0)}%</td>
-        <td>${mark(hours, (x) => x.hours, t('st.days', { n: marchDays(hours) }))}</td></tr>`).join('')}
-    </table></div><span class="muted">${t('compare.note')}</span>`;
+        <td>${(st.maxGrade * 100).toFixed(0)}%</td></tr>`).join('')}
+    </table></div><span class="muted compare-note">${t('compare.note')}</span>`;
     openDrawer(label || t('compare.title'), table);
     renderCompare($('#chart'), rows.map(({ r, pts, color }) => ({ label: names(r)[0], color, points: pts })), {
       onHover: (pts) => map.getSource('cursor').setData({
@@ -961,12 +961,24 @@ function bindUI() {
     else if (v) loadScenarioFromUrl(v);
   };
   $('#prev-step').onclick = () => goToStep(state.step - 1);
-  $('#next-step').onclick = () => goToStep(state.step + 1);
-  $('#panel-toggle').onclick = () => {
-    const p = $('#panel');
-    p.classList.toggle('collapsed');
-    $('#panel-toggle').textContent = p.classList.contains('collapsed') ? '⟩' : '⟨';
+  $('#copy-link').onclick = async () => {
+    try {
+      await navigator.clipboard.writeText(location.href);
+      status(t('share.done'), 2000);
+    } catch {
+      status(t('share.fail'), 4000);
+    }
   };
+  $('#next-step').onclick = () => goToStep(state.step + 1);
+  // The panel slides left on wide screens and down on phones; the arrow says which.
+  const phone = window.matchMedia('(max-width: 760px)');
+  const setToggle = () => {
+    const c = $('#panel').classList.contains('collapsed');
+    $('#panel-toggle').textContent = phone.matches ? (c ? '▴' : '▾') : c ? '⟩' : '⟨';
+  };
+  $('#panel-toggle').onclick = () => { $('#panel').classList.toggle('collapsed'); setToggle(); };
+  phone.addEventListener?.('change', setToggle);
+  setToggle();
   document.addEventListener('keydown', (e) => {
     if (e.target.matches('input, select, textarea')) return;
     if (e.key === 'ArrowRight') goToStep(state.step + 1);
